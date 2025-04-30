@@ -12,7 +12,7 @@ CREATE TABLE tag (
 DROP TABLE IF EXISTS serie;
 CREATE TABLE serie (
     cle_serie INT AUTO_INCREMENT,
-    titre VARCHAR(100),
+    titre VARCHAR,
     nb_saison INT,
     PRIMARY KEY (cle_serie)
 );

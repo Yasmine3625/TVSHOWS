@@ -36,7 +36,7 @@ use tvshows\Series;
 <div id="list-serie">
     <?php
     $image= [
-        "love_101.webp",
+        "love101.webp",
         "My_name.jpeg",
         "originals.webp",
         "Pulse.jpeg",

@@ -35,8 +35,15 @@ use tvshows\Series;
 
 <div id="list-serie">
     <?php
-    $series = new Series();
-    $series->generateSeries();
+    $image= [
+        "love_101.webp",
+        "My_name.jpeg",
+        "originals.webp",
+        "Pulse.jpeg",
+        "the_order.jpeg",
+        "the_rookie.jpeg",
+        "Walter_boys.jpeg"
+    ];
     ?>
 </div>
 

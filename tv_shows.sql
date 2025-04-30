@@ -2,7 +2,7 @@ USE tv_shows;
 
 -- TABLE: tag
 DROP TABLE IF EXISTS tag;
-CREATE TABLE tag (
+CREATE TABLE `tag` (
     id_tag INT NOT NULL,
     nom VARCHAR(50),
     PRIMARY KEY (id_tag)
@@ -10,16 +10,16 @@ CREATE TABLE tag (
 
 -- TABLE: serie
 DROP TABLE IF EXISTS serie;
-CREATE TABLE serie (
+CREATE TABLE `serie` (
     cle_serie INT AUTO_INCREMENT,
-    titre VARCHAR,
+    titre VARCHAR(100),
     nb_saison INT,
     PRIMARY KEY (cle_serie)
 );
 
 -- TABLE: realisateur
 DROP TABLE IF EXISTS realisateur;
-CREATE TABLE realisateur (
+CREATE TABLE `realisateur` (
     cle_real INT NOT NULL,
     nom VARCHAR(60),
     image VARCHAR(255),
@@ -28,7 +28,7 @@ CREATE TABLE realisateur (
 
 -- TABLE: acteur
 DROP TABLE IF EXISTS acteur;
-CREATE TABLE acteur (
+CREATE TABLE `acteur` (
     cle_act INT NOT NULL,
     nom VARCHAR(60),
     image VARCHAR(255),
@@ -37,7 +37,7 @@ CREATE TABLE acteur (
 
 -- TABLE: saison
 DROP TABLE IF EXISTS saison;
-CREATE TABLE saison (
+CREATE TABLE `saison` (
     cle_saison INT NOT NULL,
     titre VARCHAR(100),
     affichage VARCHAR(255),
@@ -49,19 +49,19 @@ CREATE TABLE saison (
 
 -- TABLE: episode
 DROP TABLE IF EXISTS episode;
-CREATE TABLE episode (
+CREATE TABLE `episode` (
     cle_episode INT NOT NULL,
     synopsis TEXT,
     duree TIME,
     titre VARCHAR(100),
     id_saison INT,
     PRIMARY KEY (cle_episode),
-    FOREIGN KEY (id_saison) REFERENCES saison(cle_saison),
+    FOREIGN KEY (id_saison) REFERENCES saison(cle_saison)
 );
 
 -- TABLE: saison_acteur
 DROP TABLE IF EXISTS saison_acteur;
-CREATE TABLE saison_acteur (
+CREATE TABLE `saison_acteur` (
     cle_saison INT,
     cle_acteur INT,
     PRIMARY KEY (cle_saison, cle_acteur),
@@ -71,7 +71,7 @@ CREATE TABLE saison_acteur (
 
 -- TABLE: serie_tag
 DROP TABLE IF EXISTS serie_tag;
-CREATE TABLE serie_tag (
+CREATE TABLE `serie_tag` (
     cle_serie INT,
     cle_tag INT,
     PRIMARY KEY (cle_serie, cle_tag),
@@ -81,7 +81,7 @@ CREATE TABLE serie_tag (
 
 -- TABLE: episode_realisateur
 DROP TABLE IF EXISTS episode_realisateur;
-CREATE TABLE episode_realisateur (
+CREATE TABLE `episode_realisateur` (
     cle_episode INT,
     cle_real INT,
     PRIMARY KEY (cle_episode, cle_real),

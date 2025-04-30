@@ -70,7 +70,6 @@ Insert into `acteur` (`cle_act`, `nom`, `image` ) VALUES(1, 'Danielle Rose Russe
 (32, 'Sarah Rafferty', 'images/images_series/Walter_boys_act04.jpeg'),
 (33, 'Marc Blucas', 'images/images_series/Walter_boys_act05.jpeg');
 
---remplir la table serie_tag
 INSERT INTO `serie_tag`(`cle_serie`,`cle_tag`) VALUES
 (1,5),(1,2),
 (2,4),(2,6),(2,3),
@@ -80,7 +79,6 @@ INSERT INTO `serie_tag`(`cle_serie`,`cle_tag`) VALUES
 (6,1),(6,7),
 (7,1),(7,2);
 
---remplir la table saison
 INSERT INTO `saison` (`titre`, `cle_saison`, `affichage`, `nb_episode`, `cle_serie`)
 VALUES
 ('Saison 1',101, 'images/imeges_series/the_rookie.jpeg',5,1 ),
@@ -93,7 +91,6 @@ VALUES
 ('Saison 1',601, 'images/imeges_series/Pulse.jpeg',8,6),
 ('Saison 1',701, 'images/imeges_series/Walter_boys.jpeg',10,7);
 
---remplir la table saison_acteur
 INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 (101,21),(101,22),(101,23),(101,24),
 (102,21),(102,22),(102,23),(102,24),
@@ -106,7 +103,6 @@ INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 (701, 29),(701, 30),(701, 31),(701, 32),(701, 33)
 ;
 
---remplir la table realisateur
 INSERT INTO `realisateur` (`cle_real`,`nom`, `image`) VALUES
 (1, 'Liz Friedlander' , 'images/images_series/real01_the_rookie.jpeg'),
 (2, 'Adam Davidson' , 'images/images_series/real02_the_rookie.jpeg'),
@@ -115,7 +111,6 @@ INSERT INTO `realisateur` (`cle_real`,`nom`, `image`) VALUES
 (5, 'Chris Grismer' , 'images/images_series/real01_originals.jpeg'),
 (6, 'Brad Turner' , 'images/images_series/real02_originals.jpeg');
 
---remplir la table realisateur
 INSERT INTO `episode`(`cle_episode`, `synopsis`, `duree`, `titre`,`id_saison`) VALUES
 (1101,'John Nolan est un divorcé âgé de 45 ans qui, après avoir assisté à (et fait déjouer) un braquage de banque dans sa petite ville, décide de changer de vie : il déménage à Los Angeles et devient flic. Son affectation au sein de la police suscite le scepticisme de ses collègues officiers, en particulier de son commandant de quart, le sergent Wade Gray, et de son agent instructeur, Talia Bishop. Les premiers jours de travail de Nolan sont marqués par un conflit familial qui dégénère rapidement (au cours duquel Nolan est témoin de sa première mort), un père déséquilibré qui laisse son enfant dans une voiture verrouillée par une chaude journée et un criminel échappé qui teste rapidement Nolan comme jamais auparavant. Jackson West, fils d un officier haut gradé de la police de Los Angeles et désireux de respecter l héritage familial, rejoint également Nolan en tant qu officier recrue, ainsi que Lucy Chen, qui est devenue flic contre la volonté de ses parents thérapeutes et entretient une liaison secrète avec Nolan malgré le risque que cela pose pour sa carrière. Gray informe Nolan qu il fera tout ce qui est en son pouvoir pour le décourager de continuer à servir, craignant que le manque d expérience et l âge de Nolan mettent en danger la vie de ses officiers. Nolan dit à Gray qu il croit qu être un flic pourrait être sa vocation. Gray répond que si cela est vrai, rien de ce que Gray fera subir à Nolan ne le dissuadera.'
 ,'00:46:00','Premiers pas',101),
@@ -223,7 +218,6 @@ Les tensions entre chaque partie surnaturelle de la ville sont à leur comble pu
 ;
 
 
---remplir la table episode_realisateur
 INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
 (1101,1),(1101,2),
 (2101,3),(2101,1),

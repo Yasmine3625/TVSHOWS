@@ -163,11 +163,14 @@ footer {
 }
 
 #image-serie {
+    display: flex;
+    flex-direction: column;
     background-color: #261d17;
     height: 400px;
     width: 250px;
     text-align: center;
     margin: 1em;
+
 }
 
 #list-serie {
@@ -183,4 +186,6 @@ footer {
     width: 100%;
     /* Les images prennent toute la largeur de la carte */
     height: auto;
+    flex: 1;
+
 }

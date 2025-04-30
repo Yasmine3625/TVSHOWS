@@ -52,7 +52,6 @@ use tvshows\SeriesRenderer
         $serierenderer->getHTML($img);
     }
     ?>
-
 </div>
 
 <?php

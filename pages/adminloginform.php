@@ -29,7 +29,7 @@ elseif (!$response['granted']): ?>
     </div>
     <?php
 else:
-    include "pages/admin.php";
+    include "admin.php";
 endif;
 ?>
 <?php

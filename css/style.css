@@ -10,24 +10,19 @@ body {
 }
 
 body {
-
     display: flex;
     flex-direction: column;
-
 }
 
 #main-content {
-
     flex: 1;
 }
-
 
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
     background-color: #0e0d0d;
 }
 
@@ -48,7 +43,6 @@ h1 {
     height: 100px;
     width: auto;
     margin: 7px;
-
 }
 
 #nav-bar {
@@ -62,16 +56,12 @@ h1 {
 #nav-bar a {
     color: white;
     text-decoration: none;
-
     padding: 10px;
     margin: 0 2em;
-
     font-size: 1.5em;
     word-spacing: 0.5em;
     letter-spacing: 0.2em;
-
 }
-
 
 .nav-btn-log:hover,
 .nav-btn-log:focus {
@@ -116,13 +106,11 @@ h1 {
     font-size: 16px;
 }
 
-
 #main-content {
     display: flex;
     flex-direction: row;
     overflow-y: auto;
 }
-
 
 footer {
     background-color: #0e0d0d;
@@ -131,23 +119,16 @@ footer {
     justify-content: center;
 }
 
-
 .category-menu {
     display: flex;
     flex-direction: column;
-
-
     height: 100%;
     width: 180px;
-
     align-items: center;
-
-
     padding: 20px;
     background-color: #0e0d0ded;
     border-bottom: 1px solid #444;
 }
-
 
 .category-item {
     width: 80%;
@@ -163,6 +144,8 @@ footer {
 }
 
 #image-serie {
+    display: flex;
+    flex-direction: column;
     background-color: #261d17;
     height: 400px;
     width: 250px;
@@ -172,7 +155,6 @@ footer {
 
 #list-serie {
     flex: 1;
-
     overflow: scroll;
     display: flex;
     flex-wrap: wrap;
@@ -183,4 +165,5 @@ footer {
     width: 100%;
     /* Les images prennent toute la largeur de la carte */
     height: auto;
+    flex: 1;
 }

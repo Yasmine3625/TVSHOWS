@@ -1,0 +1,186 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Cinzel';
+    background-color: #5a5d5f;
+}
+
+body {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+#main-content {
+
+    flex: 1;
+}
+
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #0e0d0d;
+}
+
+h1 {
+    padding: 0 1.5em;
+    font-size: 2.5em;
+    word-spacing: 0.5em;
+    letter-spacing: 0.2em;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#nav-bar-icone {
+    height: 100px;
+    width: auto;
+    margin: 7px;
+
+}
+
+#nav-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#nav-bar a {
+    color: white;
+    text-decoration: none;
+
+    padding: 10px;
+    margin: 0 2em;
+
+    font-size: 1.5em;
+    word-spacing: 0.5em;
+    letter-spacing: 0.2em;
+
+}
+
+
+.nav-btn-log:hover,
+.nav-btn-log:focus {
+    background-color: #FFA366;
+}
+
+.nav-btn-acc:hover,
+.nav-btn-acc:focus {
+    background-color: #261d17;
+    /* orange clair */
+}
+
+.search-bar {
+    position: relative;
+    display: inline-block;
+    margin: 0 20px;
+    vertical-align: middle;
+}
+
+.search-input {
+    padding: 10px 15px 10px 40px;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    background-color: #1f2235;
+    color: white;
+    width: 500px;
+    outline: none;
+    transition: width 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: #a0a0a0;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #a0a0a0;
+    font-size: 16px;
+}
+
+
+#main-content {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+}
+
+
+footer {
+    background-color: #0e0d0d;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+
+.category-menu {
+    display: flex;
+    flex-direction: column;
+
+
+    height: 100%;
+    width: 180px;
+
+    align-items: center;
+
+
+    padding: 20px;
+    background-color: #0e0d0ded;
+    border-bottom: 1px solid #444;
+}
+
+
+.category-item {
+    width: 80%;
+    padding: 10px 16px;
+    color: rgb(211, 193, 175);
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.category-item:hover {
+    background-color: #261d17;
+}
+
+#image-serie {
+    background-color: #261d17;
+    height: 400px;
+    width: 250px;
+    text-align: center;
+    margin: 1em;
+}
+
+#list-serie {
+    flex: 1;
+
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#image-serie img {
+    width: 100%;
+    /* Les images prennent toute la largeur de la carte */
+    height: auto;
+}

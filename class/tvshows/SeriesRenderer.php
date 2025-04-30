@@ -1,14 +1,19 @@
 <?php
+namespace tvshows;
 use tvshows\Series;
 
 class SeriesRenderer
 {
-    public function getHTML()
+    //on enleve le $image et on met $this->image
+    public function getHTML($image)
     {
         ?>
+
         <div id="image-serie">
-            <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../" . \tvshows\Series::UPLOAD_DIR . $this->image ?>" alt="imageSerie">
-            <legend style="justify-content: center;">
+            <!-- on remplace le /uploads/   -->
+            <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" .
+$image ?>" alt="imageSerie">
+            <legend style="justify-content: center; height: 20px;">
                 <label>Serie</label>
             </legend>
         </div>

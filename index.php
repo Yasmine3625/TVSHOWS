@@ -4,6 +4,7 @@ require_once __DIR__ . "/config.php";
 
 use tvshows\Template;
 use tvshows\Series;
+use tvshows\SeriesRenderer
 ?>
 
 
@@ -35,15 +36,20 @@ use tvshows\Series;
 
 <div id="list-serie">
     <?php
-    $image= [
+    $image = [
         "love101.webp",
         "My_name.jpeg",
-        "originals.webp",
-        "Pulse.jpeg",
+        "originals.jpg",
+        "Pulse.webp",
         "the_order.jpeg",
         "the_rookie.jpeg",
         "Walter_boys.jpeg"
     ];
+
+    $serierenderer = new SeriesRenderer();
+    foreach ($image as $img) {
+        $serierenderer->getHTML($img);
+    }
     ?>
 </div>
 

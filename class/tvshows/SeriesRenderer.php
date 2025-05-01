@@ -10,12 +10,12 @@ class SeriesRenderer
         ?>
 
         <div id="image-serie">
-            <!-- on remplace le /uploads/   -->
-            <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" . $image ?>" alt="imageSerie">
-            <legend style="justify-content: center; height: 20px;">
-                <label>Serie</label>
-            </legend>
+            <div id="image-container">
+                <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" . $image ?>" alt="imageSerie">
+            </div>
+            <div class="serie-label">Serie</div>
         </div>
+
 
 
         <?php

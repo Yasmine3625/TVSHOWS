@@ -1,13 +1,12 @@
 <?php
 
 namespace tvshows;
-require_once __DIR__ . "/Autoloader.php";
-require_once __DIR__ . "/config.php";
+
+include __DIR__ . "/../../DB_CREDENTIALS.php";
+
 use PdoWrapper;
 
-include __DIR__ . "../../../DB_CREDENTIALS.php";
-
-class Series
+class Series extends PdoWrapper
 {
     public $file;
 
@@ -15,47 +14,22 @@ class Series
 
     public function __construct()
     {
-        // // appel au constructeur de la classe mère
-        // parent::__construct(
-        //     $GLOBALS['db_name'],
-        //     $GLOBALS['db_host'],
-        //     $GLOBALS['db_port'],
-        //     $GLOBALS['db_user'],
-        //     $GLOBALS['db_pwd']
-        // );
+        parent::__construct(
+            $GLOBALS['db_name'],
+            $GLOBALS['db_host'],
+            $GLOBALS['db_port'],
+            $GLOBALS['db_user'],
+            $GLOBALS['db_pwd']
+        );
     }
 
-    public function ajoutSerie($name, $imgFile = null)
+    public function getAllSeries()
     {
-
-        $name = htmlspecialchars($name);
-
-        $imgName = null;
-        // enregistrement du fichier uploadé
-        if ($imgFile != null) {
-            $tmpName = $imgFile['tmp_name'];
-            $imgName = $imgFile['name'];
-            $imgName = urlencode(htmlspecialchars($imgName));
-
-            $dirname = $GLOBALS['PHP_DIR'] . self::UPLOAD_DIR;
-            if (!is_dir($dirname))
-                mkdir($dirname);
-            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
-            if (!$uploaded)
-                die("FILE NOT UPLOADED");
-        } else
-            echo "NO IMAGE !!!!";
-
-        $query = ''; //requette pour ajouter une serie 
-        $params = [
-            'name' => htmlspecialchars($name),
-            //+ les autres paramettres 
-
-        ];
-        return $this->exec($query, $params);
+        $query = "SELECT * FROM serie";
+        return $this->exec($query, []);
     }
 
-    function generateSeries()
+    public function generateSeries()
     {
         if ($this->file == null) {
             for ($i = 0; $i < 20; $i++): ?>
@@ -65,13 +39,9 @@ class Series
                         <label>Serie</label>
                     </legend>
                 </div>
-
-
             <?php endfor;
-
         } else {
             $data = json_decode($this->file);
-
 
             foreach ($data as $card): ?>
                 <div id="image-serie">
@@ -80,15 +50,7 @@ class Series
                         <label for="<?php ?>"><?php ?></label>
                     </legend>
                 </div>
-
-
-            <?php endforeach; ?>
-        <?php }
-
-
-
+            <?php endforeach;
+        }
     }
-
 }
-
-?>

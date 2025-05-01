@@ -70,7 +70,11 @@ Insert into `acteur` (`cle_act`, `nom`, `image` ) VALUES(1, 'Danielle Rose Russe
 (31, 'Ashby', 'images/images_series/Walter_boys_act03.jpeg'),
 (32, 'Sarah Rafferty', 'images/images_series/Walter_boys_act04.jpeg'),
 (33, 'Marc Blucas', 'images/images_series/Walter_boys_act05.jpeg'),
-(34, 'Eliza Taylor', 'images/images_series/the_act01.jpeg');
+
+(34, 'Eliza Taylor', 'images/images_series/the_100_act01.jpeg'),
+(35, 'Bob Morley', 'images/images_series/the_100_act02.jpeg'),
+(36, 'Marie Avgeropoulos','images/images_series/the_100_act03.jpeg' )
+;
 
 INSERT INTO `serie_tag`(`cle_serie`,`cle_tag`) VALUES
 (1,5),(1,2),
@@ -79,7 +83,8 @@ INSERT INTO `serie_tag`(`cle_serie`,`cle_tag`) VALUES
 (4,1),(4,5),(4,7),
 (5,2),(5,4),
 (6,1),(6,7),
-(7,1),(7,2);
+(7,1),(7,2),
+(8,3), (8,4);
 
 INSERT INTO `saison` (`titre`, `cle_saison`, `affichage`, `nb_episode`, `cle_serie`)
 VALUES
@@ -91,7 +96,8 @@ VALUES
 ('Saison 1',501, 'images/imeges_series/Love101.webp',8,5),
 ('Saison 2',502, 'images/imeges_series/Love101.webp',8,5),
 ('Saison 1',601, 'images/imeges_series/Pulse.jpeg',8,6),
-('Saison 1',701, 'images/imeges_series/Walter_boys.jpeg',10,7);
+('Saison 1',701, 'images/imeges_series/Walter_boys.jpeg',10,7),
+('Saison 1',801, 'images/images_series/the_100',4,8);
 
 INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 (101,21),(101,22),(101,23),(101,24),
@@ -102,7 +108,8 @@ INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 (501,12),(501,13),(501,14),(501,15),(501,16),(501,17),
 (502,12),(502,13),(502,14),(502,15),(502,16),(502,17),
 (601,7),(601,8),(601,9),(601,10),(601,11),
-(701, 29),(701, 30),(701, 31),(701, 32),(701, 33)
+(701, 29),(701, 30),(701, 31),(701, 32),(701, 33),
+(801,34), (801,35), (801,36)
 ;
 
 INSERT INTO `realisateur` (`cle_real`,`nom`, `image`) VALUES
@@ -167,7 +174,7 @@ INSERT INTO `episode`(`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`) 
 (5601, 'Un shérif adjoint charmeur a des vues sur Danny. Harper subit les parents désobligeants d une jeune patiente. Sophie fait face à un dilemme moral.', '00:50:00', 'Episode 05', 601),
 (6601, 'Une visite à leur père acariâtre dans leur ville natale ravive des tensions entre Danny et Harper. Le jour de repos de Tom et du Dr Soriano prend une tournure inattendue.', '00:50:00', 'Episode 06', 601),
 (7601, 'Pour choisir le prochain chef des internes, la Dre Cruz observe minutieusement Danny et Sam sur le terrain. Camila cherche à comprendre l étrange maladie d une fille de neuf ans.', '00:50:00', 'Episode 07', 601),
-(8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601); 
+(8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601);
 
 
 INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES

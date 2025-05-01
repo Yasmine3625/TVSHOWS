@@ -44,9 +44,7 @@ use tvshows\SeriesRenderer
         "the_order.jpeg" => "The order",
         "the_rookie.jpeg" => "The rookie",
         "love101.webp" => "Love 101",
-        "100.jpg" => "100",
-        "reign.jpg"=>"Reign",
-        "Walter_boys.jpeg" => "Walter boys"
+        "Walter_boys.jpeg" => "Walter"
     ];
 
     $serierenderer = new SeriesRenderer();

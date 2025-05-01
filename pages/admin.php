@@ -1,5 +1,7 @@
 <?php
 session_start();
+$logged = isset($_SESSION['nickname']);
+
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("Location: /pages/adminloginform.php");
@@ -15,10 +17,11 @@ use tvshows\SeriesRenderer;
 
 ob_start();
 ?>
+<?php if ($logged): ?>
+    <h1>Bienvenue dans l'admin</h1>
+<?php endif; ?>
 
-<h1>Bienvenue dans l'admin</h1>
 <p>Bonjour <?= htmlspecialchars($_SESSION['nick'] ?? 'admin') ?> 👋</p>
-<a href="logout.php">Déconnexion</a>
 
 <!-- ici, ajoute ton interface admin CRUD -->
 

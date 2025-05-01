@@ -28,6 +28,7 @@ INSERT INTO `serie` ( `titre`, `nb_saison`) VALUES
 ('originals', 1),
 ('Love 101',2),
 ('Ma vie avec les walter Boys',1)
+('The 100', 2)
 ;
 
 Insert into `acteur` (`cle_act`, `nom`, `image` ) VALUES(1, 'Danielle Rose Russel', 'images/images_series/originals_act06.webp' ),
@@ -68,7 +69,8 @@ Insert into `acteur` (`cle_act`, `nom`, `image` ) VALUES(1, 'Danielle Rose Russe
 (30, 'Nikki Rodriguez ', 'images/images_series/Walter_boys_act02.jpeg'),
 (31, 'Ashby', 'images/images_series/Walter_boys_act03.jpeg'),
 (32, 'Sarah Rafferty', 'images/images_series/Walter_boys_act04.jpeg'),
-(33, 'Marc Blucas', 'images/images_series/Walter_boys_act05.jpeg');
+(33, 'Marc Blucas', 'images/images_series/Walter_boys_act05.jpeg'),
+(34, 'Eliza Taylor', 'images/images_series/the_act01.jpeg');
 
 INSERT INTO `serie_tag`(`cle_serie`,`cle_tag`) VALUES
 (1,5),(1,2),
@@ -168,7 +170,7 @@ INSERT INTO `episode`(`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`) 
 (8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601); 
 
 
-/*INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
+INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
 (1101,1),(1101,2),
 (2101,3),(2101,1),
 (3101,1),
@@ -222,4 +224,4 @@ INSERT INTO `episode`(`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`) 
 (5601,6),
 (6601,4),
 (7601,5),(7501,1),
-(8601,3),(8601,4),(8601,6);*/
+(8601,3),(8601,4),(8601,6);

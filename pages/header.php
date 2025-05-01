@@ -8,7 +8,7 @@
         <a class="nav-btn-acc" href="/../index.php">Acceuil</a>
         <div class="search-bar">
             <input type="text" placeholder="Rechercher une série..." class="search-input" />
-            <i class="fas fa-search search-icon"></i>
+            <i class="fas fa-search search-icon" ></i>
         </div>
         <a href="/../pages/adminloginform.php" class="nav-btn-log" id="btn-admin-Login" type="button">Login</a>
 

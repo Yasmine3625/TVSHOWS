@@ -18,6 +18,7 @@ class SeriesRenderer
         </div>
         <?php
     }
+
 }
 
 

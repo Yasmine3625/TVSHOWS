@@ -5,34 +5,35 @@ require_once __DIR__ . "/../config.php";
 use tvshows\AdminLogger;
 use tvshows\Template;
 
+session_start();
 
 $logger = new AdminLogger();
 
-if (isset($_POST['username']) and isset($_POST['password'])) {
+// Traitement du formulaire
+if (isset($_POST['username']) && isset($_POST['password'])) {
     $response = $logger->log(trim($_POST['username']), $_POST['password']);
+
     if ($response['granted']) {
-        $nick = $response['nick'];
+        $_SESSION['admin'] = true;
+        $_SESSION['nick'] = $response['nick'];
+        header("Location: /pages/admin.php");
+        exit;
     }
 }
 
+ob_start();
 ?>
 
-<?php ob_start(); ?>
+<?php if (!isset($response)): ?>
+    <?php $logger->generateLoginForm(""); ?>
 
-<?php
-if (!isset($response)):
-    $logger->generateLoginForm("");
-elseif (!$response['granted']): ?>
-    <div id="authetication-sct">
-        <?php echo "<div class='magic-card' id='error'>" . $response['error'] . "</div>";
-        $logger->generateLoginForm(""); ?>
+<?php elseif (!$response['granted']): ?>
+    <div id="authentication-sct">
+        <div class="magic-card" id="error"><?= htmlspecialchars($response['error']) ?></div>
+        <?php $logger->generateLoginForm(""); ?>
     </div>
-    <?php
-else:
-    include "admin.php";
-endif;
-?>
+<?php endif; ?>
+
 <?php
 $content = ob_get_clean();
 Template::render($content);
-?>

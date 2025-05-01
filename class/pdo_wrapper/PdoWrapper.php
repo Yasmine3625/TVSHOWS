@@ -13,7 +13,7 @@ class PdoWrapper
     private $db_port;
     private $pdo;
 
-    public function __construct($db_name, $db_host = '127.0.0.1', $db_port = '3306', $db_user = 'root', $db_pwd = '')
+    public function __construct($db_name = "tv_shows", $db_host = '127.0.0.1', $db_port = '3306', $db_user = 'root', $db_pwd = '')
     {
         $this->db_name = $db_name;
         $this->db_host = $db_host;
@@ -21,12 +21,22 @@ class PdoWrapper
         $this->db_user = $db_user;
         $this->db_pwd = $db_pwd;
 
-        $dsn = 'mysql:dbname=' . $this->db_name . ';host=' . $this->db_host . ';port=' . $this->db_port;
         try {
-            $this->pdo = new PDO($dsn, $this->db_user, $this->db_pwd);
-        } catch (\Exception $ex) {
-            die('Error : ' . $ex->getMessage());
+            // Agrégation des informations de connexion dans une chaine DSN (Data Source Name)
+            $dsn = 'mysql:dbname=' . $db_name . ';host=' . $db_host . ';port=' . $db_port;
+
+            // Connexion et récupération de l'objet connecté
+            $pdo = new PDO($dsn, $db_user, $db_pwd);
         }
+
+        // Récupération d'une éventuelle erreur
+        catch (\Exception $ex) {
+            // Arrêt de l'exécution du script PHP
+            die("Erreur : " . $ex->getMessage());
+        }
+
+        // Si pas d'erreur : poursuite de l'exécution
+        echo "Connexion OK<br>";
 
     }
 

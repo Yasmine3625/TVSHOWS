@@ -5,16 +5,16 @@ use tvshows\Series;
 class SeriesRenderer
 {
     //on enleve le $image et on met $this->image
-    public function getHTML($image, $serieName)
+    public function getHTML()
     {
         ?>
         <div id="image-serie">
             <div id="image-container">
-                <a href="pages/serie.php?serie=<?= urlencode($serieName) ?>">
-                    <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" . $image ?>" alt="imageSerie">
+                <a href="pages/serie.php?serie=<?= urlencode($this->image) ?>">
+                    <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" . $$this->image ?>" alt="imageSerie">
                 </a>
             </div>
-            <div class="serie-label"><?= htmlspecialchars($serieName) ?></div>
+            <div class="serie-label"><?= htmlspecialchars($$this->name) ?></div>
         </div>
         <?php
     }

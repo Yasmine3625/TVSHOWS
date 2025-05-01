@@ -8,7 +8,13 @@ use tvshows\SeriesRenderer
 ?>
 
 
-<?php ob_start(); ?>
+<?php ob_start();
+
+
+
+
+
+?>
 
 <div id="tag-bar">
     <?php
@@ -37,8 +43,8 @@ use tvshows\SeriesRenderer
 <div id="list-serie">
     <?php
     $image = [
-        "love101.webp "=> "Love 101",
-        "My_name.jpeg"=>"My name",
+        "love101.webp " => "Love 101",
+        "My_name.jpeg" => "My name",
         "originals.jpg" => "Originals",
         "Pulse.webp" => "Pulse",
         "the_order.jpeg" => "The order",
@@ -46,15 +52,15 @@ use tvshows\SeriesRenderer
         "love101.webp" => "Love 101",
         "Walter_boys.jpeg" => "Walter"
     ];
-
-    $serierenderer = new SeriesRenderer();
-    foreach ($image as $img => $name) {
-        $serierenderer->getHTML($img, $name);
-    }
     ?>
 </div>
 
 <?php
+
+
+$gdb = new Series();
+
 $content = ob_get_clean();
+
 Template::render($content);
 ?>

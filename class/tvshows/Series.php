@@ -30,6 +30,7 @@ class Series extends PdoWrapper
             null,
             'tvshows\SeriesRenderer'
         );
+
     }
     public function getSeriesByCategory($categoryName)
     {

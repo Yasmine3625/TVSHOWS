@@ -1,6 +1,7 @@
 <?php
-$logged = isset($_SESSION['nick']);
+$isAdminLogged = isset($_SESSION['nickname']);
 ?>
+
 
 
 <header>
@@ -13,12 +14,11 @@ $logged = isset($_SESSION['nick']);
         <a class="nav-btn-acc" href="/../index.php">Acceuil</a>
         <div class="search-bar">
             <input type="text" placeholder="Rechercher une série..." class="search-input" />
-            <i class="fas fa-search search-icon" ></i>
+            <i class="fas fa-search search-icon"></i>
         </div>
-        <?php if ($logged): ?>
-            <a role="button" href="<?php echo $GLOBALS['DOCUMENT_DIR'] ?>pages/shop.php">
-                Admin
-            </a>
+        <?php if ($isAdminLogged): ?>
+            <a href="/../index.php" role="button" class="nav-btn-log" id="btn-admin-Login">Logout</a>
+
         <?php else: ?>
             <a href="/../pages/adminloginform.php" class="nav-btn-log" id="btn-admin-Login" role="button">Login</a>
         <?php endif ?>

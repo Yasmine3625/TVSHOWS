@@ -24,7 +24,6 @@ class AdminLogger
     public function log(string $username, string $password): array
     {
 
-        // les data devraient être récupérées dans une base de données...
         $user = "yasmine";
         $pwd = "labchri";
 

@@ -1,22 +1,18 @@
-#login-form,
 #error {
     width: 300px;
 }
 
-#main-content {
-    justify-content: center;
 
-}
-
-#authetication-sct {
+#login-container {
     display: flex;
     flex-direction: column;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 
     background-color: #0e0d0d;
 }
+
 
 #login-form-container {
     display: flex;

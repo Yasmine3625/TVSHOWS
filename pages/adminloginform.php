@@ -5,7 +5,7 @@ require_once __DIR__ . "/../config.php";
 use tvshows\AdminLogger;
 use tvshows\Template;
 
-session_start();
+
 
 $logger = new AdminLogger();
 
@@ -22,17 +22,22 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 
 ob_start();
+session_start();
 ?>
 
-<?php if (!isset($response)): ?>
-    <?php $logger->generateLoginForm(""); ?>
+<div id="login-container">
+    <?php if (!isset($response)): ?>
 
-<?php elseif (!$response['granted']): ?>
-    <div id="authentication-sct">
-        <div class="magic-card" id="error"><?= htmlspecialchars($response['error']) ?></div>
         <?php $logger->generateLoginForm(""); ?>
-    </div>
-<?php endif; ?>
+
+    <?php elseif (!$response['granted']): ?>
+
+        <div id="error"><?= htmlspecialchars($response['error']) ?></div>
+        <?php $logger->generateLoginForm(""); ?>
+
+    <?php endif; ?>
+
+</div>
 
 <?php
 $content = ob_get_clean();

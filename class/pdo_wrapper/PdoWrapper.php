@@ -26,7 +26,7 @@ class PdoWrapper
             $dsn = 'mysql:dbname=' . $db_name . ';host=' . $db_host . ';port=' . $db_port;
 
             // Connexion et récupération de l'objet connecté
-            $pdo = new PDO($dsn, $db_user, $db_pwd);
+            $this->pdo = new PDO($dsn, $db_user, $db_pwd);
         }
 
         // Récupération d'une éventuelle erreur

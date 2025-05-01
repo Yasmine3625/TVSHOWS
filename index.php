@@ -42,23 +42,23 @@ use tvshows\SeriesRenderer
 
 <div id="list-serie">
     <?php
-    $image = [
-        "love101.webp " => "Love 101",
-        "My_name.jpeg" => "My name",
-        "originals.jpg" => "Originals",
-        "Pulse.webp" => "Pulse",
-        "the_order.jpeg" => "The order",
-        "the_rookie.jpeg" => "The rookie",
-        "love101.webp" => "Love 101",
-        "Walter_boys.jpeg" => "Walter"
-    ];
+    $gdb = new Series();
+
+
+
+
+    $series = $gdb->getAllSeries(); // retourne des SeriesRenderer
+    foreach ($series as $s) {
+        echo $s->getHTML(); // affiche chaque bloc HTML
+    }
     ?>
 </div>
 
 <?php
 
 
-$gdb = new Series();
+
+
 
 $content = ob_get_clean();
 

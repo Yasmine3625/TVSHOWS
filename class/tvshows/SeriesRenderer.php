@@ -1,25 +1,28 @@
 <?php
 namespace tvshows;
-use tvshows\Series;
 
 class SeriesRenderer
 {
-    //on enleve le $image et on met $this->image
+    public $cle_serie;
+    public $titre;
+    public $nb_saison;
+    public $image;
+
     public function getHTML()
     {
-        ?>
-        <div id="image-serie">
-            <div id="image-container">
-                <a href="pages/serie.php?serie=<?= urlencode($this->image) ?>">
-                    <img src="<?= $GLOBALS['DOCUMENT_DIR'] . "../uploads/" . $$this->image ?>" alt="imageSerie">
+        // construction du chemin de l’image
+        $imagePath = "/../uploads/" . $this->image;
+
+        // retourne le bloc HTML sous forme de chaîne
+        return "
+        <div class='serie'>
+            <div class='image-container'>
+                <a href='pages/serie.php?serie=" . urlencode($this->cle_serie) . "'>
+                    <img src='$imagePath' alt='Image de la série " . htmlspecialchars($this->titre) . "'>
                 </a>
             </div>
-            <div class="serie-label"><?= htmlspecialchars($$this->name) ?></div>
+            <div class='serie-label'>" . htmlspecialchars($this->titre) . " (" . intval($this->nb_saison) . " saisons)</div>
         </div>
-        <?php
+        ";
     }
-
 }
-
-
-?>

@@ -23,5 +23,17 @@ class Series extends PdoWrapper
         );
     }
 
+    public function getAllSeries()
+    {
+        return $this->exec(
+            "SELECT * FROM serie ORDER BY titre",
+            null,
+            'tvshows\SeriesRenderer'
+        );
+    }
+
+
+
+
 
 }

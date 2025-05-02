@@ -54,19 +54,18 @@ ob_start();
 
             <div class="serie-details">
                 <div class="saison-boxes">
-                <?php for ($i = 1; $i <=
-                        intval($serie->nb_saison); $i++): ?>
+                    <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
                         <div class="saison-box">
-                                <a href="saison.php?serie=<?=
-                                    urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
-                                    Saison <?= $i ?>
-                                </a>
-                                <img src="/images/images_series/<?= htmlspecialchars($saisons->affichage) ?>"
-                        alt="Image de la saison"
-                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                            <a href="saison.php?serie=<?=
+                                urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
+                                Saison <?= $i ?>
+                            </a>
+                            <img src="/../images/images_series/<?= htmlspecialchars($saisons->affichage) ?>"
+                                alt="Image de la saison"
+                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                         </div>
                     <?php endfor; ?>
-                        
+
                 </div>
 
                 <?php if (!empty($tags)): ?>

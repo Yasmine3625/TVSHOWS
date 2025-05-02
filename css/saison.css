@@ -77,6 +77,12 @@
     font-size: 3em;
 }
 
+.episode-section {
+    display: flex;
+    justify-content: center;
+    margin: 21px;
+}
+
 .saisons-episodes-container {
     width: 85%;
 

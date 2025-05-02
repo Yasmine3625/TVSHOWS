@@ -155,6 +155,43 @@ footer {
 
 
 
+.info_serie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 80px;
+    border-radius: 0;
+    background: linear-gradient(to right, rgba(240, 240, 240, 1) 0%, rgba(240, 240, 240, 0.2) 70%, rgba(240, 240, 240, 0) 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    margin: 0;
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.gauche {
+    flex: 1;
+    padding-right: 60px;
+}
+
+.gauche h1 {
+    font-size: 4em;
+    margin-bottom: 10px;
+}
+
+.gauche p {
+    font-size: 2em;
+    margin: 0;
+}
+
+.serie-image img {
+    width: 500px;
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
 
 
 #list-serie {

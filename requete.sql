@@ -16,3 +16,9 @@ JOIN episode e ON er.cle_episode = e.cle_episode
 JOIN saison s ON e.id_saison = s.cle_saison
 JOIN serie ser ON s.cle_serie = ser.cle_serie
 WHERE r.nom LIKE acteur_name;
+
+SELECT *
+FROM serie s
+JOIN serie_tag st ON s.cle_serie = st.cle_serie
+JOIN tag t ON st.cle_tag = t.id_tag
+WHERE LOWER(t.nom) = LOWER('NomDuTag');

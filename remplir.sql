@@ -27,7 +27,7 @@ INSERT INTO `serie` ( `titre`, `nb_saison`) VALUES
 ('My name',1),
 ('originals', 1),
 ('Love 101',2),
-('Ma vie avec les walter Boys',1)
+('Ma vie avec les walter Boys',1),
 ('The 100', 2)
 ;
 
@@ -177,7 +177,7 @@ INSERT INTO `episode`(`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`) 
 (8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601);
 
 
-INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
+/*INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
 (1101,1),(1101,2),
 (2101,3),(2101,1),
 (3101,1),
@@ -231,4 +231,4 @@ INSERT into `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
 (5601,6),
 (6601,4),
 (7601,5),(7501,1),
-(8601,3),(8601,4),(8601,6);
+(8601,3),(8601,4),(8601,6);*/

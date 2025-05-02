@@ -77,10 +77,16 @@
     font-size: 3em;
 }
 
-#saisons-episodes-container {
+.saisons-episodes-container {
     width: 85%;
-    display: list-item;
-    height: 500px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+
+.acteur-section {
+    width: 100%;
 }
 
 .episode-button {

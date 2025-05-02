@@ -65,17 +65,30 @@ ob_start();
         <p>Episodes</p>
     </div>
     <hr style="margin: unset;">
-    <div id="saisons-episodes-container">
-        <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
+    <div class="episode-section">
+        <div class="saisons-episodes-container">
+            <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
 
-            <div id="ep">
-                <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
-                    class="episode-button">
-                    Episode <?= $i ?>
-                </a>
+                <div id="ep">
+                    <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
+                        class="episode-button">
+                        Episode <?= $i ?>
+                    </a>
+                </div>
+
+            <?php endfor; ?>
+        </div>
+    </div>
+
+    <div id="saison-acteur-container">
+        <?php foreach ($acteurs as $real): ?>
+            <div class="realisateur">
+                <img src="/images/images_series/<?= htmlspecialchars($real->image) ?>"
+                    alt="Image de <?= htmlspecialchars($real->nom) ?>"
+                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                <p><?= htmlspecialchars($real->nom) ?></p>
             </div>
-
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
 
 

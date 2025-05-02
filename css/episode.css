@@ -31,11 +31,50 @@
     font-style: italic;
     color: white;
 }
-.icon{
+
+
+.icon {
+    position: relative; /* position normale */
+    margin-top: 2rem;  /* espace en haut de l'élément */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ajuste la taille comme nécessaire */
+    height: 500px;
     background-color: black;
 }
-.image-icone {
+
+.icon img {
+    max-width: 95%;
+    max-height: 100%;
+}
+.realisateurs {
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.realisateur-list {
+    display: flex; /* Affiche les éléments en ligne (horizontalement) */
+    gap: 1rem;
+    padding-bottom: 1rem; /* Espace en bas pour éviter que le contenu soit coupé */
+    max-width: 100%; /* Assure que l'élément ne dépasse pas le conteneur */
+}
+
+.image-real-list{
+    display: flex; /* Affiche les éléments en ligne (horizontalement) */
+    gap: 1rem;
+    padding-bottom: 1rem; /* Espace en bas pour éviter que le contenu soit coupé */
+    max-width: 100%; /* Assure que l'élément ne dépasse pas le conteneur */
+    overflow-y: auto;
+}
+
+.episodes-container{
+    width: 100%;
+
     display: flex;
-    justify-content: center; /* Centre l'image horizontalement */
-    align-items: center; /* Centre l'image verticalement */
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+.ep-list{
+    width: 400px;
 }

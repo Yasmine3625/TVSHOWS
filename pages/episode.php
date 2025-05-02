@@ -39,14 +39,10 @@ if (count($serieData) === 0) {
 }
 $serie = $serieData[0];
 
-// Récupérer les réalisateurs de l'épisode
-$realisateurs = $gdb->exec(
-    "SELECT r.nom, r.image
-    FROM realisateur r
-    INNER JOIN episode_realisateur re ON re.cle_real = r.cle_real
-    WHERE re.cle_episode = :id_episode",
-    ['id_episode' => $episode->cle_episode]
-);
+
+
+$realisateurs = $gdb->getRealisateursParEpisode($episode->cle_episode); 
+
 
 // Capture HTML
 ob_start();
@@ -77,12 +73,9 @@ ob_start();
                 <?php if ($realisateurs): ?>
                     <div class="realisateur-list">
                         <?php foreach($realisateurs as $real): ?>
-                            <div class="realisateur">
-                                <img src="/images/images_series/<?= htmlspecialchars($real->image) ?>"
-                                     alt="Image de <?= htmlspecialchars($real->nom) ?>"
-                                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                
                                 <p><?= htmlspecialchars($real->nom) ?></p>
-                            </div>
+
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
@@ -94,12 +87,29 @@ ob_start();
                     <img src="..\images\Icon.png" alt="Icône">
                 </div>
             </div>
-
         </div>
+        <div class="episode-section">
+        <div class="episodes-container">
+            <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
 
-        <div class="navigation-links">
-            <a href="saison.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>">Retour à la Saison <?= $numSaison ?></a><br>
-            <a href="serie.php?serie=<?= urlencode($cleSerie) ?>">Retour à la Série <?= htmlspecialchars($serie->titre) ?></a>
+                <div id="ep-list">
+                    <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
+                        class="episode-button">
+                        Episode <?= $i ?>
+                    </a>
+                </div>
+
+            <?php endfor; ?>
+        </div>
+    </div>
+        <div class="image-real-list">
+            <?php foreach($realisateurs as $real): ?>
+                <div class="image-real">
+                    <img src="/images/images_series/<?= htmlspecialchars($real->image) ?>"
+                            alt="Image de <?= htmlspecialchars($real->nom) ?>">
+                
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

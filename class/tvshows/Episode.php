@@ -55,4 +55,17 @@ class Episode extends PdoWrapper
             'episode' => $episodes[0]
         ];
     }
+    public function getRealisateursParEpisode($idEpisode)
+    {
+        $sql = "SELECT r.nom, r.image
+                FROM realisateur r
+                INNER JOIN episode_realisateur re ON re.cle_real = r.cle_real
+                WHERE re.cle_episode = :id_episode";
+    
+        $params = ['id_episode' => $idEpisode];
+    
+        return $this->exec($sql, $params);
+    }
+    
+
 }

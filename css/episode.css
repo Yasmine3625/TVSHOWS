@@ -1,0 +1,41 @@
+.episode-details {
+    padding: 1rem;
+}
+
+.episode-details .titre {
+    margin-bottom: 1rem;
+}
+
+.episode-details .titre h3,
+.episode-details .description-box h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: white;
+    line-height: 1.6;
+
+}
+
+.episode-details .titre {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.description-box {
+    margin: 1rem 0;
+    line-height: 1.6;
+    color: white;
+}
+
+.duree p {
+    font-style: italic;
+    color: white;
+}
+.icon{
+    background-color: black;
+}
+.image-icone {
+    display: flex;
+    justify-content: center; /* Centre l'image horizontalement */
+    align-items: center; /* Centre l'image verticalement */
+}

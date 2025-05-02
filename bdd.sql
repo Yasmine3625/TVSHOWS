@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `acteur`
 --
+DROP TABLE IF EXISTS acteur;
 
 CREATE TABLE `acteur` (
   `cle_act` int(11) NOT NULL,
@@ -77,6 +78,7 @@ INSERT INTO `acteur` (`cle_act`, `nom`, `image`) VALUES
 --
 -- Structure de la table `episode`
 --
+DROP TABLE IF EXISTS episode;
 
 CREATE TABLE `episode` (
   `cle_episode` int(11) NOT NULL,
@@ -84,17 +86,17 @@ CREATE TABLE `episode` (
   `duree` time DEFAULT NULL,
   `titre` varchar(100) DEFAULT NULL,
   `id_saison` int(11) DEFAULT NULL,
-  `numero_episode` INT(15) NOT NULL
+  `numero_episode` INT(15)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `episode`
 --
 
-INSERT INTO `episode` (`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`, `numero_episode`) VALUES
-(1101, 'John Nolan est un divorcé âgé de 45 ans qui, après avoir assisté à (et fait déjouer) un braquage de banque dans sa petite ville, décide de changer de vie : il déménage à Los Angeles et devient flic.', '00:46:00', 'Premiers pas', 101, 1),
-(1102, 'Deux semaines après la fin de la saison 1, Nolan a déménagé dans une nouvelle maison et les recrues apprennent les résultats de leur examen. Ils réussissent tous le test.', '00:48:00', 'Impact', 102, 1),
-(1201, 'L histoire est raconté du point de vue d Elijah. Déterminé à aider son frère à trouver la rédemption.', '01:02:00', 'Retour a la Nouvelle-Orleans', 201, 1),
+INSERT INTO `episode` (`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`,`numero_episode`) VALUES
+(1101, 'John Nolan est un divorcé âgé de 45 ans qui, après avoir assisté à (et fait déjouer) un braquage de banque dans sa petite ville, décide de changer de vie : il déménage à Los Angeles et devient flic.', '00:46:00', 'Premiers pas', 101,1),
+(1102, 'Deux semaines après la fin de la saison 1, Nolan a déménagé dans une nouvelle maison et les recrues apprennent les résultats de leur examen. Ils réussissent tous le test.', '00:48:00', 'Impact', 102,1),
+(1201, 'L histoire est raconté du point de vue d Elijah. Déterminé à aider son frère à trouver la rédemption.', '01:02:00', 'Retour a la Nouvelle-Orleans', 201,1),
 (1301, 'Le jour de son anniversaire, Jiwoo Yoon assiste à la mort atroce de son père. Prête à tout pour se venger.', '00:45:00', 'Episode 01', 301, 1),
 (1401, 'Arrivé à l Université de Belgrave, Jack intègre une société secrète imprégnée de mystère et de magie.', '00:45:00', 'Semaine infernale (partie 01)', 401, 1),
 (1501, 'Après avoir mis leur lycée à feu et à sang, Eda, Osman, Sinan et Kerem réalisent que seule Burcu, une jeune prof à l écoute, pourrait encore les sauver de l expulsion.', '01:02:00', 'Le premier regard', 501, 1),
@@ -105,7 +107,7 @@ INSERT INTO `episode` (`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`,
 (2201, 'Rebekah arrive à la Nouvelle-Orléans à la recherche d Elijah, mais rencontre Hayley dans le manoir de Klaus où elle se confie à Rebekah sur son état inattendu.', '00:59:45', 'À la reconquête du royaume', 201, 2),
 (2301, 'Mujin Choi inflige une punition à Gangjae Do. Jiwoo intègre les forces de police sous couverture.', '00:46:00', 'Episode 02', 301, 2),
 (2401, 'Grand-père expose sa théorie au sujet des attaques.', '00:47:00', 'Semaine Infernale (partie 02)', 401, 2),
-(2501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Uneadmiration mutuelle', 501, 3),
+(2501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Uneadmiration mutuelle', 501, 2),
 (2502, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Episode 02 ', 502, 2),
 (2601, 'La tempête redouble d intensité. Les urgences sont débordées et Danny doit faire des choix difficiles. Tom doit se montrer à la hauteur quand le sort frappe quelqu un de proche.', '00:50:00', 'Episode 02', 601, 2),
 (3101, 'Nolan et Bishop poursuivent un groupe de voleurs et Nolan perd un sac d argent volé lorsqu un artiste de rue s enfuit avec. Le bureau apprend que les voleurs', '00:48:00', 'Plan B', 101, 3),
@@ -113,49 +115,57 @@ INSERT INTO `episode` (`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`,
 (3201, 'Rebekah et Klaus se sont alliés afin de récupérer Elijah, détenu par l arme secrète anti-sorcières de Marcel.', '00:58:49', 'Les amants maudits', 201, 3),
 (3301, 'Durant la traque d une cible imprévue avec son équipe, Jiwoo doit faire preuve de sang-froid.', '00:47:00', 'Episode 03', 301, 3),
 (3401, 'Une société secrète rivale cherche à recruter Jack. Plus tard, une leçon de magie lui ouvre les yeux sur le prix à payer pour chaque sort lancé.', '00:45:00', 'Introduction a l etique(partie 01)', 401, 3),
-(3501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'L envol du desir', 501, 4),
+(3501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'L envol du desir', 501, 3),
 (3502, 'Tombée sous le charme d Osman, Elif est anéantie par un malentendu. Kerem encourage Eda à persévérer dans son art. Kemal prend Sinan sous son aile.', '01:02:00', 'Episode 03 ', 502, 3),
 (3601, 'Alors que les générateurs de secours de l hôpital faiblissent, la Dre Cruz s inquiète pour la sécurité de Vero. Sophie et Camila risquent tout pour sauver une patiente en péril.', '00:50:00', 'Episode 03', 601, 3),
 (4101, 'Le Sergent Gray teste les recrues en interchangeant leur formateurs: il assigne Nolan à Lopez, West à Bradford et Chen à Bishop; et charge les recrues de mieux comprendre leurs nouveaux formateurs.', '00:45:00', 'Changement d equipe', 101, 4),
-(4102, 'Nolan est assigné à son nouvel agent instructeur, le lieutenant Nyla Harper, dont il trouve les méthodes trop extrêmes.', '00:50:00', 'Le billet en or', 102,4),
+(4102, 'Nolan est assigné à son nouvel agent instructeur, le lieutenant Nyla Harper, dont il trouve les méthodes trop extrêmes.', '00:50:00', 'Le billet en or', 102, 4),
 (4201, 'Avec le festival annuel de musique de la rue Dauphine en vue, Davina, souhaitant profiter d une soirée.', '01:01:02', 'Nouvelles alliances', 201, 4),
 (4301, 'Pour Giho Cha, la déclaration de guerre de Gangjae contre Mujin vient à point nommé.', '00:50:00', 'Episode 04', 301, 4),
 (4401, 'Jack suggère de faire alliance avec les Chevaliers, et Randall lui enseigne comment maîtriser ses pouvoirs. De son côté, Edward prend Alyssa sous son aile.', '00:48:00', 'Introduction a l etique(partie 02)', 401, 4),
-(4501, 'Işık encourage Eda à poursuivre ses rêves. Après avoir soumis Tuncay à un test impitoyable, les amis rendent un jugement sans indulgence.', '01:02:00', 'Abscence et manque', 501, 5),
+(4501, 'Işık encourage Eda à poursuivre ses rêves. Après avoir soumis Tuncay à un test impitoyable, les amis rendent un jugement sans indulgence.', '01:02:00', 'Abscence et manque', 501, 4),
 (4502, 'Lorsque tout espoir semble perdu, Işık se détache du groupe, mais Elif l incite à reconsidérer sa décision. Kerem envisage un choix déchirant.', '01:02:00', 'Episode 04 ', 502, 4),
-(4601, 'Les urgences sont saturées après la tempête. Danny jongle pour concilier l afflux de patients et l arrivée d une nouvelle titulaire qui connaît bien Xander.', '00:50:00', 'Episode 04', 601,4),
+(4601, 'Les urgences sont saturées après la tempête. Danny jongle pour concilier l afflux de patients et l arrivée d une nouvelle titulaire qui connaît bien Xander.', '00:50:00', 'Episode 04', 601, 4),
 (5101, 'Nolan a du mal à faire face à sa rupture avec Chen au moment même où les formateurs lancent un concours annuel pour déterminer qui peut obtenir le plus d arrestations en un seul jour de travail.', '00:46:00', 'Le tournoi', 101, 5),
 (5201, 'Irrité par les récents événements impliquant la sécurité de son bébé à naître, Klaus exige des réponses de Sophie.', '00:56:45', 'Le rituel de moisson', 201, 5),
 (5301, 'Jiwoo et Pildo échappent au pire de justesse, reportant l attention de la police sur Gangjae.', '00:46:00', 'Episode 05', 301, 5),
-(5501, 'Osman embringue Tuncay dans une magouille... dont il n avait pas anticipé les conséquences. Işık invente une excuse afin que Burcu et Kemal travaillent ensemble.', '01:02:00', 'Le profondeur des sentiments ', 501, 6),
+(5501, 'Osman embringue Tuncay dans une magouille... dont il n avait pas anticipé les conséquences. Işık invente une excuse afin que Burcu et Kemal travaillent ensemble.', '01:02:00', 'Le profondeur des sentiments ', 501 ,5),
 (5502, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Episode 05 ', 502, 5),
-(5601, 'Un shérif adjoint charmeur a des vues sur Danny. Harper subit les parents désobligeants d une jeune patiente. Sophie fait face à un dilemme moral.', '00:50:00', 'Episode 05', 601, 5),
-(6501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Jeux et enjeux ', 501,7),
-(6502, 'Kerem et Eda se retrouvent dans une impasse. Necdet tombe dans le piège d Osman. Refusant de se soumettre à la pression parentale, Elif prend son courage à deux mains.', '01:02:00', 'Episode 06 ', 502,6),
+(5601, 'Un shérif adjoint charmeur a des vues sur Danny. Harper subit les parents désobligeants d une jeune patiente. Sophie fait face à un dilemme moral.', '00:50:00', 'Episode 05', 601 ,5),
+(6501, 'Une lycéenne modèle et quatre rebelles décident que leur prof préférée doit craquer sur le bel entraîneur de basket. Une folle histoire d amitié, d amour et de courage.', '01:02:00', 'Jeux et enjeux ', 501, 6),
+(6502, 'Kerem et Eda se retrouvent dans une impasse. Necdet tombe dans le piège d Osman. Refusant de se soumettre à la pression parentale, Elif prend son courage à deux mains.', '01:02:00', 'Episode 06 ', 502, 6),
 (6601, 'Une visite à leur père acariâtre dans leur ville natale ravive des tensions entre Danny et Harper. Le jour de repos de Tom et du Dr Soriano prend une tournure inattendue.', '00:50:00', 'Episode 06', 601, 6),
-(7501, 'Tuncay annonce une mauvaise nouvelle à Burcu. Un incident dans le labo neuf pousse Necdet à bout, et l expulsion de la petite bande n est plus qu une question d heures', '01:02:00', 'Changement de cap ', 501, 8),
-(7502, 'Les amis se préparent pour les examens. Elif se ravise pendant son récital. Necdet tente de se dérober à une enquête en manipulant Yıldira.', '01:02:00', 'Episode 07 ', 502,7),
-(7601, 'Pour choisir le prochain chef des internes, la Dre Cruz observe minutieusement Danny et Sam sur le terrain. Camila cherche à comprendre l étrange maladie d une fille de neuf ans.', '00:50:00', 'Episode 07', 601, 7),
+(7501, 'Tuncay annonce une mauvaise nouvelle à Burcu. Un incident dans le labo neuf pousse Necdet à bout, et l expulsion de la petite bande n est plus qu une question d heures', '01:02:00', 'Changement de cap ', 501, 7),
+(7502, 'Les amis se préparent pour les examens. Elif se ravise pendant son récital. Necdet tente de se dérober à une enquête en manipulant Yıldira.', '01:02:00', 'Episode 07 ', 502, 7),
+(7601, 'Pour choisir le prochain chef des internes, la Dre Cruz observe minutieusement Danny et Sam sur le terrain. Camila cherche à comprendre l étrange maladie d une fille de neuf ans.', '00:50:00', 'Episode 07', 601, 6),
 (8501, 'Après un conseil disciplinaire houleux, les cinq amis saisiront-ils leur dernière chance de faire ce qui semble être amende honorable ? Kemal et Burcu tombent des nues.', '01:02:00', 'Un moment unique ', 501, 8),
 (8502, 'Le jour du jugement approche pour Necdet. Elif fait ses valises. Osman imagine une solution pour inciter Kerem à étudier.', '01:02:00', 'Episode 08 ', 502, 8),
-(8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601, 7);
+(8601, 'En attendant de passer un entretien avec les RH, Danny et Xander se penchent sur leur douloureux passé. Une crise met en évidence les conflits de loyauté qui hantent Tom.', '00:50:00', 'Episode 08', 601,8);
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `episode_realisateur`
 --
+DROP TABLE IF EXISTS episode_realisateur;
 
 CREATE TABLE `episode_realisateur` (
   `cle_episode` int(11) NOT NULL,
   `cle_real` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
---
+INSERT INTO `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
+(1502, 3),(8601,3),(8601,2),(8502,4),(8502,2),(8501,4),(8502,6),
+(1502, 4),(7601,5),(7601,1),(7602,2),(7601,1),(7602,5),(6601,3),(6601,4),
+(1501, 5),
+(1502, 6),
+(1502, 2),
+(1501, 2),
+(1502, 1),(1101,1),(1101,2),(1102,4),(1102,5),(6502,4),(6502,4),(6501,2),(6501,3);
 -- Structure de la table `realisateur`
 --
+DROP TABLE IF EXISTS realisateur;
 
 CREATE TABLE `realisateur` (
   `cle_real` int(11) NOT NULL,
@@ -168,18 +178,19 @@ CREATE TABLE `realisateur` (
 --
 
 INSERT INTO `realisateur` (`cle_real`, `nom`, `image`) VALUES
-(1, 'Liz Friedlander', 'images/images_series/real01_the_rookie.jpeg'),
-(2, 'Adam Davidson', 'images/images_series/real02_the_rookie.jpeg'),
-(3, 'Greg Beeman', 'images/images_series/real03_the_rookie.jpeg'),
-(4, 'Rob Bowman', 'images/images_series/real04_the_rookie.jpeg'),
-(5, 'Chris Grismer', 'images/images_series/real01_originals.jpeg'),
-(6, 'Brad Turner', 'images/images_series/real02_originals.jpeg');
+(1, 'Liz Friedlander', 'real01_the_rookie.jpeg'),
+(2, 'Adam Davidson', 'real02_the_rookie.jpeg'),
+(3, 'Greg Beeman', 'real03_the_rookie.jpeg'),
+(4, 'Rob Bowman', 'real04_the_rookie.jpeg'),
+(5, 'Chris Grismer', 'real01_originals.jpeg'),
+(6, 'Brad Turner', 'real02_originals.jpeg');
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `saison`
 --
+DROP TABLE IF EXISTS saison;
 
 CREATE TABLE `saison` (
   `cle_saison` int(11) NOT NULL,
@@ -209,6 +220,7 @@ INSERT INTO `saison` (`cle_saison`, `titre`, `affichage`, `nb_episode`, `cle_ser
 --
 -- Structure de la table `saison_acteur`
 --
+DROP TABLE IF EXISTS saison_acteur;
 
 CREATE TABLE `saison_acteur` (
   `cle_saison` int(11) NOT NULL,
@@ -269,6 +281,7 @@ INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 --
 -- Structure de la table `serie`
 --
+DROP TABLE IF EXISTS serie;
 
 CREATE TABLE `serie` (
   `cle_serie` int(11) NOT NULL,
@@ -295,6 +308,7 @@ INSERT INTO `serie` (`cle_serie`, `titre`, `nb_saison`, `image`) VALUES
 --
 -- Structure de la table `serie_tag`
 --
+DROP TABLE IF EXISTS serie_tag;
 
 CREATE TABLE `serie_tag` (
   `cle_serie` int(11) NOT NULL,
@@ -327,6 +341,7 @@ INSERT INTO `serie_tag` (`cle_serie`, `cle_tag`) VALUES
 --
 -- Structure de la table `tag`
 --
+DROP TABLE IF EXISTS tag;
 
 CREATE TABLE `tag` (
   `id_tag` int(11) NOT NULL,
@@ -366,7 +381,7 @@ ALTER TABLE `episode`
 --
 -- Index pour la table `episode_realisateur`
 --
-ALTER TABLE `episode_realisateur`
+/*ALTER TABLE `episode_realisateur`
   ADD PRIMARY KEY (`cle_episode`,`cle_real`),
   ADD KEY `cle_real` (`cle_real`);
 

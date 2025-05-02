@@ -53,6 +53,15 @@ ob_start();
             </div>
 
             <div class="serie-details">
+            <div class="tag_box">
+                <?php if (!empty($tags)): ?>
+                    <p><strong>Tags :</strong>
+                        <?php foreach ($tags as $tag): ?>
+                            <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
+                        <?php endforeach; ?>
+                    </p>
+                <?php endif; ?>
+                </div>
                 <div class="saison-boxes">
                 <?php for ($i = 1; $i <=
                         intval($serie->nb_saison); $i++): ?>
@@ -67,15 +76,6 @@ ob_start();
                         </div>
                     <?php endfor; ?>
                         
-                </div>
-                <div class="tag_box">
-                <?php if (!empty($tags)): ?>
-                    <p><strong>Tags :</strong>
-                        <?php foreach ($tags as $tag): ?>
-                            <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
-                        <?php endforeach; ?>
-                    </p>
-                <?php endif; ?>
                 </div>
             </div>
         </div>

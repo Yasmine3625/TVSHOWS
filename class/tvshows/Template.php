@@ -24,6 +24,7 @@ class Template
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>adminlogger.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>style.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>serie.css">
+            <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>episode.css">
         </head>
 
         <body>

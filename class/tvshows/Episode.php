@@ -1,74 +1,58 @@
 <?php
 namespace tvshows;
-class Episode
+include __DIR__ . "/../../DB_CREDENTIALS.php";
+
+use pdo_wrapper\PdoWrapper;
+class Episode extends PdoWrapper
 {
-    public function ajoutSerie($name, $imgFile = null)
+    public $file;
+
+    public const UPLOAD_DIR = "uploads/";
+
+    public function __construct()
     {
+        parent::__construct(
+            $GLOBALS['db_name'],
+            $GLOBALS['db_host'],
+            $GLOBALS['db_port'],
+            $GLOBALS['db_user'],
+            $GLOBALS['db_pwd']
+        );
+    }
 
-        $name = htmlspecialchars($name);
+    public function getAllEpisodes()
+    {
+        return $this->exec(
+            "SELECT * FROM episode ORDER BY titre",
+            null,
+            'tvshows\EpisodesRenderer'
+        );
+    }
+    public function getBySerieSaisonEtNumero($cleSerie, $numSaison, $numEpisode)
+    {
+        // Récupère la saison ciblée par index
+        $querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT " . ($numSaison - 1) . ", 1";
+        $params = ['cleSerie' => $cleSerie];
+        $saisons = $this->exec($querySaison, $params);
 
-        $imgName = null;
-        // enregistrement du fichier uploadé
-        if ($imgFile != null) {
-            $tmpName = $imgFile['tmp_name'];
-            $imgName = $imgFile['name'];
-            $imgName = urlencode(htmlspecialchars($imgName));
+        if (count($saisons) === 0) {
+            return null;
+        }
 
-            $dirname = $GLOBALS['PHP_DIR'] . self::UPLOAD_DIR;
-            if (!is_dir($dirname))
-                mkdir($dirname);
-            $uploaded = move_uploaded_file($tmpName, $dirname . $imgName);
-            if (!$uploaded)
-                die("FILE NOT UPLOADED");
-        } else
-            echo "NO IMAGE !!!!";
+        $saison = $saisons[0];
 
-        $query = ''; //requette pour ajouter une serie 
-        $params = [
-            'name' => htmlspecialchars($name),
-            //+ les autres paramettres 
+        // Récupère l'épisode spécifique
+        $queryEpisode = "SELECT * FROM episode WHERE id_saison = :cleSaison AND numero_episode = :numEpisode";
+        $episodeParams = ['cleSaison' => $saison->cle_saison, 'numEpisode' => $numEpisode];
+        $episodes = $this->exec($queryEpisode, $episodeParams);
 
+        if (count($episodes) === 0) {
+            return null;
+        }
+
+        return [
+            'saison' => $saison,
+            'episode' => $episodes[0]
         ];
-        return $this->exec($query, $params);
     }
-
-    function generateSeries()
-    {
-        if ($this->file == null) {
-            for ($i = 0; $i < 20; $i++): ?>
-                <div id="image-serie">
-                    <img src="" alt="imageSerie">
-                    <legend style="justify-content: center;">
-                        <label>Serie</label>
-                    </legend>
-                </div>
-
-
-            <?php endfor;
-
-        } else {
-            $data = json_decode($this->file);
-
-
-            foreach ($data as $card): ?>
-                <div id="image-serie">
-                    <img src="<?php ?>" alt="image">
-                    <legend style="justify-content: center;">
-                        <label for="<?php ?>"><?php ?></label>
-                    </legend>
-                </div>
-
-
-            <?php endforeach; ?>
-        <?php }
-
-
-    }
-
-
-
-
 }
-
-
-?>

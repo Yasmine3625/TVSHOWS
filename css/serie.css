@@ -31,11 +31,11 @@
 }
 .saison-boxes {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap; /* Autorise le retour à la ligne */
     gap: 15px;
-    overflow-x: auto;
-    padding-top: 20px;
+    justify-content: flex-start;
 }
+
 
 .saison-box {
     background: rgba(240, 240, 240, 0.9);

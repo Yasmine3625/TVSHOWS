@@ -66,7 +66,7 @@ intval($saison->nb_episode) ?></p>
                 <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
                     <li>
                         <a href="episode.php?serie=<?=
-urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>">
+                            urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>">
                             Episode <?= $i ?>
                         </a>
                     </li>

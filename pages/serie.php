@@ -36,7 +36,7 @@ $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-
+$img=$saisons[0];
 ob_start();
 ?>
 <div class="serie-page">
@@ -61,14 +61,14 @@ ob_start();
                                     urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
                                     Saison <?= $i ?>
                                 </a>
-                                <img src="/images/images_series/<?= htmlspecialchars($saisons->affichage) ?>"
+                                <img src="/uploads/<?= htmlspecialchars($img->affichage) ?>"
                         alt="Image de la saison"
                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                         </div>
                     <?php endfor; ?>
                         
                 </div>
-
+                <div class="tag_box">
                 <?php if (!empty($tags)): ?>
                     <p><strong>Tags :</strong>
                         <?php foreach ($tags as $tag): ?>
@@ -76,6 +76,7 @@ ob_start();
                         <?php endforeach; ?>
                     </p>
                 <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-$img=$saisons[0];
+$img = $saisons[0];
 ob_start();
 ?>
 <div class="serie-page">
@@ -63,19 +63,27 @@ ob_start();
                 <?php endif; ?>
                 </div>
                 <div class="saison-boxes">
-                <?php for ($i = 1; $i <=
-                        intval($serie->nb_saison); $i++): ?>
+                    <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
                         <div class="saison-box">
-                                <a href="saison.php?serie=<?=
-                                    urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
-                                    Saison <?= $i ?>
-                                </a>
-                                <img src="/uploads/<?= htmlspecialchars($img->affichage) ?>"
-                        alt="Image de la saison"
-                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+
+                            <a href="saison.php?serie=<?=
+                                urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
+                                Saison <?= $i ?>
+                            </a>
+                            <img src="/uploads/<?= htmlspecialchars($img->affichage) ?>" alt="Image de la saison"
+                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                         </div>
                     <?php endfor; ?>
-                        
+
+                </div>
+                <div class="tag_box">
+                    <?php if (!empty($tags)): ?>
+                        <p><strong>Tags :</strong>
+                            <?php foreach ($tags as $tag): ?>
+                                <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

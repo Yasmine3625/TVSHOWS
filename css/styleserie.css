@@ -1,0 +1,71 @@
+
+.info_serie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 80px;
+    border-radius: 0;
+    background: linear-gradient(to right, rgba(240, 240, 240, 1) 0%, rgba(240, 240, 240, 0.2) 70%, rgba(240, 240, 240, 0) 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    margin: 0;
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.gauche {
+    flex: 1;
+    padding-right: 60px;
+}
+
+.gauche h1 {
+    font-size: 4em;
+    margin-bottom: 10px;
+}
+
+.gauche p {
+    font-size: 2em;
+    margin: 0;
+}
+.saison-boxes {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    overflow-x: auto;
+    padding-top: 20px;
+}
+
+.saison-box {
+    background: rgba(240, 240, 240, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.saison-box:hover {
+    background: rgba(240, 240, 240, 1);
+    transform: translateY(-5px);
+}
+
+.saison-box img {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.saison-box p {
+    margin-top: 10px;
+    font-weight: bold;
+}

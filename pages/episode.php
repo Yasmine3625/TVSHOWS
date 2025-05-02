@@ -8,7 +8,8 @@ use tvshows\Series;
 ob_start();
 
 // Vérifie les paramètres GET
-if (!isset($_GET['serie']) || !isset($_GET['saison']) || !isset($_GET['episode'])) {
+if (!isset($_GET['serie']) || !isset($_GET['saison']) ||
+!isset($_GET['episode'])) {
     die("Série, saison ou épisode non spécifié.");
 }
 
@@ -33,7 +34,8 @@ if (count($serieData) === 0) {
 $serie = $serieData[0];
 
 // Récupère les infos de la saison
-$querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT " . ($numSaison - 1) . ", 1";
+$querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT
+" . ($numSaison - 1) . ", 1";
 $paramsSaison = ['cleSerie' => $cleSerie];
 $saisons = $gdb->exec($querySaison, $paramsSaison);
 
@@ -47,8 +49,10 @@ $saison = $saisons[0];
 
 var_dump($saison);
 
-$queryEpisode = "SELECT * FROM episode WHERE id_saison = :cleSaison AND  numero_episode = :numeroEpisode";  // Remplacez 'numero' par la bonne colonne si nécessaire
-$paramsEpisode = ['cleSaison' => $saison->cle_saison, 'numeroEpisode' => $numEpisode];
+$queryEpisode = "SELECT * FROM episode WHERE id_saison = :cleSaison
+AND  numero_episode = :numeroEpisode";  // Remplacez 'numero' par la bonne colonne si nécessaire
+$paramsEpisode = ['cleSaison' => $saison->cle_saison, 'numeroEpisode'
+=> $numEpisode];
 $episodes = $gdb->exec($queryEpisode, $paramsEpisode);
 
 if (count($episodes) === 0) {
@@ -61,24 +65,32 @@ $episode = $episodes[0];
 ob_start();
 ?>
 <div class="episode-page">
-    <h1><?= htmlspecialchars($serie->titre) ?> - Saison <?= $numSaison ?> - Épisode <?= $numEpisode ?></h1>
+    <h1><?= htmlspecialchars($serie->titre) ?> - Saison <?= $numSaison
+?> - Épisode <?= $numEpisode ?></h1>
 
     <div class="episode-content">
         <?php if (!empty($episode->affichage)): ?>
             <div class="episode-image">
-                <img src="/images/images_series/<?= htmlspecialchars($episode->affichage) ?>" alt="Image de l'épisode">
+                <img src="/images/images_series/<?=
+htmlspecialchars($episode->affichage) ?>" alt="Image de l'épisode">
             </div>
         <?php endif; ?>
 
         <div class="episode-details">
-            <p><strong>Titre de l'épisode :</strong> <?= htmlspecialchars($episode->titre) ?></p>
-            <p><strong>Description :</strong> <?= nl2br(htmlspecialchars($episode->synopsis)) ?></p>
-            <p><strong>Durée :</strong> <?= htmlspecialchars($episode->duree) ?> minutes</p>
+            <p><strong>Titre de l'épisode :</strong> <?=
+htmlspecialchars($episode->titre) ?></p>
+            <p><strong>Description :</strong> <?=
+nl2br(htmlspecialchars($episode->synopsis)) ?></p>
+            <p><strong>Durée :</strong> <?=
+htmlspecialchars($episode->duree) ?> minutes</p>
         </div>
 
         <div class="navigation-links">
-            <a href="saison.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>">Retour à la Saison <?= $numSaison ?></a><br>
-            <a href="serie.php?serie=<?= urlencode($cleSerie) ?>">Retour à la Série <?= htmlspecialchars($serie->titre) ?></a>
+            <a href="saison.php?serie=<?= urlencode($cleSerie)
+?>&saison=<?= $numSaison ?>">Retour à la Saison <?= $numSaison
+?></a><br>
+            <a href="serie.php?serie=<?= urlencode($cleSerie)
+?>">Retour à la Série <?= htmlspecialchars($serie->titre) ?></a>
         </div>
     </div>
 </div>

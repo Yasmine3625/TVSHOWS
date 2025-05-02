@@ -32,7 +32,8 @@ if (count($serieData) === 0) {
 $serie = $serieData[0];
 
 // Récupère les infos de la saison
-$querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT " . ($numSaison - 1) . ", 1";
+$querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT
+" . ($numSaison - 1) . ", 1";
 $params = ['cleSerie' => $cleSerie];
 $saisons = $gdb->exec($querySaison, $params);
 
@@ -51,17 +52,21 @@ ob_start();
     <div class="saison-content">
         <?php if (!empty($saison->affichage)): ?>
             <div class="saison-image">
-                <img src="/images/images_series/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison">
+                <img src="/images/images_series/<?=
+htmlspecialchars($saison->affichage) ?>" alt="Image de la saison">
             </div>
         <?php endif; ?>
 
         <div class="saison-details">
-            <p><strong>Titre de la saison :</strong> <?= htmlspecialchars($saison->titre) ?></p>
-            <p><strong>Nombre d'épisodes :</strong> <?= intval($saison->nb_episode) ?></p>
+            <p><strong>Titre de la saison :</strong> <?=
+htmlspecialchars($saison->titre) ?></p>
+            <p><strong>Nombre d'épisodes :</strong> <?=
+intval($saison->nb_episode) ?></p>
             <ul>
                 <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
                     <li>
-                        <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>">
+                        <a href="episode.php?serie=<?=
+urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>">
                             Episode <?= $i ?>
                         </a>
                     </li>

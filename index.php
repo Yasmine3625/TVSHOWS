@@ -5,6 +5,9 @@ require_once __DIR__ . "/config.php";
 use tvshows\Template;
 use tvshows\Series;
 use tvshows\SeriesRenderer;
+use tvshows\Tags;
+use tvshows\TagsRenderer;
+
 
 ?>
 
@@ -16,28 +19,18 @@ use tvshows\SeriesRenderer;
 
 
 ?>
-
 <div id="tag-bar">
-    <?php
-    $categories = [
-        "Action",
-        "Aventure",
-        "Comédie",
-        "Drame",
-        "Horreur",
-        "Thriller",
-        "Policier",
-        "Fantastique",
-        "Science-fiction",
-        "Romance"
-    ];
-    ?>
     <div class="category-menu">
         <h2 class="category-title">Catégories</h2>
-        <a href="#" class="category-item">Tout</a>
-        <?php foreach ($categories as $cat): ?>
-            <a href="#" class="category-item"><?= htmlspecialchars($cat) ?></a>
-        <?php endforeach; ?>
+        <a href="/index.php" class="category-item">Tout</a>
+        <?php
+        $tagDb = new Tags();
+        $tags = $tagDb->exec("SELECT * FROM tag ORDER BY nom", null, 'tvshows\TagsRenderer');
+
+        foreach ($tags as $tag) {
+            echo $tag->getHTML();
+        }
+        ?>
     </div>
 </div>
 
@@ -45,12 +38,16 @@ use tvshows\SeriesRenderer;
     <?php
     $gdb = new Series();
 
+    if (isset($_GET['category']) && !empty($_GET['category'])) {
+        $category = $_GET['category'];
+        echo "<h2 style='margin: 1em;'>Résultats pour la catégorie : " . htmlspecialchars($category) . "</h2>";
+        $series = $gdb->getSeriesByCategory($category);
+    } else {
+        $series = $gdb->getAllSeries();
+    }
 
-
-
-    $series = $gdb->getAllSeries(); // retourne des SeriesRenderer
     foreach ($series as $s) {
-        echo $s->getHTML(); // affiche chaque bloc HTML
+        echo $s->getHTML();
     }
     ?>
 </div>

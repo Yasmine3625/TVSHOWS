@@ -50,6 +50,17 @@ class Series extends PdoWrapper
         );
     }
 
+    public function searchSeries(string $searchTerm)
+    {
+        $sql = "SELECT * FROM serie WHERE LOWER(titre) LIKE LOWER(:searchTerm) ORDER BY titre";
+        return $this->exec(
+            $sql,
+            [':searchTerm' => "%" . $searchTerm . "%"],
+            'tvshows\SeriesRenderer'
+        );
+    }
+
+
 
 
 

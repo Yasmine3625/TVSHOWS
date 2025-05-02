@@ -1,5 +1,5 @@
 <?php
-$isAdminLogged = isset($_SESSION['nickname']);
+$isAdminLogged = isset($_SESSION['nick']);
 ?>
 
 

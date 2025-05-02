@@ -14,6 +14,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $response = $logger->log(trim($_POST['username']), $_POST['password']);
 
     if ($response['granted']) {
+        session_start();
+
         $_SESSION['admin'] = true;
         $_SESSION['nick'] = $response['nick'];
         header("Location: /pages/admin.php");

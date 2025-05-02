@@ -7,7 +7,7 @@ class AdminLogger
     public function generateLoginForm(string $action): void
     { ?>
         <div id="login-form-container">
-            <form method="post" action="<?php $action ?>" id="login-form">
+            <form method="post" action="<?= htmlspecialchars($action) ?>" id="login-form">
                 <legend style="text-align: center">Please Login</legend>
                 <div class="form-group">
                     <input type="text" name="username" placeholder="username">

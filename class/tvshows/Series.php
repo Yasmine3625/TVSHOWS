@@ -32,27 +32,24 @@ class Series extends PdoWrapper
         );
 
     }
-    public function getSeriesByCategory($categoryName)
+    public function getSeriesByCategory(string $categoryName)
     {
+        $sql = "
+        SELECT s.*
+        FROM serie s
+        JOIN serie_tag st ON s.cle_serie = st.cle_serie
+        JOIN tag t ON st.cle_tag = t.id_tag
+        WHERE LOWER(t.nom) = LOWER(:category)
+        ORDER BY s.titre
+    ";
 
-        $query = "SELECT s.* FROM series s
-                    JOIN series_tags st ON s.id = st.series_id 
-                    JOIN tags t ON st.tag_id = t.id 
-                    WHERE t.name = :category";
-
-        $stmt = $this::pdo->prepare($query);
-        $stmt->bindParam(':category', $categoryName, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $seriesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $series = [];
-
-        foreach ($seriesData as $data) {
-            $series[] = new SeriesRenderer($data);
-        }
-
-        return $series;
+        return $this->exec(
+            $sql,
+            [':category' => $categoryName],
+            'tvshows\SeriesRenderer'
+        );
     }
+
 
 
 

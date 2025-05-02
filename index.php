@@ -4,7 +4,8 @@ require_once __DIR__ . "/config.php";
 
 use tvshows\Template;
 use tvshows\Series;
-use tvshows\SeriesRenderer
+use tvshows\SeriesRenderer;
+
 ?>
 
 

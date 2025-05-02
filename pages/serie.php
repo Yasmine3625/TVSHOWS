@@ -14,7 +14,7 @@ if (!isset($_GET['serie'])) {
 
 $cle = $_GET['serie'];
 
-// Requête vers la base de données
+// Requête vers la base de données pour récupérer les détails de la série
 $gdb = new Series();
 $query = "SELECT * FROM serie WHERE cle_serie = :cle";
 $params = ['cle' => $cle];
@@ -35,6 +35,14 @@ $tagQuery = "
 ";
 $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 
+// Requête pour récupérer les saisons et leurs images
+$saisonQuery = "
+    SELECT cle_saison, titre, affichage 
+    FROM saison 
+    WHERE cle_serie = :cle
+";
+$saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
+
 // Capture du contenu HTML
 ob_start();
 ?>
@@ -51,16 +59,19 @@ ob_start();
                 </div>
             </div>
             <div class="serie-details">
-                
-                <ul>
-                    <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
-                        <li>
-                            <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
-                                Saison <?= $i ?>
+                <div class="saison-boxes">
+                    <?php foreach ($saisons as $saison): ?>
+                        <div class="saison-box">
+                            <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $saison->cle_saison ?>">
+                                <div class="saison-info">
+                                    <img src="/images/images_series/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison" class="saison-image">
+                                    <p> <?= htmlspecialchars($saison->titre) ?></p>
+                                </div>
                             </a>
-                        </li>
-                    <?php endfor; ?>
-                </ul>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
                 <?php if (!empty($tags)): ?>
                     <p><strong>Tags :</strong>
                         <?php foreach ($tags as $tag): ?>
@@ -70,12 +81,8 @@ ob_start();
                 <?php endif; ?>
             </div>
         </div>
-
     </div>
 </div>
-
-
-
 <?php
 $content = ob_get_clean();
 Template::render($content);

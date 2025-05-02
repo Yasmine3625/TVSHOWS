@@ -32,16 +32,17 @@ class Saisons extends PdoWrapper
         $params = ['cleSerie' => $cleSerie];
         return $this->exec($query, $params);
     }
+    
     public function getActeurParEpisode($cleSaison)
     {
         $sql = "SELECT a.nom, a.image
                 FROM acteur a
-                INNER JOIN saison_acteur sa ON sa.cle_act = sa.cle_act
+                INNER JOIN saison_acteur sa ON sa.cle_acteur = a.cle_act  -- Changer 'cle_act' par 'cle_acteur'
                 WHERE sa.cle_saison = :cle_saison";
     
         $params = ['cle_saison' => $cleSaison];
-    
         return $this->exec($sql, $params);
     }
+    
     
 }

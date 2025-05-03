@@ -12,13 +12,7 @@ use tvshows\TagsRenderer;
 ?>
 
 
-<?php ob_start();
-
-
-
-
-
-?>
+<?php ob_start(); ?>
 <div id="tag-bar">
     <div class="category-menu">
         <h2 class="category-title">Catégories</h2>

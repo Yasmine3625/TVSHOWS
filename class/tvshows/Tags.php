@@ -33,7 +33,4 @@ class Tags extends PdoWrapper
 
 
 
-
-
-
 }

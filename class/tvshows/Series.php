@@ -60,9 +60,27 @@ class Series extends PdoWrapper
         );
     }
 
-
-
-
-
-
+    public function AjoutSerie(string $titre, int $nb_saison, string $image): bool
+    {
+        $sql = "INSERT INTO serie (titre, nb_saison, image) VALUES (:titre, :nb_saison, :image)";
+        $params = [
+            ':titre' => $titre,
+            ':nb_saison' => $nb_saison,
+            ':image' => $image
+        ];
+    
+        // On exécute la requête sans attendre un résultat, juste savoir si elle a fonctionné
+        try {
+            $this->prepare($sql);
+            $this->bind($params);
+            return $this->execute();
+        } catch (\Exception $e) {
+            // Tu peux loguer ici si nécessaire
+            return false;
+        }
+    }
+    
 }
+
+
+

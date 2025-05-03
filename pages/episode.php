@@ -48,45 +48,70 @@ $realisateurs = $gdb->getRealisateursParEpisode($episode->cle_episode);
 ob_start();
 ?>
 <div class="episode-page">
-    <h1><?= htmlspecialchars($serie->titre) ?> - Saison <?= $numSaison ?> - Épisode <?= $numEpisode ?></h1>
-
     <div class="episode-content">
-        <?php if (!empty($episode->affichage)): ?>
-            <div class="episode-image">
-                <img src="/images/images_series/<?= htmlspecialchars($episode->affichage) ?>" alt="Image de l'épisode">
-            </div>
-        <?php endif; ?>
-
         <div class="episode-details">
-            <div class="titre">
-                <p><strong>Titre de l'épisode :</strong> <?= htmlspecialchars($episode->titre) ?></p>
-            </div>
-
-            <div class="description">
-                <p><strong>Synopsis :</strong> <?= nl2br(htmlspecialchars($episode->synopsis)) ?></p>
-            </div>
-
-            <p><strong>Durée :</strong> <?= htmlspecialchars($episode->duree) ?> minutes</p>
-
-            <div class="realisateurs">
-                <p><strong>Réalisateur(s) :</strong></p>
-                <?php if ($realisateurs): ?>
-                    <div class="realisateur-list">
-                        <?php foreach($realisateurs as $real): ?>
-                                
-                                <p><?= htmlspecialchars($real->nom) ?></p>
-
-                        <?php endforeach; ?>
-                    </div>
-                <?php else: ?>
-                    <p>Aucun réalisateur trouvé.</p>
-                <?php endif; ?>
-            </div>
             <div class="icon">
                 <div class="image-icone">
-                    <img src="..\images\Icon.png" alt="Icône">
+                    <div class="image-icone" style="background-image: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
+                    <img src="..\images\Icon.png" alt="Icône" class="img">
+                    </div>
+
                 </div>
             </div>
+            <div class="title-container">
+                <h2> Épisode <?= $numEpisode ?></h2>
+                <h2><?= htmlspecialchars($serie->titre) ?> | Saison <?= $numSaison ?> </h2>
+                <p><strong>Titre de l'épisode :</strong> <?= htmlspecialchars($episode->titre) ?></p>
+                <p><strong>Durée :</strong> <?= htmlspecialchars($episode->duree) ?> minutes</p>
+
+
+            </div>
+            <br>
+
+        <div class="toggle-buttons">
+            <button type="button" class="toggle-btn active" onclick="showSection('synopsis', this)">Synopsis</button>
+            <button type="button" class="toggle-btn" onclick="showSection('realisateurs', this)">Réalisateur(s)</button>
+        </div>
+
+        <div id="synopsis" class="toggle-section active">
+            <h3>Synopsis</h3>
+            <p><?= nl2br(htmlspecialchars($episode->synopsis)) ?></p>
+        </div>
+
+        <div id="realisateurs" class="toggle-section">
+            <h3>Réalisateur(s)</h3>
+            <?php if ($realisateurs): ?>
+                <div class="image-real-list">
+                    <?php foreach($realisateurs as $real): ?>
+                        <div class="image-real">
+                            <img src="/images/images_series/<?= htmlspecialchars($real->image) ?>" alt="Image de <?= htmlspecialchars($real->nom) ?>">
+                            <p><?= htmlspecialchars($real->nom) ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p>Aucun réalisateur trouvé.</p>
+            <?php endif; ?>
+        </div>
+
+        <script>
+            function showSection(id, btn) {
+                // Toggle content sections
+                document.querySelectorAll('.toggle-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(id).classList.add('active');
+
+                // Toggle button styles
+                document.querySelectorAll('.toggle-btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                btn.classList.add('active');
+            }
+        </script>
+
+
+
         </div>
         <div class="episode-section">
         <div class="episodes-container">
@@ -102,15 +127,7 @@ ob_start();
             <?php endfor; ?>
         </div>
     </div>
-        <div class="image-real-list">
-            <?php foreach($realisateurs as $real): ?>
-                <div class="image-real">
-                    <img src="/images/images_series/<?= htmlspecialchars($real->image) ?>"
-                            alt="Image de <?= htmlspecialchars($real->nom) ?>">
-                
-                </div>
-            <?php endforeach; ?>
-        </div>
+        
     </div>
 </div>
 <?php

@@ -17,7 +17,7 @@ class SeriesRenderer
         return "
         <div class='serie'>
             <div class='image-container'>
-                <a href='pages/serie.php?serie=" . urlencode($this->cle_serie) . "'>
+                <a href='/pages/serie.php?serie=" . urlencode($this->cle_serie) . "'>
                     <img src='$imagePath' alt='Image de la série " . htmlspecialchars($this->titre) . "'>
                 </a>
             </div>

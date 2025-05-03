@@ -16,6 +16,6 @@ class TagsRenderer
         $safeName = htmlspecialchars($this->nom);
         $encodedName = urlencode($this->nom);
 
-        return "<a class=\"tag\" href=\"/index.php?category={$encodedName}\">{$safeName}</a>";
+        return "<a class=\"category-item\" href=\"/index.php?category={$encodedName}\">{$safeName}</a>";
     }
 }

@@ -35,8 +35,7 @@ class PdoWrapper
             die("Erreur : " . $ex->getMessage());
         }
 
-        // Si pas d'erreur : poursuite de l'exécution
-        echo "Connexion OK<br>";
+
 
     }
 

@@ -32,7 +32,11 @@ class Template
         </head>
 
         <body>
-            <?php include $GLOBALS['PHP_DIR'] . "pages/header.php"; ?>
+
+            <?php
+
+            include $GLOBALS['PHP_DIR'] . "pages/header.php"; ?>
+
             <div id="main-content">
 
                 <?php echo $code ?>

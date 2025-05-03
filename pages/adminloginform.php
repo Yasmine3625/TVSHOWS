@@ -18,7 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         $_SESSION['admin'] = true;
         $_SESSION['nick'] = $response['nick'];
-        header("Location: /pages/admin.php");
+        header("Location: /index.php");
         exit;
     }
 }

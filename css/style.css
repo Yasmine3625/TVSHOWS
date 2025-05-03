@@ -170,6 +170,11 @@ footer {
     padding: 10px;
 }
 
+#list-serie h2 {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .serie {
     width: 150px;
     height: 200px;

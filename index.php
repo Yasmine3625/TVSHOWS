@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . "/Autoloader.php";
 require_once __DIR__ . "/config.php";
 
@@ -8,12 +10,20 @@ use tvshows\SeriesRenderer;
 use tvshows\Tags;
 use tvshows\TagsRenderer;
 
-
+$isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 ?>
 
 
 <?php ob_start(); ?>
+
 <div id="tag-bar">
+
+    <?php if ($isAdminLogged): ?>
+        <a href="ajoutserie.php">Ajout série</a>
+        <a href="logout.php">Se déconnecter</a>
+    <?php endif; ?>
+
+
     <div class="category-menu">
         <h2 class="category-title">Catégories</h2>
         <a href="/index.php" class="category-item">Tout</a>

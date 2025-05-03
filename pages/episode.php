@@ -52,7 +52,6 @@ ob_start();
         <div class="episode-details">
             <div class="icon">
                 <div class="image-icone">
-                    <div class="image-icone" style="background-image: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
                     <img src="..\images\Icon.png" alt="Icône" class="img">
                     </div>
 

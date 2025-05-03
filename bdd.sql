@@ -295,7 +295,7 @@ CREATE TABLE `serie` (
 --
 
 INSERT INTO `serie` (`cle_serie`, `titre`, `nb_saison`, `image`) VALUES
-(1, 'the rookie', 2, 'the_rookie.jpg'),
+(1, 'the rookie', 2, 'the_rookie.jpeg'),
 (2, 'Pulse', 1, 'Pulse.webp'),
 (3, 'the order', 1, 'the_order.jpeg'),
 (4, 'My name', 1, 'My_name.jpeg'),

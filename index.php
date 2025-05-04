@@ -38,22 +38,29 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
     </div>
 </div>
 
-<div id="list-serie">
+<div id="list-serie-container">
     <?php
     $gdb = new Series();
 
-    if (isset($_GET['category']) && !empty($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h2 style='margin: 1em;'>Résultats pour la catégorie : " . htmlspecialchars($category) . "</h2>";
-        $series = $gdb->getSeriesByCategory($category);
-    } else {
-        $series = $gdb->getAllSeries();
-    }
-
-    foreach ($series as $s) {
-        echo $s->getHTML();
-    }
     ?>
+    <div id="rslt">
+        <?php
+        if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $category = $_GET['category'];
+            echo "<h2 style='margin: 1em;'>Résultats pour la catégorie : " . htmlspecialchars($category) . "</h2>";
+            $series = $gdb->getSeriesByCategory($category);
+        } else {
+            $series = $gdb->getAllSeries();
+        }
+        ?>
+    </div>
+    <div id="list-serie">
+        <?php
+        foreach ($series as $s) {
+            echo $s->getHTML();
+        }
+        ?>
+    </div>
 </div>
 
 <?php

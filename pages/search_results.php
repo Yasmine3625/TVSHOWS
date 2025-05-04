@@ -17,15 +17,26 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $gdb = new Series();
     $series = $gdb->searchSeries($searchTerm); // Appel à la méthode de recherche
 
-    echo "<h2>Résultats de la recherche pour: " . htmlspecialchars($searchTerm) . "</h2>";
+    ?>
+    <div style="display: flex; flex-direction: column; flex:1">
+        <div>
+            <?php
+            echo "<h2>Résultats de la recherche pour: " . htmlspecialchars($searchTerm) . "</h2>"; ?>
+        </div>
+        <div style="flex: 1;display : flex; flex-wrap: wrap;">
+            <?php
 
-    if (!empty($series)) {
-        foreach ($series as $s) {
-            echo $s->getHTML(); // Afficher chaque série correspondante
-        }
-    } else {
-        echo "<p>Aucun résultat trouvé pour '" . htmlspecialchars($searchTerm) . "'</p>";
-    }
+            if (!empty($series)) {
+                foreach ($series as $s) {
+                    echo $s->getHTML(); // Afficher chaque série correspondante
+                }
+            } else {
+                echo "<p>Aucun résultat trouvé pour '" . htmlspecialchars($searchTerm) . "'</p>";
+            }
+            ?>
+        </div>
+    </div>
+    <?php
 } else {
     echo "<p>Veuillez entrer un terme de recherche.</p>";
 }

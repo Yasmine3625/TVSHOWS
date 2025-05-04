@@ -12,10 +12,14 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
     <div id="nav-bar">
         <a class="nav-btn-acc" href="/../index.php">Acceuil</a>
         <div class="search-bar">
-            <form action="/pages/search_results.php" method="get">
+            <form action="/pages/search_results.php" method="get" style="display: flex;">
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search search-icon"></i>
+                </button>
                 <input type="text" name="search" placeholder="Rechercher une série..." class="search-input" />
-                <button type="submit" class="fas fa-search search-icon"></button>
+
             </form>
+
         </div>
         <?php if ($isAdminLogged): ?>
             <a href="pages\logout.php" role="button" class="nav-btn-log" id="btn-admin-Login">Logout</a>

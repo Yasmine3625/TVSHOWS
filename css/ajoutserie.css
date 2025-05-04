@@ -9,3 +9,17 @@
 
     background-color: #0e0d0d;
 }
+
+.serie-card {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.serie-radio {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: scale(1.5); /* agrandir un peu le bouton */
+    z-index: 10;
+}

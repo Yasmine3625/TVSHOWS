@@ -27,11 +27,20 @@ class Selection
             </header>
             <div class="browser-content-wrapper">
                 <div id="list-serie">
-                    <?php foreach ($this->series as $s): ?>
-                        <div class="serie-card">
-                            <?php echo $s->getHTML(true); ?>
-                        </div>
-                    <?php endforeach; ?>
+                <?php foreach ($this->series as $s): ?>
+                    <div class="serie-card" onclick="selectSerie('<?php echo $s->getId(); ?>')">
+    <input 
+        type="radio" 
+        name="selected_serie" 
+        value="<?php echo $s->getId(); ?>" 
+        id="radio-<?php echo $s->getId(); ?>" 
+        class="serie-radio"
+    >
+    <?php echo $s->getHTML(true); ?>
+</div>
+
+<?php endforeach; ?>
+
                 </div>
             </div>
             <!-- Script pour afficher le bouton radio après avoir cliqué sur l'image -->

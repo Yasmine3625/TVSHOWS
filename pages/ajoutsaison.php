@@ -19,7 +19,7 @@ $browser = new Selection() ;
 <?php ob_start() ?>
 
 
-<?php $browser->generateGrid() ?>
+<?php $browser->generateShop() ?>
 
 <?php $code = ob_get_clean() ?>
 <?php Template::render($code); ?>

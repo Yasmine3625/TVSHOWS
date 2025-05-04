@@ -20,43 +20,43 @@ class Selection
         ?>
         <form class="browser" action="<?php echo $GLOBALS['DOCUMENT_DIR'] ?>pages/add_to_cart.php" method="post" autocomplete="off">
             <header>
-                <div style="padding: 5px">
-                    SÉRIES : <span id="num-series"></span>
-                </div>
-                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajouter au panier</button>
+                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajouter </button>
             </header>
             <div class="browser-content-wrapper">
-                <div class="browser-content">
+                <div id="list-serie">
                     <?php foreach ($this->series as $s): ?>
-                        <div class="serie-card">
+                        <div class="serie-card" style="cursor: pointer;">
                             <?php echo $s->getHTML(true); ?>
                             <legend>
-                                <label for="serie-<?php echo $s->getId(); ?>">
-                                    <?php echo htmlspecialchars($s->getTitle()); ?>
-                                </label>
-                                <input class="form-check-input" type="checkbox" name="selection[]"
-                                       value="<?php echo $s->getId(); ?>"
-                                       id="serie-<?php echo $s->getId(); ?>">
+                                <input class="form-check-input" type="radio" name="selection[]"
+                                        value="<?php echo $s->getId(); ?>"
+                                        id="serie-<?php echo $s->getId(); ?>">
                             </legend>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
+            <!-- Ajout du script pour gérer la sélection au clic -->
+            <script>
+                document.querySelectorAll('.serie-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const checkbox = card.querySelector('input[type="checkbox"]');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                        }
+                    });
+                });
+            </script>
         </form>
         <?php
     }
+    
 
     public function generateGrid()
     {
         ?>
         <div class="browser-content-wrapper">
-            <div class="browser-content" style='
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;'>
+            <div id="list-serie">
                 <?php foreach ($this->series as $serie): ?>
                     <div class="serie-card">
                         <?php echo $serie->getHTML(true); ?>

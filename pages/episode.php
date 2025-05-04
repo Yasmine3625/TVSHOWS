@@ -7,7 +7,6 @@ use tvshows\Episode;
 
 ob_start();
 
-// Vérifie les paramètres GET
 if (!isset($_GET['serie'], $_GET['saison'], $_GET['episode'])) {
     die("Série, saison ou épisode non spécifié.");
 }
@@ -16,7 +15,6 @@ $cleSerie = $_GET['serie'];
 $numSaison = intval($_GET['saison']);
 $numEpisode = intval($_GET['episode']);
 
-// Utilisation de la classe Episode pour récupérer les données
 $gdb = new Episode();
 $data = $gdb->getBySerieSaisonEtNumero($cleSerie, $numSaison, $numEpisode);
 
@@ -24,12 +22,9 @@ if (!$data) {
     die("Saison ou épisode non trouvé.");
 }
 
-// Selon l'implémentation de Episode::getBySerieSaisonEtNumero,
-// supposons que $data['saison'] et $data['episode'] contiennent les infos
 $saison = $data['saison'];
 $episode = $data['episode'];
 
-// Récupérer aussi les infos de la série
 $serieData = $gdb->exec(
     "SELECT * FROM serie WHERE cle_serie = :cle",
     ['cle' => $cleSerie]
@@ -95,13 +90,11 @@ ob_start();
 
         <script>
             function showSection(id, btn) {
-                // Toggle content sections
                 document.querySelectorAll('.toggle-section').forEach(section => {
                     section.classList.remove('active');
                 });
                 document.getElementById(id).classList.add('active');
 
-                // Toggle button styles
                 document.querySelectorAll('.toggle-btn').forEach(button => {
                     button.classList.remove('active');
                 });

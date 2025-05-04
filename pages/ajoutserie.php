@@ -20,7 +20,6 @@ ob_start();
 $form = new AjoutSerieForm();
 $form->generateForm();
 
-// Code pour traiter le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre']);
     $tags = $_POST['tags'] ?? [];

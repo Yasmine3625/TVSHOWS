@@ -41,7 +41,6 @@ class Episode extends PdoWrapper
 
         $saison = $saisons[0];
 
-        // Récupère l'épisode spécifique
         $queryEpisode = "SELECT * FROM episode WHERE id_saison = :cleSaison AND numero_episode = :numEpisode";
         $episodeParams = ['cleSaison' => $saison->cle_saison, 'numEpisode' => $numEpisode];
         $episodes = $this->exec($queryEpisode, $episodeParams);

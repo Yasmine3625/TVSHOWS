@@ -32,7 +32,6 @@ $tagQuery = "
 ";
 $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 
-// Toutes les saisons de cette série
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 

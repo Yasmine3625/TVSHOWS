@@ -1,7 +1,7 @@
 <?php
 namespace tvshows;
 
-class AjoutSerie
+class AjoutSerieForm
 {
 
     public function generateForm(): void
@@ -13,9 +13,6 @@ class AjoutSerie
                 <form method="POST" action="ajoutserie.php" enctype="multipart/form-data">
                 <label for="titre">Titre :</label><br>
                 <input type="text" id="titre" name="titre" required><br><br>
-
-                <label for="nb_saison">Nombre de saisons :</label><br>
-                <input type="number" id="nb_saison" name="nb_saison" required><br><br>
 
                 <label>Tags :</label><br>
                 <button type="button" onclick="toggleTags()">Choisir les tags</button>

@@ -1,4 +1,6 @@
 <?php
+
+use tvshows\AjoutSerieForm;
 session_start();
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
@@ -15,7 +17,7 @@ use tvshows\AjoutSerie;
 
 ob_start();
 
-$form = new AjoutSerie();
+$form = new AjoutSerieForm();
 $form->generateForm();
 
 // Code pour traiter le formulaire

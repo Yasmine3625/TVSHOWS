@@ -19,7 +19,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 <div id="tag-bar">
 
     <?php if ($isAdminLogged): ?>
-        <a href="ajoutserie.php">Ajout série</a>
+        <a href="/pages/ajoutserie.php">Ajout série</a>
         <a href="logout.php">Se déconnecter</a>
     <?php endif; ?>
 

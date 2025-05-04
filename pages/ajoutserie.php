@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (move_uploaded_file($tmpName, $targetPath)) {
             $series = new Series();
-            $success = $series->AjoutSerie($titre, $nb_saison, $fileName);
+            $success = $series->AjoutSerieForm($titre, $nb_saison, $fileName);
 
             if ($success) {
                 $lastId = $series->getLastInsertId(); // À ajouter dans Series si pas encore fait

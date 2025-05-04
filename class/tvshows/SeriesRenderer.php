@@ -25,4 +25,13 @@ class SeriesRenderer
         </div>
         ";
     }
+    public function getId(): int
+    {
+        return $this->cle_serie;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->titre;
+    }
 }

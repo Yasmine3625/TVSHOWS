@@ -18,38 +18,44 @@ class Selection
     public function generateShop()
     {
         ?>
-        <form class="browser" action="<?php echo $GLOBALS['DOCUMENT_DIR'] ?>pages/add_to_cart.php" method="post" autocomplete="off">
+        <form class="browser" action="ajoutsaison.php" method="post" autocomplete="off">
             <header>
-                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajouter </button>
+                <div style="padding: 5px">
+                    SÉRIES : <span id="num-series"></span>
+                </div>
+                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajouter au panier</button>
             </header>
             <div class="browser-content-wrapper">
                 <div id="list-serie">
                     <?php foreach ($this->series as $s): ?>
-                        <div class="serie-card" style="cursor: pointer;">
+                        <div class="serie-card">
                             <?php echo $s->getHTML(true); ?>
-                            <legend>
-                                <input class="form-check-input" type="radio" name="selection[]"
-                                        value="<?php echo $s->getId(); ?>"
-                                        id="serie-<?php echo $s->getId(); ?>">
-                            </legend>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
-            <!-- Ajout du script pour gérer la sélection au clic -->
+            <!-- Script pour afficher le bouton radio après avoir cliqué sur l'image -->
             <script>
-                document.querySelectorAll('.serie-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const checkbox = card.querySelector('input[type="checkbox"]');
-                        if (checkbox) {
-                            checkbox.checked = !checkbox.checked;
-                        }
+                // Fonction pour afficher le bouton radio après avoir cliqué sur l'image
+                function showSelection(serieId) {
+                    // Cacher tous les boutons radio
+                    var radios = document.querySelectorAll('.form-check-input');
+                    radios.forEach(function(radio) {
+                        radio.style.display = 'none';
                     });
-                });
+    
+                    // Montrer le bouton radio correspondant à l'image cliquée
+                    var selectedRadio = document.getElementById(serieId);
+                    selectedRadio.style.display = 'block';
+                    // Cocher le bouton radio
+                    selectedRadio.checked = true;
+                }
             </script>
         </form>
         <?php
     }
+    
+
     
 
     public function generateGrid()

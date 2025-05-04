@@ -38,6 +38,9 @@ class PdoWrapper
 
 
     }
+    public function getPDO(): \PDO {
+        return $this->pdo;
+    }
 
     public function exec($statement, $params, $classname = null)
     {

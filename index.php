@@ -20,7 +20,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
     <?php if ($isAdminLogged): ?>
         <a href="/pages/ajoutserie.php">Ajout série</a>
-        <a href="/pages/ajoutsaison.php">Ajout saison</a>
+        <a href="/pages/selectionserie.php">Ajout saison</a>
         <a href="logout.php">Se déconnecter</a>
     <?php endif; ?>
 

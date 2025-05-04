@@ -23,7 +23,6 @@ $form->generateForm();
 // Code pour traiter le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre']);
-    $nb_saison = (int) $_POST['nb_saison'];
     $tags = $_POST['tags'] ?? [];
 
     if (isset($_FILES['le_fichier']) && $_FILES['le_fichier']['error'] === UPLOAD_ERR_OK) {
@@ -38,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (move_uploaded_file($tmpName, $targetPath)) {
             $series = new Series();
-            $success = $series->AjoutSerieForm($titre, $nb_saison, $fileName);
+            $success = $series->AjoutSerie($titre, 0, $fileName);
 
             if ($success) {
                 $lastId = $series->getLastInsertId(); // À ajouter dans Series si pas encore fait

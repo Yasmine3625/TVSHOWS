@@ -8,21 +8,14 @@ class AjoutActeurForm
             <h2>Ajouter un acteur : </h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutepisode.php">
-                    <label for="titre">Nom :</label><br>
-                    <input type="text" id="titre" name="titre" required><br><br>
+                <form method="POST" action="ajoutacteur.php">
+                <label for="nom">Nom :</label><br>
+                    <input type="text" id="nom" name="nom" required><br><br>
 
-                    <label for="synopsis">Synopsis :</label><br>
-                    <textarea id="synopsis" name="synopsis" required></textarea><br><br>
+                    <label for="affichage">L'image :</label><br>
+                    <input type="file" id="affichage" name="affichage" accept="image/*" required><br><br>
 
-                    <label for="duree">Durée (ex : 45min) :</label><br>
-                    <input type="text" id="duree" name="duree" required><br><br>
-
-
-                    <label for="numero_episode">Numéro de l’épisode :</label><br>
-                    <input type="number" id="numero_episode" name="numero_episode" required><br><br>
-
-                    <input type="submit" value="Ajouter l’épisode">
+                    <input type="submit" value="Ajouter l'acteurr">
                 </form>
             </div>
         </div>

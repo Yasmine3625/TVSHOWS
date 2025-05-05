@@ -1,6 +1,6 @@
 <?php
 
-use tvshows\AjoutSaisonForm;
+use tvshows\AjoutActeurForm;
 session_start();
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
@@ -12,36 +12,35 @@ require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
 use tvshows\Template;
-use tvshows\Saisons;
+use tvshows\Acteur;
 
 ob_start();
 
-$form = new AjoutSaisonForm();
+$form = new AjoutActeurForm();
 
 $errors = [];
 
-$titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
+$nom = isset($_POST['nom']) ? trim($_POST['nom']) : '';
 $affichage = isset($_POST['affichage']) ? trim(string: $_POST['affichage']) : '';
-$nb_episode = isset($_POST['nb_episode']) ? intval($_POST['nb_episode']) : 0;
-$cle_serie = isset($_GET['cle_serie']) ? intval($_GET['cle_serie']) : 0;
-$cle = $cle_serie*100 + 1;
+$id_saison = isset($_GET['cle_saison']) ? intval($_GET['cle_saison']) : 0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (empty($titre)) {
-        $errors[] = "Le titre de la saison est vide.";
+    if (empty($nom)) {
+        $errors[] = "Le nom de l'acteur est vide.";
     }
 
     if (empty($affichage)) {
-        $errors[] = "L'image de la saison est vide.";
+        $errors[] = "L'image de l'acteur est vide.";
     }
 
-
     if (empty($errors)) {
-        $episode = new Saisons();
-        $success = $episode->AjoutSaison($cle, $affichage, $titre, $cle_serie, $nb_episode);
+        $acteur = new Acteur();
+        $cle = $acteur->cleActeur()+1;
+
+        $success = $acteur->ajouterActeur($nom, $affichage, $id_saison);
 
         if ($success) {
-            echo "<p style='color: green;'>La a été ajouté avec succès !</p>";
+            echo "<p style='color: green;'>L'épisode a été ajouté avec succès !</p>";
         } else {
             echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }

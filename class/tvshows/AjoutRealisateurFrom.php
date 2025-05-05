@@ -8,7 +8,7 @@ class AjoutRealisateurForm
             <h2>Ajouter un realisateur : </h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutepisode.php">
+                <form method="POST" action="ajoutrealisateur.php">
                     <label for="nom">Nom :</label><br>
                     <input type="text" id="nom" name="nom" required><br><br>
 

@@ -81,7 +81,10 @@ ob_start();
 
     <div id="saison-acteur-container">
         <?php if ($acteurs): ?>
+            <h2>Acteur/s :</h2>
+            <a href="ajoutacteur.php">Ajouter un acteur</a>
             <div class="realisateur-list">
+
                 <?php foreach ($acteurs as $acteur): ?>
                     <div class="realisateur">
                         <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"

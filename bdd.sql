@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS acteur;
 
 CREATE TABLE `acteur` (
-  `cle_act` int(11) NOT NULL,
+  `cle_act` int NOT NULL,
   `nom` varchar(60) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,11 +81,11 @@ INSERT INTO `acteur` (`cle_act`, `nom`, `image`) VALUES
 DROP TABLE IF EXISTS episode;
 
 CREATE TABLE `episode` (
-  `cle_episode` int(11) NOT NULL,
+  `cle_episode` int NOT NULL,
   `synopsis` text DEFAULT NULL,
   `duree` time DEFAULT NULL,
   `titre` varchar(100) DEFAULT NULL,
-  `id_saison` int(11) DEFAULT NULL,
+  `id_saison` int DEFAULT NULL,
   `numero_episode` INT(15)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -150,8 +150,8 @@ INSERT INTO `episode` (`cle_episode`, `synopsis`, `duree`, `titre`, `id_saison`,
 DROP TABLE IF EXISTS episode_realisateur;
 
 CREATE TABLE `episode_realisateur` (
-  `cle_episode` int(11) NOT NULL,
-  `cle_real` int(11) NOT NULL
+  `cle_episode` int NOT NULL,
+  `cle_real` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -168,7 +168,7 @@ INSERT INTO `episode_realisateur` (`cle_episode`, `cle_real`) VALUES
 DROP TABLE IF EXISTS realisateur;
 
 CREATE TABLE `realisateur` (
-  `cle_real` int(11) NOT NULL,
+  `cle_real` int NOT NULL,
   `nom` varchar(60) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -193,11 +193,11 @@ INSERT INTO `realisateur` (`cle_real`, `nom`, `image`) VALUES
 DROP TABLE IF EXISTS saison;
 
 CREATE TABLE `saison` (
-  `cle_saison` int(11) NOT NULL,
+  `cle_saison` int NOT NULL,
   `titre` varchar(100) DEFAULT NULL,
   `affichage` varchar(255) DEFAULT NULL,
   `nb_episode` int(11) DEFAULT NULL,
-  `cle_serie` int(11) DEFAULT NULL
+  `cle_serie` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -223,8 +223,8 @@ INSERT INTO `saison` (`cle_saison`, `titre`, `affichage`, `nb_episode`, `cle_ser
 DROP TABLE IF EXISTS saison_acteur;
 
 CREATE TABLE `saison_acteur` (
-  `cle_saison` int(11) NOT NULL,
-  `cle_acteur` int(11) NOT NULL
+  `cle_saison` int NOT NULL,
+  `cle_acteur` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -61,8 +61,9 @@ ob_start();
                     <?php endif; ?>
                 </div>
                 <div class="saison-boxes">
+                <a href="ajoutsaison.php">Ajout saison</a>
+
                     <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
-                        <a href="ajoutsaison.php">Ajout saison</a>
                         <div class="saison-box">
 
 

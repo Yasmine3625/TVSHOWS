@@ -3,45 +3,26 @@ namespace tvshows;
 
 class AjoutSaisonForm
 {
-    public function generateShop()
-{
-    ?>
-    <form class="browser" action="ajoutsaison.php" method="post" autocomplete="off">
-        <header>
-            <div style="padding: 5px">
-                SÉRIES : <span id="num-series"></span>
-            </div>
-            <button type="submit" class="btn btn-dark" id="add-to-cart">Ajout</button>
-        </header>
-        <div class="browser-content-wrapper">
-            <div id="list-serie">
-            <?php foreach ($this->series as $s): ?>
-                <div class="serie-card" onclick="selectSerie('<?php echo $s->getId(); ?>')">
-                    <input
-                        type="radio"
-                        name="selected_serie"
-                        value="<?php echo $s->getId(); ?>"
-                        id="radio-<?php echo $s->getId(); ?>"
-                        class="serie-radio"
-                    >
-                    <?php echo $s->getHTML(true); ?>
-                </div>
-            <?php endforeach; ?>
+    public function generateForm(): void
+    { ?>
+        <div class="ajout-container">
+            <h2>Ajouter une nouvelle saison</h2>
+
+            <div class="ajout_form">
+                <form method="POST" action="ajoutsaison.php">
+                    <label for="titre">Titre :</label><br>
+                    <input type="text" id="titre" name="titre" required><br><br>
+
+
+                    <label for="numero_episode">Numéro de saison :</label><br>
+                    <input type="number" id="numero_episode" name="numero_episode" required><br><br>
+
+                    <label for="affichage">L'image :</label><br>
+                    <input type="file" id="affichage" name="affichage" accept="image/*" required><br><br>
+
+                    <input type="submit" value="Ajouter la saison">
+                </form>
             </div>
         </div>
-        <script>
-            function showSelection(serieId) {
-                var radios = document.querySelectorAll('.form-check-input');
-                radios.forEach(function(radio) {
-                    radio.style.display = 'none';
-                });
-
-                var selectedRadio = document.getElementById(serieId);
-                selectedRadio.style.display = 'block';
-                selectedRadio.checked = true;
-            }
-        </script>
-    </form>
-    <?php
-}
+    <?php }
 }

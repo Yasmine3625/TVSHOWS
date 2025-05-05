@@ -9,13 +9,11 @@ use tvshows\SeriesRenderer;
 
 ob_start();
 
-// Vérifie si un terme de recherche est fourni
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $searchTerm = $_GET['search'];
 
-    // Créer une instance de Series pour récupérer les résultats
     $gdb = new Series();
-    $series = $gdb->searchSeries($searchTerm); // Appel à la méthode de recherche
+    $series = $gdb->searchSeries($searchTerm);
 
     ?>
     <div style="display: flex; flex-direction: column; flex:1">
@@ -28,7 +26,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
             if (!empty($series)) {
                 foreach ($series as $s) {
-                    echo $s->getHTML(); // Afficher chaque série correspondante
+                    echo $s->getHTML();
                 }
             } else {
                 echo "<p>Aucun résultat trouvé pour '" . htmlspecialchars($searchTerm) . "'</p>";

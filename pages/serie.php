@@ -23,7 +23,6 @@ if (count($serieData) === 0) {
 
 $serie = $serieData[0];
 
-// Tags
 $tagQuery = "
     SELECT tag.nom
     FROM tag
@@ -32,7 +31,6 @@ $tagQuery = "
 ";
 $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 
-// Toutes les saisons de cette série
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
@@ -53,14 +51,14 @@ ob_start();
             </div>
 
             <div class="serie-details">
-            <div class="tag_box">
-                <?php if (!empty($tags)): ?>
-                    <p><strong>Tags :</strong>
-                        <?php foreach ($tags as $tag): ?>
-                            <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
-                        <?php endforeach; ?>
-                    </p>
-                <?php endif; ?>
+                <div class="tag_box">
+                    <?php if (!empty($tags)): ?>
+                        <p><strong>Tags :</strong>
+                            <?php foreach ($tags as $tag): ?>
+                                <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <div class="saison-boxes">
                     <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>

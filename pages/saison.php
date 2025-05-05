@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
@@ -60,6 +60,11 @@ ob_start();
     <hr style="margin: unset;">
     <div id="episodes-main-title">
         <p>Episodes</p>
+        <div class="ajout-episode-button">
+            <a href="ajoutepisode.php?serie=<?= urlencode($serie->cle_serie) ?>" class="btn-ajout-episode">
+                Ajouter un épisode
+            </a>
+        </div>
     </div>
     <hr style="margin: unset;">
     <div class="episode-section">

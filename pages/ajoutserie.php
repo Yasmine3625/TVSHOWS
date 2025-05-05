@@ -20,12 +20,12 @@ ob_start();
 $form = new AjoutSerieForm();
 $form->generateForm();
 
-// Code pour traiter le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre']);
     $tags = $_POST['tags'] ?? [];
 
     if (isset($_FILES['le_fichier']) && $_FILES['le_fichier']['error'] === UPLOAD_ERR_OK) {
+
         $tmpName = $_FILES['le_fichier']['tmp_name'];
         $fileName = basename($_FILES['le_fichier']['name']);
         $targetDir = __DIR__ . '/../uploads/';

@@ -61,11 +61,18 @@ class Episode extends PdoWrapper
                 FROM realisateur r
                 INNER JOIN episode_realisateur re ON re.cle_real = r.cle_real
                 WHERE re.cle_episode = :id_episode";
-    
+
         $params = ['id_episode' => $idEpisode];
-    
+
         return $this->exec($sql, $params);
     }
-    
+
+    public function AjoutEpisode(int $cle, string $synopsis, string $duree, string $titre, int $id_saison, int $numero_episode): bool
+    {
+        $sql = "INSERT INTO episode (cle_episode ,synopsis ,duree, titre, id_saison, numero_episode) VALUES (?, ?, ?, ?, ?, ?)";
+        $result = $this->exec($sql, [$cle, $synopsis, $duree, $titre, $id_saison, $numero_episode], null);
+        return $result !== false;
+    }
+
 
 }

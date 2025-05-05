@@ -4,12 +4,8 @@ namespace tvshows;
 
 class TagsRenderer
 {
-    public string $nom; // doit être public pour que PDO puisse l’hydrater
+    public string $nom;
 
-    public function __construct()
-    {
-        // rien ici
-    }
 
     public function getHTML(): string
     {

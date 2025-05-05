@@ -27,33 +27,24 @@ class Selection
             </header>
             <div class="browser-content-wrapper">
                 <div id="list-serie">
-                <?php foreach ($this->series as $s): ?>
-                    <div class="serie-card" onclick="selectSerie('<?php echo $s->getId(); ?>')">
-    <input 
-        type="radio" 
-        name="selected_serie" 
-        value="<?php echo $s->getId(); ?>" 
-        id="radio-<?php echo $s->getId(); ?>" 
-        class="serie-radio"
-    >
-    <?php echo $s->getHTML(true); ?>
-</div>
+                    <?php foreach ($this->series as $s): ?>
+                        <div class="serie-card" onclick="selectSerie('<?php echo $s->getId(); ?>')">
+                            <input type="radio" name="selected_serie" value="<?php echo $s->getId(); ?>"
+                                id="radio-<?php echo $s->getId(); ?>" class="serie-radio">
+                            <?php echo $s->getHTML(true); ?>
+                        </div>
 
-<?php endforeach; ?>
+                    <?php endforeach; ?>
 
                 </div>
             </div>
-            <!-- Script pour afficher le bouton radio après avoir cliqué sur l'image -->
             <script>
-                // Fonction pour afficher le bouton radio après avoir cliqué sur l'image
                 function showSelection(serieId) {
-                    // Cacher tous les boutons radio
                     var radios = document.querySelectorAll('.form-check-input');
-                    radios.forEach(function(radio) {
+                    radios.forEach(function (radio) {
                         radio.style.display = 'none';
                     });
-    
-                    // Montrer le bouton radio correspondant à l'image cliquée
+
                     var selectedRadio = document.getElementById(serieId);
                     selectedRadio.style.display = 'block';
                     // Cocher le bouton radio
@@ -63,9 +54,9 @@ class Selection
         </form>
         <?php
     }
-    
 
-    
+
+
 
     public function generateGrid()
     {
@@ -79,7 +70,7 @@ class Selection
                 <?php endforeach; ?>
             </div>
         </div>
-    <?php
+        <?php
     }
 
 

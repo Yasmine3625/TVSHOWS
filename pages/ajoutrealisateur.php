@@ -34,12 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['affichage']) && $_FILES['affichage']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['affichage']['tmp_name'];
         $fileName = basename($_FILES['affichage']['name']);
-        $targetDir = __DIR__ . '/../uploads/';
-        $targetPath = $targetDir . $fileName;
-
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
+        $targetPath =  $fileName;
 
         if (move_uploaded_file($tmpName, $targetPath)) {
             $imageName = $fileName;

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $episode = new Episode();
-        $success = $episode->AjoutEpisode($cle, $synopsis,$duree, $titre, $id_saison, $numero_episode);
+        $success = $episode->ajouterEpisode($cle, $synopsis,$duree, $titre, $id_saison, $numero_episode);
 
         if ($success) {
             $sqlUpdate = "UPDATE saison SET nb_episode = nb_episode + 1 WHERE cle_saison = :cle_saison";

@@ -57,6 +57,7 @@ ob_start();
                             <?php foreach ($tags as $tag): ?>
                                 <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
                             <?php endforeach; ?>
+
                         </p>
                     <?php endif; ?>
                 </div>
@@ -73,6 +74,25 @@ ob_start();
             style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
     </div>
 <?php endforeach; ?>
+<form id="saison-selection-form" action="supprimersaison.php" method="get" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette saison ?');">
+                        <input type="hidden" name="serie" value="<?= htmlspecialchars($serie->cle_serie) ?>">
+                        <input type="hidden" name="saison" value=""> <!-- On remplira ce champ avec le numéro de la saison sélectionnée -->
+                        
+                        <button type="submit" id="delete-season-button">Supprimer la saison sélectionnée</button>
+                    </form>
+
+                    <script>
+                        const radioButtons = document.querySelectorAll('input[name="selected_saison"]');
+                        const saisonForm = document.getElementById('saison-selection-form');
+                        const saisonInput = saisonForm.querySelector('input[name="saison"]');
+
+                        radioButtons.forEach(button => {
+                            button.addEventListener('change', () => {
+                                saisonInput.value = button.value; // Remplir le champ caché avec le numéro de la saison
+                            });
+                        });
+                    </script>
+
 
 
                 </div>

@@ -1,32 +1,38 @@
 <?php
-session_start();
 require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
 use tvshows\Episode;
 
-
-if (!isset($_GET['episode_id'])) {
-    die("ID de l'épisode non spécifié.");
+if (!isset($_GET['serie'], $_GET['saison'], $_GET['selected_episode'])) {
+    die("Paramètres manquants.");
 }
 
-$episodeId = intval($_GET['episode_id']);
+$cleSerie = $_GET['serie'];
+$numSaison = intval($_GET['saison']);
+$episodeNum = intval($_GET['selected_episode']);
 
-if (!isset($_GET['saison_id']) || !isset($_GET['serie_id'])) {
-    die("ID de la saison ou de la série non spécifié.");
+$episodeDb = new Episode();
+
+$episodeData = $episodeDb->getBySerieSaisonEtNumero($cleSerie, $numSaison, $episodeNum);
+
+if (!$episodeData) {
+    die("Épisode introuvable.");
 }
 
-$saisonId = intval($_GET['saison_id']);
-$serieId = intval($_GET['serie_id']);
+$idSaison = $episodeData['saison']->cle_saison;
 
-$gdb = new Episode();
 
-// Suppression de l'épisode en base de données
-$gdb->exec("DELETE FROM episode WHERE cle_episode = :cle_episode",
-['cle_episode' => $episodeId]);
+$success = $episodeDb->supprimerEpisode($idSaison, $episodeNum);
 
-// Rediriger vers la page de la saison
-header("Location: saison.php?cle=" . urlencode($saisonId) . "&serie="
-. urlencode($serieId));
+if (!$success) {
+    die("La suppression a échoué.");
+}
+
+$sql = "UPDATE episode SET numero_episode = numero_episode - 1
+        WHERE id_saison = :saison AND numero_episode > :numero";
+$episodeDb->exec($sql, ['saison' => $idSaison, 'numero' => $episodeNum]);
+
+header("Location: saison.php?serie=" . urlencode($cleSerie) . "&saison=" . urlencode($numSaison));
 exit;
 ?>

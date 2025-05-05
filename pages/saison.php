@@ -5,6 +5,7 @@ require_once __DIR__ . "/../config.php";
 use tvshows\Template;
 use tvshows\Series;
 use tvshows\Saisons;
+use tvshows\Episode;
 
 ob_start();
 
@@ -17,6 +18,7 @@ $numSaison = intval($_GET['saison']);
 
 $seriesDb = new Series();
 $saisonsDb = new Saisons();
+$episodeDb = new Episode(); 
 
 $querySerie = "SELECT * FROM serie WHERE cle_serie = :cle";
 $serieData = $seriesDb->exec($querySerie, ['cle' => $cleSerie]);
@@ -33,6 +35,9 @@ if (count($saisons) === 0) {
 }
 $saison = $saisons[0];
 
+$episodes = $episodeDb->exec("SELECT * FROM episode WHERE id_saison = :id", ['id' => $saison->cle_saison]);
+$episodeCount = count($episodes); // nombre réel
+
 $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
 
 ob_start();
@@ -48,7 +53,7 @@ ob_start();
 
         <div id="foreground-element">
             <h1><?= htmlspecialchars($serie->titre) ?> - Saison <?= $numSaison ?></h1>
-            <p><strong>Nombre d'épisodes :</strong> <?= intval($saison->nb_episode) ?></p>
+            <p><strong>Nombre d'épisodes :</strong> <?= $episodeCount ?></p>
             <p>Acteurs :</p>
         </div>
     </div>
@@ -60,41 +65,35 @@ ob_start();
             <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">
                 Ajouter un épisode
             </a>
-            class="btn-ajout-episode">
-            Ajouter un épisode
-            </a>
         </div>
     </div>
     <hr style="margin: unset;">
     <div class="episode-section">
-    <form id="episode-selection-form" action="supprimerepisode.php" method="get">
-    <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
-    <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
-    <button type="submit">Supprimer</button>
-</form>
-
-        <div class="saisons-episodes-container">
-        <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
-            <div id="ep">
-                <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
-                    class="episode-button">
-                    Episode <?= $i ?>
-                </a>
-
-                <input type="radio" name="selected_episode" value="<?= $i ?>" form="episode-selection-form">
+        <form id="episode-selection-form" action="supprimerepisode.php" method="get">
+            <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
+            <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
+            <button type="submit">Supprimer</button>
+        
+            <div class="saisons-episodes-container">
+                <?php for ($i = 1; $i <= $episodeCount; $i++): ?>
+                    <div id="ep">
+                        <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
+                            class="episode-button">
+                            Episode <?= $i ?>
+                        </a>
+                        <input type="radio" name="selected_episode" value="<?= $i ?>" form="episode-selection-form">
+                    </div>
+                <?php endfor; ?>
             </div>
-        <?php endfor; ?>
-
-        </div>
+        </form>
     </div>
 
     <div id="saison-acteur-container">
         <?php if ($acteurs): ?>
             <h2>Acteur/s :</h2>
-            <a href="ajoutacteur.php?id_saison=<?= urlencode(string: $saison->cle_saison) ?>">Ajouter un acteur</a>
+            <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>">Ajouter un acteur</a>
 
             <div class="realisateur-list">
-
                 <?php foreach ($acteurs as $acteur): ?>
                     <div class="realisateur">
                         <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"
@@ -112,4 +111,3 @@ ob_start();
 <?php
 $content = ob_get_clean();
 Template::render($content);
-?>

@@ -60,6 +60,66 @@ class Saisons extends PdoWrapper
 
         return 0;
     }
+    public function supprimerSaison(int $cle_saison)
+    {
+        // Récupérer la cle_serie de la saison à supprimer
+        $saisonQuery = "SELECT cle_serie FROM saison WHERE cle_saison = :cle_saison";
+        $saisonResult = $this->exec($saisonQuery, ['cle_saison' => $cle_saison]);
+    
+        if (count($saisonResult) === 0) {
+            return false;
+        }
+    
+        $cleSerie = $saisonResult[0]->cle_serie;
+    
+        // Supprimer les épisodes associés à cette saison
+        $this->exec(
+            "DELETE FROM episode WHERE id_saison = :cle_saison",
+            ['cle_saison' => $cle_saison]
+        );
+    
+        // Supprimer la saison
+        $result = $this->exec(
+            "DELETE FROM saison WHERE cle_saison = :cle_saison",
+            ['cle_saison' => $cle_saison]
+        );
+    
+        // Si la suppression de la saison est réussie
+        if ($result !== false) {
+            // Décrémenter le nombre de saisons de la série
+            $decrementResult = $this->decrementerNbSaison($cleSerie);
+            
+            if (!$decrementResult) {
+                die("Échec de la décrémentation du nombre de saisons.");
+            }
+    
+            return true;
+        }
+    
+        return false;
+    }
+    
+
+public function decrementerNbSaison(int $cleSerie)
+{
+    // Vérifier d'abord la valeur actuelle de nb_saison
+    $query = "SELECT nb_saison FROM serie WHERE cle_serie = :cle_serie";
+    $result = $this->exec($query, ['cle_serie' => $cleSerie]);
+
+    // Si la série n'existe pas ou nb_saison est déjà 0, ne pas décrémenter
+    if (empty($result) || $result[0]->nb_saison <= 0) {
+        return false;
+    }
+
+    // Décrémenter le nombre de saisons seulement si nb_saison > 0
+    $query = "UPDATE serie SET nb_saison = nb_saison - 1 WHERE cle_serie = :cle_serie";
+    $this->exec($query, ['cle_serie' => $cleSerie]);
+
+    return true;
+}
+
+
+
 
     public function supprimerSerie(int $cle_serie)
     {

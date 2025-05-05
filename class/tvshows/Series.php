@@ -98,6 +98,20 @@ class Series extends PdoWrapper
         // Si $result est false, la suppression a échoué
         return $result !== false;
     }
+    public function getById(int $cle_serie)
+    {
+        $query = "SELECT * FROM serie WHERE cle_serie = :cle_serie";
+        $params = ['cle_serie' => $cle_serie];
+        
+        $result = $this->exec($query, $params);
+
+        if (!empty($result)) {
+            return $result[0];
+        }
+        
+        return null;
+    }
+
 
     public function getLastInsertId(): int
     {

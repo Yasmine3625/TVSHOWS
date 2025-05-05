@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
@@ -23,30 +23,27 @@ if (count($serieData) === 0) {
 
 $serie = $serieData[0];
 
-// Récupérer le nombre de saisons pour cette série
-$nbSaisonsQuery = "SELECT COUNT(*) AS nb_saisons FROM saison WHERE cle_serie = :cle";
-$nbSaisonsResult = $gdb->exec($nbSaisonsQuery, ['cle' => $cle]);
+$tagQuery = "
+    SELECT tag.nom
+    FROM tag
+    INNER JOIN serie_tag ON tag.id_tag = serie_tag.cle_tag
+    WHERE serie_tag.cle_serie = :cle
+";
+$tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 
-// Récupérer le nombre de saisons
-$nbSaisons = !empty($nbSaisonsResult) ? $nbSaisonsResult[0]->nb_saisons : 0;
-
-// Récupérer les saisons de la série
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-// La première saison pour afficher l'image
-$img = !empty($saisons) ? $saisons[0] : null;
-
+$img = $saisons[0];
 ob_start();
 ?>
-
 <div class="serie-page">
     <div class="serie-content" style="display: flex; align-items: center; gap: 40px;">
         <div class="serie-text">
             <div class="info_serie">
                 <div class="gauche">
                     <h1><?= htmlspecialchars($serie->titre) ?></h1>
-                    <p><strong>Nombre de saisons :</strong> <?= $nbSaisons ?></p> <!-- Affichage du nombre de saisons -->
+                    <p><strong>Nombre de saisons :</strong> <?= intval($serie->nb_saison) ?></p>
                 </div>
                 <div class="serie-image">
                     <img src="/uploads/<?= htmlspecialchars($serie->image) ?>" alt="Image de la série">
@@ -60,31 +57,24 @@ ob_start();
                             <?php foreach ($tags as $tag): ?>
                                 <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
                             <?php endforeach; ?>
+
                         </p>
                     <?php endif; ?>
                 </div>
-
                 <h2>Saison/s :</h2>
-                <a href="ajoutsaison.php">Ajouter une saison</a>
+                <a href="ajoutsaison.php">Ajout saison</a>
+                <div class="saison-boxes">
 
-                <form id="saison-selection-form" action="supprimersaison.php" method="get">
-                    <input type="hidden" name="serie" value="<?= htmlspecialchars($cle) ?>">
-                    <div class="saison-boxes">
-                    <?php foreach ($saisons as $index => $saison): ?>
-                        <div class="saison-box">
-                            <label>
-                                <a href="saison.php?serie=<?= urlencode($cle) ?>&saison=<?= $index + 1 ?>" class="saison-link">
-                                    Saison <?= $index + 1 ?>
-                                </a>
-                                <input type="radio" name="selected_saison" value="<?= $index + 1 ?>" form="saison-selection-form">
-                            </label>
-                            <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison"
-                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                        </div>
-                    <?php endforeach; ?>
-                    </div>
-
-                    <form id="saison-selection-form" action="supprimersaison.php" method="get" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette saison ?');">
+                <?php foreach ($saisons as $index => $saison): ?>
+    <div class="saison-box">
+        <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $index + 1 ?>&id_saison=<?= $saison->cle_saison ?>">
+            Saison <?= $index + 1 ?>
+        </a>
+        <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison"
+            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+    </div>
+<?php endforeach; ?>
+<form id="saison-selection-form" action="supprimersaison.php" method="get" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette saison ?');">
                         <input type="hidden" name="serie" value="<?= htmlspecialchars($serie->cle_serie) ?>">
                         <input type="hidden" name="saison" value=""> <!-- On remplira ce champ avec le numéro de la saison sélectionnée -->
                         
@@ -103,8 +93,9 @@ ob_start();
                         });
                     </script>
 
-                </div>
 
+
+                </div>
                 <div class="tag_box">
                     <?php if (!empty($tags)): ?>
                         <p><strong>Tags :</strong>
@@ -118,7 +109,6 @@ ob_start();
         </div>
     </div>
 </div>
-
 <?php
 $content = ob_get_clean();
 Template::render($content);

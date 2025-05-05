@@ -44,3 +44,4 @@ class AjoutSerieForm
         </div>
     <?php }
 }
+?>

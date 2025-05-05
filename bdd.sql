@@ -284,11 +284,13 @@ INSERT INTO `saison_acteur` (`cle_saison`, `cle_acteur`) VALUES
 DROP TABLE IF EXISTS serie;
 
 CREATE TABLE `serie` (
-  `cle_serie` int(11) NOT NULL,
+  `cle_serie` int(50) AUTO_INCREMENT NOT NULL,
   `titre` varchar(100) DEFAULT NULL,
   `nb_saison` int(11) DEFAULT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`cle_serie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Déchargement des données de la table `serie`

@@ -64,18 +64,16 @@ ob_start();
                 <a href="ajoutsaison.php">Ajout saison</a>
                 <div class="saison-boxes">
 
-                    <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
-                        <div class="saison-box">
+                <?php foreach ($saisons as $index => $saison): ?>
+    <div class="saison-box">
+        <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $index + 1 ?>&id_saison=<?= $saison->cle_saison ?>">
+            Saison <?= $index + 1 ?>
+        </a>
+        <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison"
+            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+    </div>
+<?php endforeach; ?>
 
-                            <a href="saison.php?serie=<?=
-                                urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
-                                Saison <?= $i ?>
-                            </a>
-
-                            <img src="/uploads/<?= htmlspecialchars($img->affichage) ?>" alt="Image de la saison"
-                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                        </div>
-                    <?php endfor; ?>
 
                 </div>
                 <div class="tag_box">

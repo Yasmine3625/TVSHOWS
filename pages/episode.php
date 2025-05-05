@@ -74,7 +74,7 @@ ob_start();
 
         <div id="realisateurs" class="toggle-section">
             <h3>Réalisateur(s)</h3>
-            <a href="ajoutrealisateur.php">Ajouter un realisateur</a>
+            <a href="ajoutrealisateur.php?cle_episode=<?= urlencode($episode->cle_episode) ?>" class="btn-ajout-episode">Ajouter un realisateur</a>
             <?php if ($realisateurs): ?>
                 <div class="image-real-list">
                     <?php foreach($realisateurs as $real): ?>

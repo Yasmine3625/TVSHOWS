@@ -19,7 +19,6 @@ $numSaison = intval($_GET['saison']);
 $seriesDb = new Series();
 $saisonsDb = new Saisons();
 
-// Récupère les infos de la série
 $querySerie = "SELECT * FROM serie WHERE cle_serie = :cle";
 $serieData = $seriesDb->exec($querySerie, ['cle' => $cleSerie]);
 
@@ -85,7 +84,8 @@ ob_start();
     <div id="saison-acteur-container">
         <?php if ($acteurs): ?>
             <h2>Acteur/s :</h2>
-            <a href="ajoutacteur.php">Ajouter un acteur</a>
+            <a href="ajoutacteur.php?id_saison=<?= urlencode(string: $saison->cle_saison) ?>">Ajouter un acteur</a>
+
             <div class="realisateur-list">
 
                 <?php foreach ($acteurs as $acteur): ?>

@@ -1,6 +1,6 @@
 <?php
 
-use tvshows\AjoutRealisateurForm;
+use tvshows\AjoutRealisateurFrom;
 session_start();
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
@@ -16,44 +16,61 @@ use tvshows\Realisateur;
 
 ob_start();
 
-$form = new AjoutRealisateurForm();
+$cle_episode = isset($_GET['cle_episode']) && is_numeric($_GET['cle_episode']) ? intval($_GET['cle_episode']) : 0;
+
+$form = new AjoutRealisateurFrom();
+$form->generateForm($cle_episode);
 
 $errors = [];
 
-$nom = isset($_POST['nom']) ? trim($_POST['nom']) : '';
-$affichage = isset($_POST['affichage']) ? trim(string: $_POST['affichage']) : '';
-$id_saison = isset($_GET['cle_saison']) ? intval($_GET['cle_saison']) : 0;
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nom = trim($_POST['nom'] ?? '');
+    $cle_episode = isset($_POST['cle_episode']) && is_numeric($_POST['cle_episode']) ? intval($_POST['cle_episode']) : 0;
+
+    var_dump($cle_episode);
+
+    $imageName = '';
+
+    if (isset($_FILES['affichage']) && $_FILES['affichage']['error'] === UPLOAD_ERR_OK) {
+        $tmpName = $_FILES['affichage']['tmp_name'];
+        $fileName = basename($_FILES['affichage']['name']);
+        $targetDir = __DIR__ . '/../uploads/';
+        $targetPath = $targetDir . $fileName;
+
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        if (move_uploaded_file($tmpName, $targetPath)) {
+            $imageName = $fileName;
+        } else {
+            $errors[] = "Erreur lors du téléchargement de l'image.";
+        }
+    } else {
+        $errors[] = "Fichier image manquant ou invalide.";
+    }
+
+    // Validation
     if (empty($nom)) {
-        $errors[] = "Le nom de l'acteur est vide.";
+        $errors[] = "Le nom du realisateur est requis.";
     }
 
-    if (empty($affichage)) {
-        $errors[] = "L'image de l'acteur est vide.";
-    }
-
+    // Traitement
     if (empty($errors)) {
         $acteur = new Realisateur();
-        $cle = $acteur->cleRealisateur() +1 ;
-
-        $success = $acteur->ajouterRealisateur($nom, $affichage, $id_saison);
+        $success = $acteur->ajouterRealisateur($nom, $imageName, $cle_episode);
 
         if ($success) {
-            echo "<p style='color: green;'>L'épisode a été ajouté avec succès !</p>";
+            echo "<p style='color: green;'>Acteur ajouté avec succès !</p>";
         } else {
             echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }
+    } else {
+        foreach ($errors as $error) {
+            echo "<p style='color: red;'>$error</p>";
+        }
     }
 }
-
-if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-}
-
-$form->generateForm();
 
 $content = ob_get_clean();
 Template::render($content);

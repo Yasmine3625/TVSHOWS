@@ -16,53 +16,57 @@ use tvshows\Episode;
 
 ob_start();
 
+// Récupérer l'ID de la saison depuis l'URL (GET)
+$id_saison = isset($_GET['id_saison']) && is_numeric($_GET['id_saison']) ? intval($_GET['id_saison']) : 0;
+
+// Affichage du formulaire avec l'ID de la saison
 $form = new AjoutEpisodeForm();
+$form->generateForm($id_saison);
+
 
 $errors = [];
 
-$titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
-$synopsis = isset($_POST['synopsis']) ? trim($_POST['synopsis']) : '';
-$duree = isset($_POST['duree']) ? trim($_POST['duree']) : '';
-$numero_episode = isset($_POST['numero_episode']) ? intval($_POST['numero_episode']) : 0;
-$id_saison = isset($_GET['id_saison']) ? intval($_GET['id_saison']) : 0;
-$cle = $id_saison + 1000;
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titre = trim($_POST['titre'] ?? '');
+    $synopsis = trim($_POST['synopsis'] ?? '');
+    $duree = trim($_POST['duree'] ?? '');
+    $numero_episode = isset($_POST['numero_episode']) ? intval($_POST['numero_episode']) : 0;
+    
+    $id_saison = isset($_POST['id_saison']) && is_numeric($_POST['id_saison']) ? intval($_POST['id_saison']) : 0;
+    $cle=$id_saison+1000* $numero_episode;
     if (empty($titre)) {
-        $errors[] = "Le titre de l'épisode est vide.";
+        $errors[] = "Le titre de l'épisode est requis.";
     }
 
     if (empty($synopsis)) {
-        $errors[] = "Le synopsis de l'épisode est vide.";
+        $errors[] = "Le synopsis de l'épisode est requis.";
     }
 
     if (empty($duree)) {
-        $errors[] = "La durée de l'épisode est vide.";
+        $errors[] = "La durée de l'épisode est requise.";
+    }
+
+    if ($numero_episode <= 0) {
+        $errors[] = "Le numéro de l'épisode doit être un nombre positif.";
     }
 
     if (empty($errors)) {
         $episode = new Episode();
-        $success = $episode->ajoutEpisode($cle, $synopsis, $duree, $titre, $id_saison, $numero_episode);
+        $success = $episode->AjoutEpisode($cle, $synopsis,$duree, $titre, $id_saison, $numero_episode);
 
         if ($success) {
-
             $sqlUpdate = "UPDATE saison SET nb_episode = nb_episode + 1 WHERE cle_saison = :cle_saison";
             $episode->exec($sqlUpdate, ['cle_saison' => $id_saison]);
-
-
+            echo "<p style='color: green;'>L'épisode a été ajouté avec succès !</p>";
         } else {
             echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }
+    } else {
+        foreach ($errors as $error) {
+            echo "<p style='color: red;'>$error</p>";
+        }
     }
 }
-
-if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-}
-
-$form->generateForm();
 
 $content = ob_get_clean();
 Template::render($content);

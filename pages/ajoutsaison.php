@@ -22,7 +22,7 @@ $errors = [];
 
 $titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
 $affichage = isset($_POST['affichage']) ? trim(string: $_POST['affichage']) : '';
-$nb_episode = isset($_POST['nb_episode']) ? intval($_POST['nb_episode']) : 0;
+$nb_episode = isset($_POST['nb_episode']) ? intval(value: $_POST['nb_episode']) : 0;
 $cle_serie = isset($_GET['cle_serie']) ? intval($_GET['cle_serie']) : 0;
 $cle = $cle_serie*100 + 1;
 

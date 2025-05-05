@@ -21,12 +21,15 @@ class Template
             <title>TV Shows</title>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
             <link rel="stylesheet" href="https://fonts.google.com/specimen/Cinzel">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>adminlogger.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>style.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>serie.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>saison.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>episode.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>ajoutserie.css">
+
 
 
         </head>
@@ -43,6 +46,17 @@ class Template
 
             </div> <!-- #main-content -->
             <?php include $GLOBALS['PHP_DIR'] . "pages/footer.php" ?>
+            <script>
+                window.addEventListener('scroll', function () {
+                    const header = document.querySelector('header');
+                    if (window.scrollY > 10) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            </script>
+
         </body>
 
         </html <?php

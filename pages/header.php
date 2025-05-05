@@ -5,12 +5,13 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 <header>
     <div id="logo-container">
-        <img id="nav-bar-icone" src="..\images\LogoOrange.png"></img>
-        <h1>SERIES</h1>
+        <h1 class="main-title">LYD-TV</h1>
     </div>
 
     <div id="nav-bar">
-        <a class="nav-btn-acc" href="/../index.php">Acceuil</a>
+        <a class="nav-btn-acc" href="/../index.php" title="Accueil">
+            <i class="fas fa-home"></i>
+        </a>
         <div class="search-bar">
             <form action="/pages/search_results.php" method="get" style="display: flex;">
                 <button type="submit" class="search-button">

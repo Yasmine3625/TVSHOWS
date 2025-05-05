@@ -23,6 +23,21 @@ class SeriesRenderer
         </div>
         ";
     }
+
+    public function getDiapoHTML(): string
+    {
+        $imagePath = "/../uploads/" . $this->image;
+
+        return "
+    <div class='diapo-slide'>
+        <a href='/pages/serie.php?serie=" . urlencode($this->cle_serie) . "'>
+            <img src='$imagePath' alt='Image de la série " . htmlspecialchars($this->titre) . "'>
+            <div class='diapo-caption'>" . htmlspecialchars($this->titre) . "</div>
+        </a>
+    </div>
+    ";
+    }
+
     public function getId(): int
     {
         return $this->cle_serie;

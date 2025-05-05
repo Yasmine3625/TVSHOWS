@@ -3,29 +3,35 @@
 use tvshows\AjoutSaisonForm;
 session_start();
 
+// Redirection si non admin
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("Location: /pages/adminloginform.php");
     exit;
 }
 
+// Chargement des dépendances
 require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
 use tvshows\Template;
-use tvshows\Series;
-use tvshows\AjoutSerie;
+use tvshows\Saisons;
 
 ob_start();
 
+// Affiche le formulaire
 $form = new AjoutSaisonForm();
 $form->generateForm();
 
-// Code pour traiter le formulaire
+// Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titre = trim($_POST['titre']);
-    $tags = $_POST['tags'] ?? [];
+    $titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
+    $nb_episode = isset($_POST['nb_episode']) ? (int)$_POST['nb_episode'] : 0;
 
-    if (isset($_FILES['le_fichier']) && $_FILES['le_fichier']['error'] === UPLOAD_ERR_OK) {
+    if (empty($titre)) {
+        echo "<p style='color: red;'>Le titre est requis.</p>";
+    } elseif (!isset($_FILES['le_fichier']) || $_FILES['le_fichier']['error'] !== UPLOAD_ERR_OK) {
+        echo "<p style='color: red;'>Fichier image manquant ou invalide.</p>";
+    } else {
         $tmpName = $_FILES['le_fichier']['tmp_name'];
         $fileName = basename($_FILES['le_fichier']['name']);
         $targetDir = __DIR__ . '/../uploads/';
@@ -36,23 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (move_uploaded_file($tmpName, $targetPath)) {
-            $series = new Series();
-            $success = $series->AjoutSerie($titre, 0, $fileName);
+            $saisons = new Saisons();
+            $success = $saisons->AjoutSaison($titre, 0, $fileName);
 
             if ($success) {
-                $lastId = $series->getLastInsertId(); // À ajouter dans Series si pas encore fait
-                foreach ($tags as $tagId) {
-                    $series->exec("INSERT INTO serie_tag (cle_serie, cle_tag) VALUES (?, ?)", [$lastId, $tagId]);
-                }
-                echo "<p style='color: green;'> Série ajoutée avec succès !</p>";
+                echo "<p style='color: green;'>Saison ajoutée avec succès !</p>";
             } else {
-                echo "<p style='color: red;'> Erreur lors de l'ajout dans la base.</p>";
+                echo "<p style='color: red;'>Erreur lors de l'ajout dans la base.</p>";
             }
         } else {
             echo "<p style='color: red;'>Erreur lors du téléchargement du fichier.</p>";
         }
-    } else {
-        echo "<p style='color: red;'> Fichier image manquant ou invalide.</p>";
     }
 }
 

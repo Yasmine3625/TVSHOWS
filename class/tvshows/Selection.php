@@ -23,7 +23,7 @@ class Selection
                 <div style="padding: 5px">
                     SÉRIES : <span id="num-series"></span>
                 </div>
-                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajouter au panier</button>
+                <button type="submit" class="btn btn-dark" id="add-to-cart">Ajout</button>
             </header>
             <div class="browser-content-wrapper">
                 <div id="list-serie">

@@ -60,8 +60,11 @@ ob_start();
     <div id="episodes-main-title">
         <p>Episodes</p>
         <div class="ajout-episode-button">
-            <a href="ajoutepisode.php?serie=<?= urlencode($serie->cle_serie) ?>" class="btn-ajout-episode">
+            <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">
                 Ajouter un épisode
+            </a>
+            class="btn-ajout-episode">
+            Ajouter un épisode
             </a>
         </div>
     </div>

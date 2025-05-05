@@ -32,7 +32,7 @@ class Series extends PdoWrapper
         );
 
     }
-    
+
     public function getSeriesByCategory(string $categoryName)
     {
         $sql = "
@@ -66,14 +66,45 @@ class Series extends PdoWrapper
         $sql = "INSERT INTO serie (titre, nb_saison, image) VALUES (?, ?, ?)";
         $result = $this->exec($sql, [$titre, $nb_saison, $image], null);
         return $result !== false;
-    }
-    
-    public function getLastInsertId(): int
-{
-    return $this->getPDO()->lastInsertId();
-}
 
-    
+
+    }
+    public function supprimerSerie(int $cle_serie): bool
+    {
+        // Supprimer les épisodes associés aux saisons de la série
+        $this->exec(
+            "DELETE FROM episode WHERE id_saison IN (SELECT cle_saison FROM saison WHERE cle_serie = :cle_serie)",
+            ['cle_serie' => $cle_serie]
+        );
+
+        // Supprimer les saisons de la série
+        $this->exec(
+            "DELETE FROM saison WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        // Supprimer les liens de tags
+        $this->exec(
+            "DELETE FROM serie_tag WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        // Supprimer la série elle-même
+        $result = $this->exec(
+            "DELETE FROM serie WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        // Si $result est false, la suppression a échoué
+        return $result !== false;
+    }
+
+    public function getLastInsertId(): int
+    {
+        return $this->getPDO()->lastInsertId();
+    }
+
+
 }
 
 

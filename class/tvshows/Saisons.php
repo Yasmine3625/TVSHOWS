@@ -32,33 +32,60 @@ class Saisons extends PdoWrapper
         $params = ['cleSerie' => $cleSerie];
         return $this->exec($query, $params);
     }
-    
+
     public function getActeurParEpisode($cleSaison)
     {
         $sql = "SELECT a.nom, a.image
                 FROM acteur a
                 INNER JOIN saison_acteur sa ON sa.cle_acteur = a.cle_act  -- Changer 'cle_act' par 'cle_acteur'
                 WHERE sa.cle_saison = :cle_saison";
-    
+
         $params = ['cle_saison' => $cleSaison];
         return $this->exec($sql, $params);
     }
-    public function AjoutSaison(int $cle, string $affichage,  string $titre, int $cle_serie, int $nb_episode): bool
+    public function AjoutSaison(int $cle, string $affichage, string $titre, int $cle_serie, int $nb_episode): bool
     {
         $sql = "INSERT INTO saison (cle_saison, titre, affichage, nb_episode, cle_serie)  VALUES (?, ?, ?, ?, ?)";
-        $result = $this->exec($sql, [$cle,$titre, $affichage,$nb_episode , $cle_serie], null);
+        $result = $this->exec($sql, [$cle, $titre, $affichage, $nb_episode, $cle_serie], null);
         return $result !== false;
     }
-    public function cleSaison(): int {
+    public function cleSaison(): int
+    {
         $query = "SELECT COUNT(*) AS total_saisons FROM saison";
         $result = $this->exec($query, []);
-    
+
         if (!empty($result)) {
             return (int) $result[0]->total_saisons;
         }
-    
+
         return 0;
     }
-    
-    
+
+    public function supprimerSerie(int $cle_serie)
+    {
+        $this->exec(
+            "DELETE FROM episode WHERE id_saison IN (SELECT cle_saison FROM saison WHERE cle_serie = :cle_serie)",
+            ['cle_serie' => $cle_serie]
+        );
+
+        $this->exec(
+            "DELETE FROM saison WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        $this->exec(
+            "DELETE FROM serie_tag WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        $result = $this->exec(
+            "DELETE FROM serie WHERE cle_serie = :cle_serie",
+            ['cle_serie' => $cle_serie]
+        );
+
+        return $result !== false;
+
+    }
+
+
 }

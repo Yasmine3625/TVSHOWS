@@ -68,10 +68,20 @@ class Episode extends PdoWrapper
 
     public function AjoutEpisode(int $cle, string $synopsis, string $duree, string $titre, int $id_saison, int $numero_episode): bool
     {
+
         $sql = "INSERT INTO episode (cle_episode ,synopsis ,duree, titre, id_saison, numero_episode) VALUES (?, ?, ?, ?, ?, ?)";
         $result = $this->exec($sql, [$cle, $synopsis, $duree, $titre, $id_saison, $numero_episode], null);
         return $result !== false;
     }
+
+    public function supprimerEpisode(int $cle_episode): bool
+    {
+        $sql = "DELETE FROM episode WHERE cle_episode = :cle_episode";
+        $params = ['cle_episode' => $cle_episode];
+        $result = $this->exec($sql, $params);
+        return $result !== false;
+    }
+
 
 
 }

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = $series->AjoutSerie($titre, 0, $fileName);
 
             if ($success) {
-                $lastId = $series->getLastInsertId(); // À ajouter dans Series si pas encore fait
+                $lastId = $series->getLastInsertId();
                 foreach ($tags as $tagId) {
                     $series->exec("INSERT INTO serie_tag (cle_serie, cle_tag) VALUES (?, ?)", [$lastId, $tagId]);
                 }

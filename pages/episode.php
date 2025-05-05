@@ -53,6 +53,7 @@ ob_start();
                 </div>
             </div>
             <div class="title-container">
+                <a href="supprimerepisode.php">Supprimer un episode</a>
                 <h2> Épisode <?= $numEpisode ?></h2>
                 <h2><?= htmlspecialchars($serie->titre) ?> | Saison <?= $numSaison ?> </h2>
                 <p><strong>Titre de l'épisode :</strong> <?= htmlspecialchars($episode->titre) ?></p>

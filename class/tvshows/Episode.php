@@ -1,36 +1,19 @@
 <?php
 namespace tvshows;
+
 include __DIR__ . "/../../DB_CREDENTIALS.php";
 
 use pdo_wrapper\PdoWrapper;
+
 class Episode extends PdoWrapper
 {
-    public $file;
-
-    public const UPLOAD_DIR = "uploads/";
-
-    public function __construct()
-    {
-        parent::__construct(
-            $GLOBALS['db_name'],
-            $GLOBALS['db_host'],
-            $GLOBALS['db_port'],
-            $GLOBALS['db_user'],
-            $GLOBALS['db_pwd']
-        );
-    }
-
     public function getAllEpisodes()
     {
-        return $this->exec(
-            "SELECT * FROM episode ORDER BY titre",
-            null,
-            'tvshows\EpisodesRenderer'
-        );
+        return $this->exec("SELECT * FROM episode ORDER BY titre", null, 'tvshows\EpisodesRenderer');
     }
+
     public function getBySerieSaisonEtNumero($cleSerie, $numSaison, $numEpisode)
     {
-        // Récupère la saison ciblée par index
         $querySaison = "SELECT * FROM saison WHERE cle_serie = :cleSerie LIMIT " . ($numSaison - 1) . ", 1";
         $params = ['cleSerie' => $cleSerie];
         $saisons = $this->exec($querySaison, $params);
@@ -54,6 +37,7 @@ class Episode extends PdoWrapper
             'episode' => $episodes[0]
         ];
     }
+    
     public function getRealisateursParEpisode($idEpisode)
     {
         $sql = "SELECT r.nom, r.image
@@ -66,22 +50,23 @@ class Episode extends PdoWrapper
         return $this->exec($sql, $params);
     }
 
-    public function AjoutEpisode(int $cle, string $synopsis, string $duree, string $titre, int $id_saison, int $numero_episode): bool
+    public function ajouterEpisode(int $cle, string $synopsis, string $duree, string $titre, int $id_saison, int $numero_episode): bool
     {
-
-        $sql = "INSERT INTO episode (cle_episode ,synopsis ,duree, titre, id_saison, numero_episode) VALUES (?, ?, ?, ?, ?, ?)";
-        $result = $this->exec($sql, [$cle, $synopsis, $duree, $titre, $id_saison, $numero_episode], null);
-        return $result !== false;
+        $sql = "INSERT INTO episode (cle_episode, synopsis, duree, titre, id_saison, numero_episode) VALUES (?, ?, ?, ?, ?, ?)";
+        return $this->exec($sql, [$cle, $synopsis, $duree, $titre, $id_saison, $numero_episode]) !== false;
     }
 
-    public function supprimerEpisode(int $cle_episode): bool
+    public function supprimerEpisode(int $id_saison, int $num_episode): bool
     {
-        $sql = "DELETE FROM episode WHERE cle_episode = :cle_episode";
-        $params = ['cle_episode' => $cle_episode];
-        $result = $this->exec($sql, $params);
+        $sql = "DELETE FROM episode WHERE id_saison = :saison AND numero_episode = :numero";
+        $result = $this->exec($sql, ['saison' => $id_saison, 'numero' => $num_episode]);
+
+        if ($result) {
+            $updateSql = "UPDATE saison SET nb_episode = nb_episode - 1 WHERE cle_saison = :saison";
+            $this->exec($updateSql, ['saison' => $id_saison]);
+        }
+
         return $result !== false;
     }
-
-
-
+    
 }

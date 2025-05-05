@@ -8,7 +8,6 @@ use tvshows\Saisons;
 
 ob_start();
 
-// Vérifie les paramètres GET
 if (!isset($_GET['serie']) || !isset($_GET['saison'])) {
     die("Série ou saison non spécifiée.");
 }
@@ -27,7 +26,6 @@ if (count($serieData) === 0) {
 }
 $serie = $serieData[0];
 
-// Récupère les infos de la saison via la classe Saisons
 $saisons = $saisonsDb->getSaisonsBySerieAndIndex($cleSerie, $numSaison - 1);
 
 if (count($saisons) === 0) {
@@ -69,15 +67,24 @@ ob_start();
     </div>
     <hr style="margin: unset;">
     <div class="episode-section">
+    <form id="episode-selection-form" action="supprimerepisode.php" method="get">
+    <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
+    <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
+    <button type="submit">Supprimer</button>
+</form>
+
         <div class="saisons-episodes-container">
-            <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
-                <div id="ep">
-                    <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
-                        class="episode-button">
-                        Episode <?= $i ?>
-                    </a>
-                </div>
-            <?php endfor; ?>
+        <?php for ($i = 1; $i <= intval($saison->nb_episode); $i++): ?>
+            <div id="ep">
+                <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
+                    class="episode-button">
+                    Episode <?= $i ?>
+                </a>
+
+                <input type="radio" name="selected_episode" value="<?= $i ?>" form="episode-selection-form">
+            </div>
+        <?php endfor; ?>
+
         </div>
     </div>
 

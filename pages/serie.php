@@ -62,12 +62,15 @@ ob_start();
                 </div>
                 <div class="saison-boxes">
                     <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
+                        <a href="ajoutsaison.php">Ajout saison</a>
                         <div class="saison-box">
+
 
                             <a href="saison.php?serie=<?=
                                 urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">
                                 Saison <?= $i ?>
                             </a>
+
                             <img src="/uploads/<?= htmlspecialchars($img->affichage) ?>" alt="Image de la saison"
                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                         </div>

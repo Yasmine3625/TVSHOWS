@@ -43,6 +43,24 @@ class Saisons extends PdoWrapper
         $params = ['cle_saison' => $cleSaison];
         return $this->exec($sql, $params);
     }
+    public function AjoutSaison(string $titre, int $nb_episode, string $image, int $cle_serie): bool
+    {
+        $sqlGetNbSaisons = "SELECT COUNT(*) AS nb_saisons FROM saison WHERE cle_serie = :cle_serie";
+        $params = ['cle_serie' => $cle_serie];
+        $result = $this->exec($sqlGetNbSaisons, $params);
+        $nb_saisons = $result[0]['nb_saisons'];
+        
+        $nb_saison = $nb_saisons + 1;
+        
+        $cle_saison = $cle_serie * 100 + $nb_saison;
+    
+        $sql = "INSERT INTO saison (cle_saison, titre, nb_episode, affichage, cle_serie, nb_saison) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+        
+        $result = $this->exec($sql, [$cle_saison, $titre, $nb_episode, $image, $cle_serie, $nb_saison], null);
+        
+        return $result !== false;
+    }
     
     
 }

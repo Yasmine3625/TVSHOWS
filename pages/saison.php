@@ -36,7 +36,6 @@ if (count($saisons) === 0) {
 }
 $saison = $saisons[0];
 
-// Récupérer les acteurs pour la saison
 $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
 
 ob_start();

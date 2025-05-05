@@ -26,7 +26,7 @@ class Tags extends PdoWrapper
         return $this->exec(
             "SELECT * FROM tag ORDER BY nom",
             null,
-            'tvshows\TagsRenderer.php'
+            'tvshows\TagsRenderer'
         );
 
     }

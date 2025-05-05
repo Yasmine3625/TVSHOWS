@@ -10,10 +10,8 @@ class SeriesRenderer
 
     public function getHTML()
     {
-        // construction du chemin de l’image
         $imagePath = "/../uploads/" . $this->image;
 
-        // retourne le bloc HTML sous forme de chaîne
         return "
         <div class='serie'>
             <div class='image-container'>

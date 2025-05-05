@@ -29,7 +29,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
         <a href="/index.php" class="category-item">Tout</a>
         <?php
         $tagDb = new Tags();
-        $tags = $tagDb->exec("SELECT * FROM tag ORDER BY nom", null, 'tvshows\TagsRenderer');
+        $tags = $tagDb->getAllTags();
 
         foreach ($tags as $tag) {
             echo $tag->getHTML();

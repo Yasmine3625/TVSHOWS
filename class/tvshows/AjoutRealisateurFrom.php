@@ -1,6 +1,6 @@
 <?php
 namespace tvshows;
-class AjoutRealisateur
+class AjoutRealisateurForm
 {
     public function generateForm()
     { ?>
@@ -9,7 +9,7 @@ class AjoutRealisateur
 
             <div class="ajout_form">
                 <form method="POST" action="ajoutepisode.php">
-                    <label for="titre">Titre :</label><br>
+                    <label for="titre">Nom :</label><br>
                     <input type="text" id="titre" name="titre" required><br><br>
 
                     <label for="synopsis">Synopsis :</label><br>

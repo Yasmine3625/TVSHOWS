@@ -49,6 +49,16 @@ class Saisons extends PdoWrapper
         $result = $this->exec($sql, [$cle,$titre, $affichage,$nb_episode , $cle_serie], null);
         return $result !== false;
     }
+    public function cleSaison(): int {
+        $query = "SELECT COUNT(*) AS total_saisons FROM saison";
+        $result = $this->exec($query, []);
+    
+        if (!empty($result)) {
+            return (int) $result[0]->total_saisons;
+        }
+    
+        return 0;
+    }
     
     
 }

@@ -37,14 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (empty($errors)) {
-        $episode = new Saisons();
-        $success = $episode->AjoutSaison($cle, $affichage, $titre, $cle_serie, $nb_episode);
+        $saison = new Saisons();
+        
+        $success = $saison->AjoutSaison($cle, $affichage, $titre, $cle_serie, $nb_episode);
 
         if ($success) {
-            echo "<p style='color: green;'>La a été ajouté avec succès !</p>";
+            $sqlUpdate = "UPDATE serie SET nb_saison = nb_saison + 1 WHERE cle_serie = :cle_serie";
+            $saison->exec($sqlUpdate, ['cle_serie' => $cle_serie]);
+        
         } else {
             echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }
+        
     }
 }
 

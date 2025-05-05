@@ -18,6 +18,17 @@ class Realisateur extends PdoWrapper
         );
     }
 
+    public function cleRealisateur(): int {
+        $query = "SELECT COUNT(*) AS total_realisateurs FROM realisateur";
+        $result = $this->exec($query, []);
+    
+        if (!empty($result)) {
+            return (int) $result[0]->total_realisateurs;
+        }
+    
+        return 0;
+    }
+
     public function ajouterRealisateur(string $nom, string $image, int $cle_episode)
     {
         $sqlCheck = "SELECT cle_real FROM realisateur WHERE nom = :nom";

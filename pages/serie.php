@@ -60,10 +60,12 @@ ob_start();
                         </p>
                     <?php endif; ?>
                 </div>
+                <h2>Saison/s :</h2>
+                <a href="ajoutsaison.php">Ajout saison</a>
                 <div class="saison-boxes">
+
                     <?php for ($i = 1; $i <= intval($serie->nb_saison); $i++): ?>
                         <div class="saison-box">
-
 
                             <a href="saison.php?serie=<?=
                                 urlencode($serie->cle_serie) ?>&saison=<?= $i ?>">

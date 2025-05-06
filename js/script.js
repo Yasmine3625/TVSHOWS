@@ -1,61 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("login-form");
-    
-    const acteurForm = document.getElementById("ajout-acteur-form");
-    const episodeForm = document.getElementById("ajout_form_episode");
-    const serieForm = document.getElementById("ajout_form_serie");
-    const saisonForm = document.getElementById("ajout_form_saison");
-    const realisateurForm = document.getElementById("ajout_form_realisateur");
+    const forms = [
+        { id: "login-form", message: "Êtes-vous sûr de vouloir vous connecter ?" },
+        { id: "ajout-acteur-form", message: "Êtes-vous sûr de vouloir ajouter cet acteur ?" },
+        { id: "ajout_form_episode", message: "Êtes-vous sûr de vouloir ajouter cet episode ?" },
+        { id: "ajout_form_serie", message: "Êtes-vous sûr de vouloir ajouter cette serie ?" },
+        { id: "ajout_form_saison", message: "Êtes-vous sûr de vouloir ajouter cette saison ?" },
+        { id: "ajout_form_realisateur", message: "Êtes-vous sûr de vouloir ajouter ce realisateur ?" }
+    ];
 
-
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir vous connecter ?");
-            if (!confirmation) {
-                e.preventDefault();
+    function areFieldsFilled(form) {
+        const inputs = form.querySelectorAll("input, textarea, select");
+        for (let input of inputs) {
+            if (input.type !== "submit" && input.value.trim() === "") {
+                alert("Veuillez remplir tous les champs.");
+                return false;
             }
-        });
-    }
-    if (acteurForm) {
-        acteurForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir ajouter cet acteur ?");
-            if (!confirmation) {
-                e.preventDefault();
-            }
-        });
-    }
-    if (episodeForm) {
-        episodeForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir ajouter cet episode ?");
-            if (!confirmation) {
-                e.preventDefault();
-            }
-        });
-    }
-    if (serieForm) {
-        serieForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir ajouter cette serie ?");
-            if (!confirmation) {
-                e.preventDefault();
-            }
-        });
-    }
-    if (realisateurForm) {
-        realisateurForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir ajouter ce realisateur ?");
-            if (!confirmation) {
-                e.preventDefault();
-            }
-        });
-    }
-    if (saisonForm) {
-        saisonForm.addEventListener("submit", function (e) {
-            const confirmation = confirm("Êtes-vous sûr de vouloir ajouter cette saison ?");
-            if (!confirmation) {
-                e.preventDefault();
-            }
-        });
+        }
+        return true;
     }
 
+    forms.forEach(({ id, message }) => {
+        const form = document.getElementById(id);
+        if (form) {
+            form.addEventListener("submit", function (e) {
+                if (!areFieldsFilled(form)) {
+                    e.preventDefault();
+                    return;
+                }
+                const confirmation = confirm(message);
+                if (!confirmation) {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
 });
-

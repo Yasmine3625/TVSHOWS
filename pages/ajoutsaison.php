@@ -28,7 +28,6 @@ $form = new AjoutSaisonForm();
 $form->generateForm($serie);
 $errors = [];
 
-// Initialisation variables POST
 $titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
 $numero_episode = isset($_POST['numero_episode']) ? intval($_POST['numero_episode']) : 0;
 
@@ -50,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imageFileType = strtolower(pathinfo($affichage['name'], PATHINFO_EXTENSION));
 
         if (empty($errors)) {
-            $destination =  basename($affichage['name']);
+            $destination = basename($affichage['name']);
             if (move_uploaded_file($affichage['tmp_name'], $destination)) {
-                $affichagePath =   basename($affichage['name']);
+                $affichagePath = basename($affichage['name']);
             } else {
                 $errors[] = "Erreur lors du téléchargement de l'image.";
             }

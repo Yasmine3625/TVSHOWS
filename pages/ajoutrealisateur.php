@@ -50,12 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Fichier image manquant ou invalide.";
     }
 
-    // Validation
     if (empty($nom)) {
         $errors[] = "Le nom du realisateur est requis.";
     }
 
-    // Traitement
     if (empty($errors)) {
         $acteur = new Realisateur();
         $success = $acteur->ajouterRealisateur($nom, $imageName, $cle_episode);

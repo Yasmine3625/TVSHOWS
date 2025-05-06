@@ -114,7 +114,6 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
     </div>
     <div class="section-header">
         <h2>Autres séries à découvrir</h2>
-        <p>Explorez notre catalogue complet de séries disponibles.</p>
     </div>
 
 

@@ -63,18 +63,19 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
             <div class="episode-section">
                 <div id="bar-modif-episode">
                     <?php if ($isAdminLogged): ?>
-                        <div class="ajout-episode-button">
+                        <div class="admin-button-group">
                             <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>"
                                 class="btn-ajout-episode">
-                                Ajouter un épisode
+                                +
                             </a>
+                            <form id="episode-selection-form" action="supprimerepisode.php" method="get" style="margin: 0;">
+                                <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
+                                <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
+                                <button type="submit">-</button>
+                            </form>
                         </div>
+                    <?php endif; ?>
 
-                        <form id="episode-selection-form" action="supprimerepisode.php" method="get">
-                            <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
-                            <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
-                            <button type="submit">Supprimer</button>
-                        <?php endif; ?>
                 </div>
 
 
@@ -97,11 +98,14 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
                     <?php if ($acteurs): ?>
                         <h2 style="margin-top: 60px;">Acteur(s)</h2>
                         <?php if ($isAdminLogged): ?>
-                            <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>"
-                                class="btn-ajout-episode">Ajouter
-                                un
-                                acteur</a>
+                            <div class="admin-button-group">
+                                <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>"
+                                    class="btn-ajout-episode">
+                                    +
+                                </a>
+                            </div>
                         <?php endif; ?>
+
                         <div class="realisateur-list">
                             <?php foreach ($acteurs as $acteur): ?>
                                 <div class="realisateur">
@@ -118,7 +122,6 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
             </div>
             <div class="section-header">
                 <h2>Autres séries à découvrir</h2>
-                <p>Explorez notre catalogue complet de séries disponibles.</p>
             </div>
             <div id="list-serie">
                 <?php

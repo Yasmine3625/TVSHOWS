@@ -121,3 +121,34 @@
     border-radius: 10px;
     text-decoration: none;
 }
+
+.admin-button-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.btn-ajout-episode,
+.admin-button-group button {
+    padding: 10px 20px;
+    background-color: #261d17;
+    color: #FFA500;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #FFA500;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.9em;
+}
+
+.btn-ajout-episode:hover,
+.admin-button-group button:hover {
+    background-color: #FFA500;
+    color: #1f1f1f;
+    box-shadow: 0 0 10px #FFA500;
+}

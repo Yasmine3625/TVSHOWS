@@ -72,29 +72,30 @@ ob_start();
     </div>
 
 
-
-    <!-- Actions : Ajouter, Supprimer -->
-    <div class="episode-actions">
-        <?php if ($isAdminLogged): ?>
-            <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="episode-button">
-                Ajouter un épisode
+    <?php if ($isAdminLogged): ?>
+        <div class="admin-button-group">
+            <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">
+                +
             </a>
-            <form id="episode-selection-form" action="supprimerepisode.php" method="get">
+            <form id="episode-selection-form" action="supprimerepisode.php" method="get" style="margin: 0;">
                 <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
                 <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
-                <button type="submit">Supprimer l'épisode</button>
+                <button type="submit">-</button>
             </form>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php endif; ?>
+
 
 
     <div id="saison-realisateur-container">
         <?php if ($realisateurs): ?>
-            <h2 style="margin-top: 60px;">Réalisé par :</h2>
-            <?php if ($isAdminLogged): ?>
-                <a href="ajoutrealisateur.php?cle_episode=<?= urlencode($episode->cle_episode) ?>"
-                    class="btn-ajout-episode">Ajouter un réalisateur</a>
-            <?php endif; ?>
+            <div class="admin-button-group">
+                <h2 style="margin-top: 60px;">Réalisé par :</h2>
+                <?php if ($isAdminLogged): ?>
+                    <a href="ajoutrealisateur.php?cle_episode=<?= urlencode($episode->cle_episode) ?>"
+                        class="btn-ajout-episode">+</a>
+                <?php endif; ?>
+            </div>
             <div class="realisateur-list">
                 <?php foreach ($realisateurs as $real): ?>
                     <div class="realisateur">
@@ -108,6 +109,7 @@ ob_start();
             <p>Aucun réalisateur trouvé.</p>
         <?php endif; ?>
     </div>
+
     <div class="saisons-episodes-container">
 
         <?php

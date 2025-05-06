@@ -1,5 +1,6 @@
 <?php
 namespace tvshows;
+session_start();
 
 class AjoutEpisodeForm
 {

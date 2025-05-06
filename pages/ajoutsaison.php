@@ -70,17 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $saison = new Saisons();
 
-        // Générer une clé unique pour la nouvelle saison
         $cle = $saison->cleSaison() + 1;
 
         $success = $saison->AjoutSaison($cle, $affichagePath, $titre, $serie, $numero_episode);
 
         if ($success) {
-            // Mettre à jour le nombre de saisons dans la table serie
             $sqlUpdate = "UPDATE serie SET nb_saison = nb_saison + 1 WHERE cle_serie = :cle_serie";
             $result = $saison->exec($sqlUpdate, ['cle_serie' => $serie]);
 
-            // Redirection vers liste des saisons (mettre le chemin correct)
             header("Location: serie.php?cle_serie=" . $serie);
             exit;
         } else {

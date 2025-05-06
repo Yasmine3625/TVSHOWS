@@ -1,6 +1,11 @@
 <?php
 namespace tvshows;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 class AjoutSaisonForm
 {
     public function generateForm(int $serie): void

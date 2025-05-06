@@ -23,7 +23,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
         </div>
         <?php if ($isAdminLogged): ?>
-            <a href="pages\logout.php" role="button" class="nav-btn-log" id="btn-admin-Login">Logout</a>
+            <a href="/../pages/logout.php" role="button" class="nav-btn-log" id="btn-admin-Login">Logout</a>
         <?php else: ?>
             <a href="/../pages/adminloginform.php" class="nav-btn-log" id="btn-admin-Login" role="button">Login</a>
         <?php endif ?>

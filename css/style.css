@@ -12,13 +12,15 @@ body {
     padding: 0;
     color: white;
     font-family: 'Cinzel';
-    background-color: #5a5d5f;
+    background-color: #1f1f1f;
 }
 
 body {
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
+
+    background-color: #1f1f1f;
 
 
 }
@@ -36,8 +38,7 @@ body {
 }
 
 header {
-    height: 40px;
-    /* encore plus fin qu'avant */
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -195,7 +196,7 @@ h1 {
     width: 60%;
     max-width: 1000px;
     height: 400px;
-    margin: 49px auto;
+    margin: 64px auto;
     overflow: hidden;
     padding: 0;
     border-radius: 12px;
@@ -257,10 +258,11 @@ h1 {
 #home-container {
     display: flex;
     flex-direction: row;
+    width: 100%;
+
 }
 
 footer {
-    background-color: #0e0d0d;
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -319,7 +321,7 @@ footer {
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding-top: 60px;
+    padding-top: 15px;
 }
 
 #list-serie {
@@ -328,7 +330,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 10px;
+    padding: 0px 15px;
 }
 
 
@@ -346,6 +348,37 @@ footer {
     box-sizing: border-box;
     overflow: hidden;
 }
+
+.serie {
+    background: #fd971ae0;
+    ;
+    /* fond sombre */
+    color: #fff;
+    /* texte blanc */
+    border-radius: 8px;
+    /* coins arrondis */
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.serie:hover {
+    transform: scale(1.05);
+    /* Exemple de lueur turquoise ; on peut ajuster la couleur et la taille */
+    box-shadow: 0 0 15px 5px rgba(228, 232, 233, 0.6);
+}
+
+/* Si la carte contient une image dans un conteneur : */
+.serie .image-container img {
+    display: block;
+    transition: transform 0.3s ease-out, filter 0.3s ease-out;
+}
+
+.serie:hover .image-container img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
 
 .image-container {
     flex: 1;

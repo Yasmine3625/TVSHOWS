@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . "/../Autoloader.php";
 require_once __DIR__ . "/../config.php";
 
@@ -6,6 +7,8 @@ use tvshows\Template;
 use tvshows\Series;
 use tvshows\Saisons;
 use tvshows\Episode;
+
+$isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 ob_start();
 
@@ -18,7 +21,7 @@ $numSaison = intval($_GET['saison']);
 
 $seriesDb = new Series();
 $saisonsDb = new Saisons();
-$episodeDb = new Episode(); 
+$episodeDb = new Episode();
 
 $querySerie = "SELECT * FROM serie WHERE cle_serie = :cle";
 $serieData = $seriesDb->exec($querySerie, ['cle' => $cleSerie]);
@@ -40,7 +43,6 @@ $episodeCount = count($episodes); // nombre réel
 
 $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
 
-ob_start();
 ?>
 
 <div id="saison-container">
@@ -61,37 +63,48 @@ ob_start();
     <hr style="margin: unset;">
     <div id="episodes-main-title">
         <p>Episodes</p>
-        <div class="ajout-episode-button">
-            <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">
-                Ajouter un épisode
-            </a>
-        </div>
     </div>
     <hr style="margin: unset;">
     <div class="episode-section">
-        <form id="episode-selection-form" action="supprimerepisode.php" method="get">
-            <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
-            <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
-            <button type="submit">Supprimer</button>
-        
-            <div class="saisons-episodes-container">
-                <?php for ($i = 1; $i <= $episodeCount; $i++): ?>
-                    <div id="ep">
-                        <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
-                            class="episode-button">
-                            Episode <?= $i ?>
-                        </a>
+        <div id="bar-modif-episode">
+            <?php if ($isAdminLogged): ?>
+                <div class="ajout-episode-button">
+                    <a href="ajoutepisode.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">
+                        Ajouter un épisode
+                    </a>
+                </div>
+
+                <form id="episode-selection-form" action="supprimerepisode.php" method="get">
+                    <input type="hidden" name="serie" value="<?= htmlspecialchars($cleSerie) ?>">
+                    <input type="hidden" name="saison" value="<?= htmlspecialchars($numSaison) ?>">
+                    <button type="submit">Supprimer</button>
+                <?php endif; ?>
+
+        </div>
+
+
+        <div class="saisons-episodes-container">
+            <?php for ($i = 1; $i <= $episodeCount; $i++): ?>
+                <div id="ep">
+                    <a href="episode.php?serie=<?= urlencode($cleSerie) ?>&saison=<?= $numSaison ?>&episode=<?= $i ?>"
+                        class="episode-button">
+                        Episode <?= $i ?>
+                    </a>
+                    <?php if ($isAdminLogged): ?>
                         <input type="radio" name="selected_episode" value="<?= $i ?>" form="episode-selection-form">
-                    </div>
-                <?php endfor; ?>
-            </div>
+                    <?php endif; ?>
+                </div>
+            <?php endfor; ?>
+        </div>
         </form>
     </div>
 
     <div id="saison-acteur-container">
         <?php if ($acteurs): ?>
             <h2>Acteur/s :</h2>
-            <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>">Ajouter un acteur</a>
+            <?php if ($isAdminLogged): ?>
+                <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>">Ajouter un acteur</a>
+            <?php endif; ?>
 
             <div class="realisateur-list">
                 <?php foreach ($acteurs as $acteur): ?>

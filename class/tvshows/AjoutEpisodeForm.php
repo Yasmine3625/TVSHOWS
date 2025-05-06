@@ -25,7 +25,6 @@ class AjoutEpisodeForm
                     <label for="numero_episode">Numéro de l’épisode :</label><br>
                     <input type="number" id="numero_episode" name="numero_episode" required><br><br>
 
-                    <!-- Champ caché pour récupérer l'ID de la saison -->
                     <input type="hidden" name="id_saison" value="<?= htmlspecialchars($id_saison) ?>" />
 
                     <input type="submit" value="Ajouter l’épisode">

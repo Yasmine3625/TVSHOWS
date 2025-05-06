@@ -477,10 +477,8 @@ footer.footer-transparent {
 .admin-buttons {
     display: flex;
     justify-content: flex-start;
-    /* Utilisation de flex-start pour réduire l'espace entre les boutons */
     align-items: center;
     gap: 10px;
-    /* Réduit l'espace entre les boutons */
 }
 
 #bare-edit-serie a,

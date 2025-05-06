@@ -22,23 +22,18 @@ class PdoWrapper
         $this->db_pwd = $db_pwd;
 
         try {
-            // Agrégation des informations de connexion dans une chaine DSN (Data Source Name)
             $dsn = 'mysql:dbname=' . $db_name . ';host=' . $db_host . ';port=' . $db_port;
 
-            // Connexion et récupération de l'objet connecté
             $this->pdo = new PDO($dsn, $db_user, $db_pwd);
-        }
-
-        // Récupération d'une éventuelle erreur
-        catch (\Exception $ex) {
-            // Arrêt de l'exécution du script PHP
+        } catch (\Exception $ex) {
             die("Erreur : " . $ex->getMessage());
         }
 
 
 
     }
-    public function getPDO(): \PDO {
+    public function getPDO(): \PDO
+    {
         return $this->pdo;
     }
 

@@ -16,10 +16,8 @@ use tvshows\Episode;
 
 ob_start();
 
-// Récupérer l'ID de la saison depuis l'URL (GET)
 $id_saison = isset($_GET['id_saison']) && is_numeric($_GET['id_saison']) ? intval($_GET['id_saison']) : 0;
 
-// Affichage du formulaire avec l'ID de la saison
 $form = new AjoutEpisodeForm();
 $form->generateForm($id_saison);
 

@@ -7,7 +7,7 @@
             <li>Oulouna Lyna</li>
             <li>Hammaz Dhyia</li>
         </ul>
-        <p>&copy; <span id="year"></span> LYD TV.</p>
+        <p>&copy; <span id="year"></span> LYD-TV.</p>
     </div>
 </footer>
 

@@ -24,6 +24,6 @@ if (!$success) {
     die("La suppression de la série a échoué.");
 }
 
-header("Location: ../index.php"); // Rediriger vers la page d'accueil ou une autre page
+header("Location: ../index.php");
 exit;
 ?>

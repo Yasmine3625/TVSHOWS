@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer l'ID de la saison depuis le formulaire (POST)
     $cle_saison = isset($_POST['id_saison']) && is_numeric($_POST['id_saison']) ? intval($_POST['id_saison']) : 0;
 
-    var_dump($cle_saison);  // Ceci devrait afficher la valeur de $cle_saison (par exemple, 502)
+    var_dump($cle_saison);
 
     $imageName = '';
 

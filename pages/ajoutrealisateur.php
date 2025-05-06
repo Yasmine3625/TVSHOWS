@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['affichage']) && $_FILES['affichage']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['affichage']['tmp_name'];
         $fileName = basename($_FILES['affichage']['name']);
-        $targetPath =  $fileName;
+        $targetPath = $fileName;
 
         if (move_uploaded_file($tmpName, $targetPath)) {
             $imageName = $fileName;
@@ -45,12 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Fichier image manquant ou invalide.";
     }
 
-    // Validation
     if (empty($nom)) {
         $errors[] = "Le nom du realisateur est requis.";
     }
 
-    // Traitement
     if (empty($errors)) {
         $acteur = new Realisateur();
         $success = $acteur->ajouterRealisateur($nom, $imageName, $cle_episode);

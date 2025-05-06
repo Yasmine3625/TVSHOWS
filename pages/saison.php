@@ -91,68 +91,49 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
                 </div>
                 </form>
 
-    <div id="saison-acteur-container">
-        <a href="ajoutacteur.php">Ajouter un acteur</a>
-        <?php if ($acteurs): ?>
-            <h2>Acteur/s :</h2>
-            <?php if ($isAdminLogged): ?>
-                <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>">Ajouter un acteur</a>
-            <?php endif; ?>
 
-            <div class="realisateur-list">
-                <?php foreach ($acteurs as $acteur): ?>
-                    <div class="realisateur">
-                        <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"
-                            alt="Image de <?= htmlspecialchars($acteur->nom) ?>">
-                        <p><?= htmlspecialchars($acteur->nom) ?></p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-
-        <!-- Liste des acteurs -->
-        <div id="saison-acteur-container">
-            <?php if ($acteurs): ?>
-                <h2 style="margin-top: 60px;">Acteur(s)</h2>
-                <?php if ($isAdminLogged): ?>
-                    <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>" class="btn-ajout-episode">Ajouter
-                        un
-                        acteur</a>
-                <?php endif; ?>
-                <div class="realisateur-list">
-                    <?php foreach ($acteurs as $acteur): ?>
-                        <div class="realisateur">
-                            <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"
-                                alt="Image de <?= htmlspecialchars($acteur->nom) ?>">
-                            <p><?= htmlspecialchars($acteur->nom) ?></p>
+                <!-- Liste des acteurs -->
+                <div id="saison-acteur-container">
+                    <?php if ($acteurs): ?>
+                        <h2 style="margin-top: 60px;">Acteur(s)</h2>
+                        <?php if ($isAdminLogged): ?>
+                            <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>"
+                                class="btn-ajout-episode">Ajouter
+                                un
+                                acteur</a>
+                        <?php endif; ?>
+                        <div class="realisateur-list">
+                            <?php foreach ($acteurs as $acteur): ?>
+                                <div class="realisateur">
+                                    <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"
+                                        alt="Image de <?= htmlspecialchars($acteur->nom) ?>">
+                                    <p><?= htmlspecialchars($acteur->nom) ?></p>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Aucun acteur trouvé.</p>
+                    <?php endif; ?>
                 </div>
-            <?php else: ?>
-                <p>Aucun acteur trouvé.</p>
-            <?php endif; ?>
+            </div>
+            <div class="section-header">
+                <h2>Autres séries à découvrir</h2>
+                <p>Explorez notre catalogue complet de séries disponibles.</p>
+            </div>
+            <div id="list-serie">
+                <?php
+                $gdb = new Series();
+
+                $series = $gdb->getAllSeries();
+                foreach ($series as $s) {
+                    echo $s->getHTML();
+                }
+                ?>
+            </div>
+
         </div>
-    </div>
-    <div class="section-header">
-        <h2>Autres séries à découvrir</h2>
-        <p>Explorez notre catalogue complet de séries disponibles.</p>
-    </div>
-    <div id="list-serie">
+
+
         <?php
-        $gdb = new Series();
-
-        $series = $gdb->getAllSeries();
-        foreach ($series as $s) {
-            echo $s->getHTML();
-        }
-        ?>
-    </div>
-
-</div>
-
-
-<?php
-$content = ob_get_clean();
-Template::render($content);
-?>
+        $content = ob_get_clean();
+        Template::render($content);

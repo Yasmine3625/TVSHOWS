@@ -34,7 +34,10 @@ $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-$img = $saisons[0];
+$img = null;
+if (!empty($saisons)) {
+    $img = $saisons[0];
+}
 ob_start();
 ?>
 <div class="serie-page">

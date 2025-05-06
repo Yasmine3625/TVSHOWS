@@ -16,15 +16,16 @@ require_once __DIR__ . "/../config.php";
 
 ob_start();
 
-$cle_serie = 0;
-if (isset($_GET['cle_serie'])) {
-    $cle_serie = intval($_GET['cle_serie']);
-} elseif (isset($_POST['cle_serie'])) {
-    $cle_serie = intval($_POST['cle_serie']);
+$serie = 0;
+if (isset($_GET['serie'])) {
+    $serie = intval($_GET['serie']);
+} elseif (isset($_POST['serie'])) {
+    $serie = intval($_POST['serie']);
 }
 
+
 $form = new AjoutSaisonForm();
-$form->generateForm($cle_serie);
+$form->generateForm($serie);
 $errors = [];
 
 // Initialisation variables POST
@@ -32,17 +33,14 @@ $titre = isset($_POST['titre']) ? trim($_POST['titre']) : '';
 $numero_episode = isset($_POST['numero_episode']) ? intval($_POST['numero_episode']) : 0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Debug : vérifier données reçues
-    // var_dump($_POST);
 
-    // Validation des champs
     if (empty($titre)) {
         $errors[] = "Le titre de la saison est vide.";
     }
     if ($numero_episode <= 0) {
         $errors[] = "Le numéro d'épisode doit être un nombre supérieur à 0.";
     }
-    if ($cle_serie <= 0) {
+    if ($serie < 0) {
         $errors[] = "La clé de la série est invalide.";
     }
 
@@ -60,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $destination =  basename($affichage['name']);
             if (move_uploaded_file($affichage['tmp_name'], $destination)) {
                 // Chemin relatif pour la BD et affichage web
-                $affichagePath = 'images/images_series/' . basename($affichage['name']);
+                $affichagePath =   basename($affichage['name']);
             } else {
                 $errors[] = "Erreur lors du téléchargement de l'image.";
             }
@@ -75,18 +73,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Générer une clé unique pour la nouvelle saison
         $cle = $saison->cleSaison() + 1;
 
-        // Debug : afficher les valeurs utilisées
-        // var_dump($cle, $affichagePath, $titre, $cle_serie, $numero_episode);
-
-        $success = $saison->AjoutSaison($cle, $affichagePath, $titre, $cle_serie, $numero_episode);
+        $success = $saison->AjoutSaison($cle, $affichagePath, $titre, $serie, $numero_episode);
 
         if ($success) {
             // Mettre à jour le nombre de saisons dans la table serie
             $sqlUpdate = "UPDATE serie SET nb_saison = nb_saison + 1 WHERE cle_serie = :cle_serie";
-            $result = $saison->exec($sqlUpdate, ['cle_serie' => $cle_serie]);
+            $result = $saison->exec($sqlUpdate, ['cle_serie' => $serie]);
 
             // Redirection vers liste des saisons (mettre le chemin correct)
-            header("Location: /pages/season_list.php?cle_serie=" . $cle_serie);
+            header("Location: serie.php?cle_serie=" . $serie);
             exit;
         } else {
             echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";

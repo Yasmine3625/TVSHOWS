@@ -3,7 +3,7 @@ namespace tvshows;
 
 class AjoutSaisonForm
 {
-    public function generateForm(int $cle_serie): void
+    public function generateForm(int $serie): void
     {
         ?>
         <div class="ajout-container">
@@ -20,7 +20,7 @@ class AjoutSaisonForm
                     <label for="affichage">L'image :</label><br>
                     <input type="file" id="affichage" name="affichage" accept="image/*" required><br><br>
 
-                    <input type="hidden" id="cle_serie" name="cle_serie" value="<?= htmlspecialchars($cle_serie) ?>">
+                    <input type="hidden" id="serie" name="serie" value="<?= htmlspecialchars($serie) ?>">
 
                     <input type="submit" value="Ajouter la saison">
                 </form>

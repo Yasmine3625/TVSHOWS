@@ -34,7 +34,7 @@ ob_start();
             echo $tag->getHTML();
         }
         ?>
-        <a href="ajoutserie.php">Ajout serie</a>
+        <a href="ajoutserie.php?cle_serie=<?= htmlspecialchars($serie->cle_serie)?>">Ajout serie</a>
     </div>
 </div>
 

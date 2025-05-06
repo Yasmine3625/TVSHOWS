@@ -77,6 +77,7 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
                         <?php endif; ?>
                 </div>
 
+
                 <div class="saisons-episodes-container">
                     <?php for ($i = 1; $i <= $episodeCount; $i++): ?>
                         <div id="ep">
@@ -89,6 +90,23 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
                     <?php endfor; ?>
                 </div>
                 </form>
+
+    <div id="saison-acteur-container">
+        <a href="ajoutacteur.php">Ajouter un acteur</a>
+        <?php if ($acteurs): ?>
+            <h2>Acteur/s :</h2>
+            <?php if ($isAdminLogged): ?>
+                <a href="ajoutacteur.php?id_saison=<?= urlencode($saison->cle_saison) ?>">Ajouter un acteur</a>
+            <?php endif; ?>
+
+            <div class="realisateur-list">
+                <?php foreach ($acteurs as $acteur): ?>
+                    <div class="realisateur">
+                        <img src="/images/images_series/<?= htmlspecialchars($acteur->image) ?>"
+                            alt="Image de <?= htmlspecialchars($acteur->nom) ?>">
+                        <p><?= htmlspecialchars($acteur->nom) ?></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -137,3 +155,4 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
 <?php
 $content = ob_get_clean();
 Template::render($content);
+?>

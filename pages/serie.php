@@ -8,7 +8,6 @@ use tvshows\Series;
 
 $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
-
 ob_start();
 
 if (!isset($_GET['serie'])) {
@@ -48,11 +47,12 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
 <div class="serie-overlay">
     <div class="serie-page" style="background-image: url('<?= $backgroundImage ?>');>
     <div class=" serie-content" style="display: flex; align-items: center; gap: 40px;flex-direction: column;">
+
         <div class="serie-text">
             <div class="info_serie avec-bg"
                 style="--image-url: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
                 <div class="gauche">
-                    <div style="display:flex ; flex-direction: column;">
+                    <div style="display:flex; flex-direction: column;">
                         <h1><?= htmlspecialchars($serie->titre) ?></h1>
                         <p><strong>Nombre de saisons :</strong> <?= intval($serie->nb_saison) ?></p>
                         <div class="tag_box" style="font-size: xx-small;">
@@ -61,7 +61,6 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
                                     <?php foreach ($tags as $tag): ?>
                                         <span class="tag"><?= htmlspecialchars($tag->nom) ?></span>
                                     <?php endforeach; ?>
-
                                 </p>
                             <?php endif; ?>
                         </div>
@@ -71,94 +70,85 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
                         <div style="height: 100px;"></div>
                         <div>
                             <h2>Saison/s :</h2>
-                            <?php
-                            if ($isAdminLogged): ?>
-                                <div id="bare-edit-serie"><a href="ajoutsaison.php">Ajout saison</a>
-
-                                    <form id="saison-selection-form" action="supprimersaison.php" method="get"
-                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette saison ?');">
-                                        <input type="hidden" name="serie"
-                                            value="<?= htmlspecialchars($serie->cle_serie) ?>">
-                                        <input type="hidden" name="saison" value="">
-                                        <!-- On remplira ce champ avec le numéro de la saison sélectionnée -->
-
-                                        <button type="submit" id="delete-season-button">Supprimer la saison
-                                            sélectionnée</button>
-                                    </form>
+                            <?php if ($isAdminLogged): ?>
+                                <div id="bare-edit-serie">
+                                    <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">Ajouter une
+                                        saison</a>
                                 </div>
-                                <?php
-                            endif;
-                            ?>
-                        </div>
-                        <div class="saison-boxes">
+                                <form method="POST" action="supprimersaison.php" id="saison-selection-form">
+                                    <input type="hidden" name="saison" value="">
+                                    <input type="submit" value="Supprimer la saison sélectionnée">
+                                </form>
+                            <?php endif; ?>
 
-                            <?php foreach ($saisons as $index => $saison): ?>
-                                <div class="saison-box">
-                                    <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $index + 1 ?>&id_saison=<?= $saison->cle_saison ?>"
-                                        class="saison-link">
-                                        <div class="saison-image-full">
-                                            <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>"
-                                                alt="Image de la saison">
-                                            <div class="saison-overlay">
-                                                Saison <?= $index + 1 ?>
+                            <div class="saison-boxes">
+                                <?php foreach ($saisons as $index => $saison): ?>
+                                    <div class="saison-box">
+                                        <?php if ($isAdminLogged): ?>
+                                            <input type="radio" name="selected_saison"
+                                                value="<?= htmlspecialchars($saison->cle_saison) ?>"
+                                                style="position: absolute; top: 5px; left: 5px; z-index: 2;">
+                                        <?php endif; ?>
+                                        <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $index + 1 ?>&id_saison=<?= $saison->cle_saison ?>"
+                                            class="saison-link">
+                                            <div class="saison-image-full" style="position: relative;">
+                                                <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>"
+                                                    alt="Image de la saison">
+                                                <div class="saison-overlay">
+                                                    Saison <?= $index + 1 ?>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-
-                            <?php endforeach; ?>
-
-
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-
-
-
-                        <script>
-                            const radioButtons = document.querySelectorAll('input[name="selected_saison"]');
-                            const saisonForm = document.getElementById('saison-selection-form');
-                            const saisonInput = saisonForm.querySelector('input[name="saison"]');
-
-                            radioButtons.forEach(button => {
-                                button.addEventListener('change', () => {
-                                    saisonInput.value = button.value; // Remplir le champ caché avec le numéro de la saison
-                                });
-                            });
-                        </script>
-
-
-
                     </div>
                 </div>
+
                 <div class="serie-image">
                     <img src="/uploads/<?= htmlspecialchars($serie->image) ?>" alt="Image de la série">
                 </div>
-
-
             </div>
-
-
         </div>
     </div>
-    <div class="section-header">
+    <<<<<<< HEAD <div class="section-header">
         <h2>Autres séries à découvrir</h2>
         <p>Explorez notre catalogue complet de séries disponibles.</p>
-    </div>
+</div>
 
 
 
-    <div id="list-serie">
-        <?php
-        $gdb = new Series();
+<div id="list-serie">
+    <?php
+    $gdb = new Series();
 
-        $series = $gdb->getAllSeries();
-        foreach ($series as $s) {
-            echo $s->getHTML();
-        }
-        ?>
-    </div>
+    $series = $gdb->getAllSeries();
+    foreach ($series as $s) {
+        echo $s->getHTML();
+    }
+    ?>
+</div>
 
 </div>
+=======
+</div>
+
+<?php if ($isAdminLogged): ?>
+    <script>
+        const radioButtons = document.querySelectorAll('input[name="selected_saison"]');
+        const saisonForm = document.getElementById('saison-selection-form');
+        const saisonInput = saisonForm.querySelector('input[name="saison"]');
+
+        radioButtons.forEach(button => {
+            button.addEventListener('change', () => {
+                saisonInput.value = button.value;
+            });
+        });
+    </script>
+<?php endif; ?>
+
+>>>>>>> 4302995dab8ae86b647f39579c71dcf7b15f5e1d
 <?php
 $content = ob_get_clean();
 Template::render($content);

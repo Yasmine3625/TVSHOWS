@@ -100,6 +100,7 @@ $acteurs = $saisonsDb->getActeurParEpisode($saison->cle_saison);
     </div>
 
     <div id="saison-acteur-container">
+        <a href="ajoutacteur.php">Ajouter un acteur</a>
         <?php if ($acteurs): ?>
             <h2>Acteur/s :</h2>
             <?php if ($isAdminLogged): ?>

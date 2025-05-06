@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($titre)) {
         $errors[] = "Le titre de la saison est vide.";
     }
-    if ($numero_episode <= 0) {
+    if ($numero_episode < 0) {
         $errors[] = "Le numéro d'épisode doit être un nombre supérieur à 0.";
     }
     if ($serie < 0) {
@@ -48,16 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $affichage = $_FILES['affichage'];
 
         $imageFileType = strtolower(pathinfo($affichage['name'], PATHINFO_EXTENSION));
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-
-        if (!in_array($imageFileType, $allowedTypes)) {
-            $errors[] = "L'image doit être au format JPG, JPEG, PNG ou GIF.";
-        }
 
         if (empty($errors)) {
             $destination =  basename($affichage['name']);
             if (move_uploaded_file($affichage['tmp_name'], $destination)) {
-                // Chemin relatif pour la BD et affichage web
                 $affichagePath =   basename($affichage['name']);
             } else {
                 $errors[] = "Erreur lors du téléchargement de l'image.";

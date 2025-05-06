@@ -21,6 +21,15 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 
 
+    <?php if ($isAdminLogged): ?>
+                            <div id="bare-edit-serie">
+                                    <a href="ajoutserie.php">Ajouter une serie</a>
+                                </div>
+                                <form method="POST" action="supprimerserie.php" id="serie-selection-form">
+                                    <input type="hidden" name="serie" value="">
+                                    <input type="submit" value="Supprimer la serie sélectionnée">
+                                </form>
+                            <?php endif; ?>
 
         <div class="category-menu">
             <h2 class="category-title">Catégories</h2>

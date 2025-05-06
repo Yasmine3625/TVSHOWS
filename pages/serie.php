@@ -38,11 +38,16 @@ $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-$img = $saisons[0];
-ob_start();
+$img = $saisons[0]; ?>
+<?php
+$backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
 ?>
-<div class="serie-page">
-    <div class="serie-content" style="display: flex; align-items: center; gap: 40px;flex-direction: column;">
+
+<?php ob_start();
+?>
+<div class="serie-overlay">
+    <div class="serie-page" style="background-image: url('<?= $backgroundImage ?>');>
+    <div class=" serie-content" style="display: flex; align-items: center; gap: 40px;flex-direction: column;">
         <div class="serie-text">
             <div class="info_serie avec-bg"
                 style="--image-url: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
@@ -50,7 +55,7 @@ ob_start();
                     <div style="display:flex ; flex-direction: column;">
                         <h1><?= htmlspecialchars($serie->titre) ?></h1>
                         <p><strong>Nombre de saisons :</strong> <?= intval($serie->nb_saison) ?></p>
-                        <div class="tag_box">
+                        <div class="tag_box" style="font-size: xx-small;">
                             <?php if (!empty($tags)): ?>
                                 <p><strong>Tags :</strong>
                                     <?php foreach ($tags as $tag): ?>
@@ -135,7 +140,24 @@ ob_start();
 
         </div>
     </div>
-</div>
+    <div class="section-header">
+        <h2>Autres séries à découvrir</h2>
+        <p>Explorez notre catalogue complet de séries disponibles.</p>
+    </div>
+
+
+
+    <div id="list-serie">
+        <?php
+        $gdb = new Series();
+
+        $series = $gdb->getAllSeries();
+        foreach ($series as $s) {
+            echo $s->getHTML();
+        }
+        ?>
+    </div>
+
 </div>
 <?php
 $content = ob_get_clean();

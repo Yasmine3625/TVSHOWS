@@ -18,6 +18,22 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
 <div id="home-container">
     <div id="tag-bar">
+
+
+
+        <?php if ($isAdminLogged): ?>
+            <div id="bare-edit-serie">
+                <div class="admin-buttons">
+                    <a href="/../pages/ajoutserie.php">+</a>
+                    <form method="POST" action="/../pages/supprimerserie.php" id="serie-selection-form">
+                        <input type="hidden" name="serie" value="">
+                        <input type="submit" value="–">
+                    </form>
+                </div>
+            </div>
+
+        <?php endif; ?>
+
         <div class="category-menu">
             <h2 class="category-title">Catégories</h2>
             <a href="/index.php" class="category-item">Tout</a>

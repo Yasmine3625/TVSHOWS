@@ -31,6 +31,8 @@ class Template
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>saison.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>episode.css">
             <link rel="stylesheet" href="/../<?php echo $GLOBALS['CSS_DIR'] ?>ajoutserie.css">
+            <script src="../js/script.js"></script>
+
 
 
 

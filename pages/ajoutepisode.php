@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $synopsis = trim($_POST['synopsis'] ?? '');
     $duree = trim($_POST['duree'] ?? '');
     $numero_episode = isset($_POST['numero_episode']) ? intval($_POST['numero_episode']) : 0;
-    
+
     $id_saison = isset($_POST['id_saison']) && is_numeric($_POST['id_saison']) ? intval($_POST['id_saison']) : 0;
-    $cle=$id_saison+1000* $numero_episode;
+    $cle = $id_saison + 1000 * $numero_episode;
     if (empty($titre)) {
         $errors[] = "Le titre de l'épisode est requis.";
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $episode = new Episode();
-        $success = $episode->ajouterEpisode($cle, $synopsis,$duree, $titre, $id_saison, $numero_episode);
+        $success = $episode->ajouterEpisode($cle, $synopsis, $duree, $titre, $id_saison, $numero_episode);
 
         if ($success) {
             $sqlUpdate = "UPDATE saison SET nb_episode = nb_episode + 1 WHERE cle_saison = :cle_saison";

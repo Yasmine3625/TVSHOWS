@@ -14,7 +14,7 @@ class AjoutActeurForm
             <h2>Ajouter un acteur : </h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutacteur.php" enctype="multipart/form-data">
+                <form method="POST" action="ajoutacteur.php" id="ajout-acteur-form" enctype="multipart/form-data">
                     <label for="nom">Nom :</label><br>
                     <input type="text" id="nom" name="nom" required><br><br>
 

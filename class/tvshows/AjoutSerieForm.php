@@ -14,7 +14,7 @@ class AjoutSerieForm
             <h2>Ajouter une nouvelle série</h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutserie.php" enctype="multipart/form-data">
+                <form method="POST" action="ajoutserie.php" id="ajout_form_serie" enctype="multipart/form-data">
                     <label for="titre">Titre :</label><br>
                     <input type="text" id="titre" name="titre" required><br><br>
 

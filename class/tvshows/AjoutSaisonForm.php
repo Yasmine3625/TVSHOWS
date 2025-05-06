@@ -15,7 +15,7 @@ class AjoutSaisonForm
             <h2>Ajouter une nouvelle saison</h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutsaison.php" enctype="multipart/form-data">
+                <form method="POST" action="ajoutsaison.php" id="ajout_form_saison" enctype="multipart/form-data">
                     <label for="titre">Titre :</label><br>
                     <input type="text" id="titre" name="titre" required><br><br>
 

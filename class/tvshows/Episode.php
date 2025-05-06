@@ -37,7 +37,7 @@ class Episode extends PdoWrapper
             'episode' => $episodes[0]
         ];
     }
-    
+
     public function getRealisateursParEpisode($idEpisode)
     {
         $sql = "SELECT r.nom, r.image
@@ -68,5 +68,5 @@ class Episode extends PdoWrapper
 
         return $result !== false;
     }
-    
+
 }

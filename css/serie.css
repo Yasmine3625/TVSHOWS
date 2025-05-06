@@ -1,3 +1,17 @@
+.serie-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    min-height: 100vh;
+
+}
+
+.serie-page {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+}
+
 .info_serie {
     display: flex;
     justify-content: space-between;
@@ -44,9 +58,7 @@
     z-index: 1;
 }
 
-.serie-content {
-    height: 100%;
-}
+
 
 .serie-image img {
     width: 300px;
@@ -67,6 +79,7 @@
     font-size: 4em;
     margin-bottom: 10px;
     padding-left: 0;
+    color: #eeeded;
 }
 
 .gauche p {
@@ -79,11 +92,10 @@
     flex-direction: row;
     gap: 15px;
     justify-content: flex-start;
-    border: 2px solid #ccc;
     overflow: visible;
-    /* important pour permettre le débordement */
     padding: 10px;
     position: relative;
+    border-radius: 10px;
 }
 
 .saison-box {
@@ -138,6 +150,71 @@
     font-size: 1em;
     box-sizing: border-box;
 }
+
+.section-header {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.section-header h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section-header p {
+    font-size: 1em;
+    color: #666;
+}
+
+.serie-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.serie-details h2 {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: bold;
+    color: #FFA500;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.saison-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Pour espacer les boutons et le titre */
+    margin-top: 10px;
+}
+
+.saison-buttons a,
+.saison-buttons input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #261d17;
+    color: #FFA500;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #FFA500;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.9em;
+}
+
+.saison-buttons a:hover,
+.saison-buttons input[type="submit"]:hover {
+    background-color: #FFA500;
+    color: #1f1f1f;
+    box-shadow: 0 0 10px #FFA500;
+}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {

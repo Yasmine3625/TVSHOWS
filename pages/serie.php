@@ -37,18 +37,25 @@ $tags = $gdb->exec($tagQuery, ['cle' => $cle]);
 $saisonQuery = "SELECT * FROM saison WHERE cle_serie = :cle";
 $saisons = $gdb->exec($saisonQuery, ['cle' => $cle]);
 
-ob_start();
+$img = $saisons[0]; ?>
+<?php
+$backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
 ?>
-<div class="serie-page">
-    <div class="serie-content" style="display: flex; align-items: center; gap: 40px; flex-direction: column;">
+
+<?php ob_start();
+?>
+<div class="serie-overlay">
+    <div class="serie-page" style="background-image: url('<?= $backgroundImage ?>');>
+    <div class=" serie-content" style="display: flex; align-items: center; gap: 40px;flex-direction: column;">
+
         <div class="serie-text">
             <div class="info_serie avec-bg"
-                 style="--image-url: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
+                style="--image-url: url('/uploads/<?= htmlspecialchars($serie->image) ?>');">
                 <div class="gauche">
                     <div style="display:flex; flex-direction: column;">
                         <h1><?= htmlspecialchars($serie->titre) ?></h1>
                         <p><strong>Nombre de saisons :</strong> <?= intval($serie->nb_saison) ?></p>
-                        <div class="tag_box">
+                        <div class="tag_box" style="font-size: xx-small;">
                             <?php if (!empty($tags)): ?>
                                 <p><strong>Tags :</strong>
                                     <?php foreach ($tags as $tag): ?>
@@ -64,13 +71,13 @@ ob_start();
                         <div>
                             <h2>Saison/s :</h2>
                             <?php if ($isAdminLogged): ?>
-                                <div id="bare-edit-serie">
-                                    <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">Ajouter une saison</a>
+                                <div class="saison-buttons">
+                                    <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">+</a>
+                                    <form method="POST" action="supprimersaison.php" id="saison-selection-form">
+                                        <input type="hidden" name="saison" value="">
+                                        <input type="submit" value="-">
+                                    </form>
                                 </div>
-                                <form method="POST" action="supprimersaison.php" id="saison-selection-form">
-                                    <input type="hidden" name="saison" value="">
-                                    <input type="submit" value="Supprimer la saison sélectionnée">
-                                </form>
                             <?php endif; ?>
 
                             <div class="saison-boxes">
@@ -78,13 +85,14 @@ ob_start();
                                     <div class="saison-box">
                                         <?php if ($isAdminLogged): ?>
                                             <input type="radio" name="selected_saison"
-                                                    value="<?= htmlspecialchars($saison->cle_saison) ?>"
-                                                    style="position: absolute; top: 5px; left: 5px; z-index: 2;">
+                                                value="<?= htmlspecialchars($saison->cle_saison) ?>"
+                                                style="position: absolute; top: 5px; left: 5px; z-index: 2;">
                                         <?php endif; ?>
                                         <a href="saison.php?serie=<?= urlencode($serie->cle_serie) ?>&saison=<?= $index + 1 ?>&id_saison=<?= $saison->cle_saison ?>"
                                             class="saison-link">
                                             <div class="saison-image-full" style="position: relative;">
-                                                <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>" alt="Image de la saison">
+                                                <img src="/uploads/<?= htmlspecialchars($saison->affichage) ?>"
+                                                    alt="Image de la saison">
                                                 <div class="saison-overlay">
                                                     Saison <?= $index + 1 ?>
                                                 </div>
@@ -95,6 +103,7 @@ ob_start();
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="serie-image">
@@ -103,6 +112,26 @@ ob_start();
             </div>
         </div>
     </div>
+    <div class="section-header">
+        <h2>Autres séries à découvrir</h2>
+        <p>Explorez notre catalogue complet de séries disponibles.</p>
+    </div>
+
+
+
+    <div id="list-serie">
+        <?php
+        $gdb = new Series();
+
+        $series = $gdb->getAllSeries();
+        foreach ($series as $s) {
+            echo $s->getHTML();
+        }
+        ?>
+    </div>
+
+</div>
+
 </div>
 
 <?php if ($isAdminLogged): ?>
@@ -118,6 +147,7 @@ ob_start();
         });
     </script>
 <?php endif; ?>
+
 
 <?php
 $content = ob_get_clean();

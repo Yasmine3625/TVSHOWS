@@ -27,14 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
     $cle_episode = isset($_POST['cle_episode']) && is_numeric($_POST['cle_episode']) ? intval($_POST['cle_episode']) : 0;
 
-    var_dump($cle_episode);
 
     $imageName = '';
 
+    // Vérification de l'image
     if (isset($_FILES['affichage']) && $_FILES['affichage']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['affichage']['tmp_name'];
         $fileName = basename($_FILES['affichage']['name']);
-        $targetPath =  $fileName;
+        $targetDir = __DIR__ . '/../upload/';
+        $targetPath = $targetDir . $fileName;
+
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
 
         if (move_uploaded_file($tmpName, $targetPath)) {
             $imageName = $fileName;

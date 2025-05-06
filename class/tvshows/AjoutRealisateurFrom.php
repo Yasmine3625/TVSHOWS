@@ -13,7 +13,7 @@ class AjoutRealisateurFrom
             <h2>Ajouter un realisateur : </h2>
 
             <div class="ajout_form">
-                <form method="POST"  action="ajoutrealisateur.php" enctype="multipart/form-data">
+                <form method="POST"  action="ajoutrealisateur.php" id="ajout_form_realisateur" enctype="multipart/form-data">
 
                     <label for="nom">Nom :</label><br>
                     <input type="text" id="nom" name="nom" required><br><br>

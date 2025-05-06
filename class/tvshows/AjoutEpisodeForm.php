@@ -12,7 +12,7 @@ class AjoutEpisodeForm
             <h2>Ajouter un nouvel épisode</h2>
 
             <div class="ajout_form">
-                <form method="POST" action="ajoutepisode.php" enctype="multipart/form-data">
+                <form method="POST" action="ajoutepisode.php" id="ajout_form_episode" enctype="multipart/form-data">
                     <label for="titre">Titre :</label><br>
                     <input type="text" id="titre" name="titre" required><br><br>
 

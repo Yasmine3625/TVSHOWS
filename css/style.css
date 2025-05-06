@@ -180,7 +180,7 @@ h1 {
     display: flex;
     width: 100%;
     justify-content: center;
-
+    background-color: #161616;
 
 }
 
@@ -467,4 +467,45 @@ footer.footer-transparent {
 .footer-content li:hover {
     color: #FFA500;
     cursor: default;
+}
+
+
+#bare-edit-serie {
+    margin-top: 20px;
+}
+
+.admin-buttons {
+    display: flex;
+    justify-content: flex-start;
+    /* Utilisation de flex-start pour réduire l'espace entre les boutons */
+    align-items: center;
+    gap: 10px;
+    /* Réduit l'espace entre les boutons */
+}
+
+#bare-edit-serie a,
+#serie-selection-form input[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #261d17;
+    color: #FFA500;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #FFA500;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.9em;
+    margin: 0;
+    /* Suppression de la marge pour éviter l'espace supplémentaire */
+}
+
+#bare-edit-serie a:hover,
+#serie-selection-form input[type="submit"]:hover {
+    background-color: #FFA500;
+    color: #1f1f1f;
+    box-shadow: 0 0 10px #FFA500;
 }

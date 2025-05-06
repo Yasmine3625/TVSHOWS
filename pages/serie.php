@@ -71,14 +71,13 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
                         <div>
                             <h2>Saison/s :</h2>
                             <?php if ($isAdminLogged): ?>
-                                <div id="bare-edit-serie">
-                                    <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">Ajouter une
-                                        saison</a>
+                                <div class="saison-buttons">
+                                    <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">+</a>
+                                    <form method="POST" action="supprimersaison.php" id="saison-selection-form">
+                                        <input type="hidden" name="saison" value="">
+                                        <input type="submit" value="-">
+                                    </form>
                                 </div>
-                                <form method="POST" action="supprimersaison.php" id="saison-selection-form">
-                                    <input type="hidden" name="saison" value="">
-                                    <input type="submit" value="Supprimer la saison sélectionnée">
-                                </form>
                             <?php endif; ?>
 
                             <div class="saison-boxes">
@@ -104,6 +103,7 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="serie-image">
@@ -112,26 +112,26 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
             </div>
         </div>
     </div>
-    <<<<<<< HEAD <div class="section-header">
+    <div class="section-header">
         <h2>Autres séries à découvrir</h2>
         <p>Explorez notre catalogue complet de séries disponibles.</p>
+    </div>
+
+
+
+    <div id="list-serie">
+        <?php
+        $gdb = new Series();
+
+        $series = $gdb->getAllSeries();
+        foreach ($series as $s) {
+            echo $s->getHTML();
+        }
+        ?>
+    </div>
+
 </div>
 
-
-
-<div id="list-serie">
-    <?php
-    $gdb = new Series();
-
-    $series = $gdb->getAllSeries();
-    foreach ($series as $s) {
-        echo $s->getHTML();
-    }
-    ?>
-</div>
-
-</div>
-=======
 </div>
 
 <?php if ($isAdminLogged): ?>
@@ -148,7 +148,7 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
     </script>
 <?php endif; ?>
 
->>>>>>> 4302995dab8ae86b647f39579c71dcf7b15f5e1d
+
 <?php
 $content = ob_get_clean();
 Template::render($content);

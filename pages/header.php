@@ -23,10 +23,38 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
         </div>
         <?php if ($isAdminLogged): ?>
-            <a href="/../pages/logout.php" role="button" class="nav-btn-log" id="btn-admin-Login">Deconnexion</a>
+<!-- Bouton Déconnexion -->
+<a href="#" class="nav-btn-log" onclick="showLogoutModal()">Déconnexion</a>
+
+<!-- Fenêtre modale personnalisée -->
+<div id="custom-confirm" class="custom-modal hidden">
+    <div class="custom-modal-content">
+        <p id="custom-confirm-message">Voulez-vous vraiment vous déconnecter ?</p>
+        <div class="modal-buttons">
+            <button id="custom-confirm-yes" onclick="logout()">Oui</button>
+            <button id="custom-confirm-no" onclick="closeLogoutModal()">Non</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showLogoutModal() {
+        document.getElementById('custom-confirm').classList.remove('hidden');
+    }
+
+    function closeLogoutModal() {
+        document.getElementById('custom-confirm').classList.add('hidden');
+    }
+
+    function logout() {
+        window.location.href = "/pages/logout.php";
+    }
+</script>
         <?php else: ?>
-            <a href="/../pages/adminloginform.php" class="nav-btn-log" id="btn-admin-Login" role="button">Connexion</a>
+            <a href="/../pages/adminloginform.php"  class="nav-btn-log" id="btn-admin-Login" role="button">Connexion</a>
         <?php endif ?>
     </div>
+
+
 
 </header>

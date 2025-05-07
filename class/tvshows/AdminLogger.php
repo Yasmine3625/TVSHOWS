@@ -16,6 +16,19 @@ class AdminLogger
                 <button type="submit" class="btn btn-primary">SE CONNECTER</button>
             </form>
         </div>
+        <div id="custom-confirm" class="custom-modal hidden">
+            <div class="custom-modal-content">
+                <p id="custom-confirm-message">Êtes-vous sûr ?</p>
+                <div class="modal-buttons">
+                    <button id="custom-confirm-yes">Oui</button>
+                    <button id="custom-confirm-no">Non</button>
+                </div>
+            </div>
+</div>
+
+</div>
+
+    </div>
 
 
         <?php
@@ -45,6 +58,7 @@ class AdminLogger
             'nick' => $nick,
             'error' => $error
         );
+    
 
     }
 

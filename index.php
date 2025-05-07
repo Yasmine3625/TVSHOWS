@@ -86,6 +86,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
         </div>
     </div>
 </div>
+
 <script>
     const slides = document.querySelectorAll('.diapo-slide');
     let currentSlide = 0;

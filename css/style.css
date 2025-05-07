@@ -507,3 +507,52 @@ footer.footer-transparent {
     color: #1f1f1f;
     box-shadow: 0 0 10px #FFA500;
 }
+
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.custom-modal-content {
+    background-color: black;  /* Contenu de la modale avec fond blanc */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optionnel : ajout d'une ombre pour le contenu */
+}
+
+.custom-modal.hidden {
+    display: none;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50; /* Vert pour le bouton "Oui" */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button#custom-confirm-no {
+    background-color: #f44336; /* Rouge pour le bouton "Non" */
+}
+
+.modal-buttons button:hover {
+    opacity: 0.8;
+}

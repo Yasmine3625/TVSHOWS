@@ -9,7 +9,6 @@ use tvshows\Template;
 
 $logger = new AdminLogger();
 
-// Traitement du formulaire
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $response = $logger->log(trim($_POST['username']), $_POST['password']);
 

@@ -30,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $imageName = '';
 
-    // Vérification de l'image
     if (isset($_FILES['affichage']) && $_FILES['affichage']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['affichage']['tmp_name'];
         $fileName = basename($_FILES['affichage']['name']);
@@ -50,12 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Fichier image manquant ou invalide.";
     }
 
-    // Validation
     if (empty($nom)) {
         $errors[] = "Le nom de l'acteur est requis.";
     }
 
-    // Traitement
     if (empty($errors)) {
         $acteur = new Acteur();
         $success = $acteur->ajouterActeur($nom, $imageName, $cle_saison);

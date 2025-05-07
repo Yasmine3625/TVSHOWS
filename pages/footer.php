@@ -1,6 +1,6 @@
 <footer class="footer-transparent">
     <div class="footer-content">
-        <h2>LYD TV</h2>
+        <h2>LYD-TV</h2>
         <p>Projet universitaire — Licence Informatique</p>
         <ul>
             <li>Yasmine Labchri</li>

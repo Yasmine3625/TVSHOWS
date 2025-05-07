@@ -498,8 +498,31 @@ footer.footer-transparent {
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     font-size: 0.9em;
     margin: 0;
-    /* Suppression de la marge pour éviter l'espace supplémentaire */
 }
+
+.admin-button {
+    padding: 10px 20px;
+    background-color: #261d17;
+    color: #FFA500;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #FFA500;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.admin-button:hover {
+    background-color: #FFA500;
+    color: #1f1f1f;
+    box-shadow: 0 0 10px #FFA500;
+}
+
 
 #bare-edit-serie a:hover,
 #serie-selection-form input[type="submit"]:hover {
@@ -514,7 +537,7 @@ footer.footer-transparent {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); 
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -522,13 +545,13 @@ footer.footer-transparent {
 }
 
 .custom-modal-content {
-    background-color: black;  /* Contenu de la modale avec fond blanc */
+    background-color: black;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     max-width: 500px;
     width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optionnel : ajout d'une ombre pour le contenu */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .custom-modal.hidden {
@@ -542,7 +565,8 @@ footer.footer-transparent {
 .modal-buttons button {
     padding: 10px 20px;
     margin: 5px;
-    background-color: #4CAF50; /* Vert pour le bouton "Oui" */
+    background-color: #4CAF50;
+    /* Vert pour le bouton "Oui" */
     color: white;
     border: none;
     border-radius: 5px;
@@ -550,7 +574,8 @@ footer.footer-transparent {
 }
 
 .modal-buttons button#custom-confirm-no {
-    background-color: #f44336; /* Rouge pour le bouton "Non" */
+    background-color: #f44336;
+    /* Rouge pour le bouton "Non" */
 }
 
 .modal-buttons button:hover {

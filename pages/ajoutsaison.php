@@ -73,11 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             header("Location: serie.php?cle_serie=" . $serie);
             exit;
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }
     } else {
-        // Afficher les erreurs
         foreach ($errors as $error) {
             echo "<p style='color: red;'>$error</p>";
         }

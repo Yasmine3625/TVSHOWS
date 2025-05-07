@@ -8,6 +8,15 @@
             <li>Hammaz Dhyia</li>
         </ul>
         <p>&copy; <span id="year"></span> LYD-TV.</p>
+
+        <p>Ressources : </p>
+        <ul>
+            <li>Gregory Bourguin</li>
+            <li>Netflix</li>
+            <li>Xalaflix</li>
+            <li>Wikipedia</li>
+            <li>ChatGPT</li>
+        </ul>
     </div>
 </footer>
 
@@ -18,7 +27,7 @@
 <script>
     window.addEventListener("scroll", function () {
         const footer = document.querySelector("footer.footer-transparent");
-        const scrollThreshold = 200; // ajustable selon la longueur de ta page
+        const scrollThreshold = 200;
 
         if (window.scrollY > scrollThreshold) {
             footer.classList.add("scrolled-footer");

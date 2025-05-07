@@ -31,8 +31,9 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
                     </form>
                     <form method="GET" action="/../pages/modifier_serie.php" id="serie-edit-form">
                         <input type="hidden" name="serie" value="">
-                        <input type="submit" value="modif">
+                        <button type="submit" class="admin-button">Modifier</button>
                     </form>
+
 
                 </div>
             </div>

@@ -44,15 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach ($tags as $tagId) {
                     $series->exec("INSERT INTO serie_tag (cle_serie, cle_tag) VALUES (?, ?)", [$lastId, $tagId]);
                 }
-                echo "<p style='color: green;'> Série ajoutée avec succès !</p>";
-            } else {
-                echo "<p style='color: red;'> Erreur lors de l'ajout dans la base.</p>";
             }
-        } else {
-            echo "<p style='color: red;'>Erreur lors du téléchargement du fichier.</p>";
         }
-    } else {
-        echo "<p style='color: red;'> Fichier image manquant ou invalide.</p>";
     }
 }
 

@@ -25,10 +25,8 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
-    // Récupérer l'ID de la saison depuis le formulaire (POST)
     $cle_saison = isset($_POST['id_saison']) && is_numeric($_POST['id_saison']) ? intval($_POST['id_saison']) : 0;
 
-    var_dump($cle_saison);
 
     $imageName = '';
 
@@ -62,11 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $acteur = new Acteur();
         $success = $acteur->ajouterActeur($nom, $imageName, $cle_saison);
 
-        if ($success) {
-            echo "<p style='color: green;'>Acteur ajouté avec succès !</p>";
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
-        }
     } else {
         foreach ($errors as $error) {
             echo "<p style='color: red;'>$error</p>";

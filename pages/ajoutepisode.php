@@ -55,9 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($success) {
             $sqlUpdate = "UPDATE saison SET nb_episode = nb_episode + 1 WHERE cle_saison = :cle_saison";
             $episode->exec($sqlUpdate, ['cle_saison' => $id_saison]);
-            echo "<p style='color: green;'>L'épisode a été ajouté avec succès !</p>";
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
         }
     } else {
         foreach ($errors as $error) {

@@ -58,11 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $acteur = new Realisateur();
         $success = $acteur->ajouterRealisateur($nom, $imageName, $cle_episode);
 
-        if ($success) {
-            echo "<p style='color: green;'>Acteur ajouté avec succès !</p>";
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'ajout dans la base de données.</p>";
-        }
+
     } else {
         foreach ($errors as $error) {
             echo "<p style='color: red;'>$error</p>";

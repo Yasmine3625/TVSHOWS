@@ -25,6 +25,14 @@ class Saisons extends PdoWrapper
         $params = ['cleSerie' => $cleSerie];
         return $this->exec($query, $params);
     }
+    public function getSaisonById(int $idSaison)
+    {
+        $query = "SELECT * FROM saison WHERE cle_saison = :idSaison";
+        $params = ['idSaison' => $idSaison];
+        $result = $this->exec($query, $params);
+
+        return !empty($result) ? $result[0] : null;
+    }
 
     public function getAllSaisonsBySerie($cleSerie)
     {

@@ -73,10 +73,13 @@ $backgroundImage = "/uploads/" . htmlspecialchars($serie->image);
                             <?php if ($isAdminLogged): ?>
                                 <div class="saison-buttons">
                                     <a href="ajoutsaison.php?serie=<?= urlencode($serie->cle_serie) ?>">+</a>
-                                    <form method="POST" action="supprimersaison.php" id="saison-selection-form">
+                                    <form method="GET" action="supprimersaison.php" id="saison-selection-form">
                                         <input type="hidden" name="saison" value="">
+                                        <input type="hidden" name="serie"
+                                            value="<?= htmlspecialchars($serie->cle_serie) ?>">
                                         <input type="submit" value="-">
                                     </form>
+
                                 </div>
                             <?php endif; ?>
 

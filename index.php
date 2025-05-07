@@ -25,10 +25,15 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
             <div id="bare-edit-serie">
                 <div class="admin-buttons">
                     <a href="/../pages/ajoutserie.php">+</a>
-                    <form method="POST" action="/../pages/supprimerserie.php" id="serie-selection-form">
-                        <input type="hidden" name="serie" value="">
+                    <form method="GET" action="/../pages/supprimerserie.php" id="serie-selection-form">
+                        <input type="hidden" name="selected_serie" id="hidden-serie-id">
                         <input type="submit" value="–">
                     </form>
+                    <form method="GET" action="/../pages/modifier_serie.php" id="serie-edit-form">
+                        <input type="hidden" name="serie" value="">
+                        <input type="submit" value="modif">
+                    </form>
+
                 </div>
             </div>
 
@@ -71,6 +76,7 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
                 $diapoSeries = array_slice($series, 0, 5);
                 foreach ($diapoSeries as $s) {
                     echo $s->getDiapoHTML();
+
                 }
                 ?>
             </div>
@@ -79,7 +85,12 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
             <div id="list-serie">
                 <?php
                 foreach ($series as $s) {
-                    echo $s->getHTML();
+                    echo $s->getHTML(); ?>
+                    <?php if ($isAdminLogged): ?>
+                        <input type="radio" name="selected-serie" value="<?= htmlspecialchars($s->getId()) ?>"
+                            form="serie-selection-form">
+                    <?php endif; ?>
+                    <?php
                 }
                 ?>
             </div>
@@ -103,7 +114,14 @@ $isAdminLogged = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
     }
 
     showSlide(currentSlide);
-    setInterval(nextSlide, 6000); // 4 sec
+    setInterval(nextSlide, 6000);
+
+    document.querySelectorAll('input[name="selected-serie"]').forEach(radio => {
+        radio.addEventListener('change', function () {
+            document.getElementById('hidden-serie-id').value = this.value;
+        });
+    });
+
 </script>
 
 
